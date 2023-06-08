@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Seat : MonoBehaviour
@@ -9,28 +7,59 @@ public class Seat : MonoBehaviour
     Seat south;
     Seat north;
 
+    bool isHoveredOver;
 
-    Student occupant;
+    public Student occupant;
 
 
 
     // Start is called before the first frame update
     void Start()
     {
+        GetStudentInChildren();
         InitializeNeighbors();
+    }
+
+    void GetStudentInChildren()
+    {
+        Student[] components = GetComponentsInChildren<Student>();
+        if (components.Length >0)
+        {
+            occupant = components[0];
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-       
-            
-            RaycastDirection(Vector3.left);
-            RaycastDirection(Vector3.right);
-            RaycastDirection(Vector3.forward);
-            RaycastDirection(Vector3.back);
-       
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            if (isHoveredOver)
+            {
+                OnClick();
+            }
+        }
+
+        
+
     }
+
+
+    void OnMouseOver()
+    {
+        //If your mouse hovers over the GameObject with the script attached, output this message
+        Debug.Log("Mouse is over GameObject.");
+        isHoveredOver = true;
+    }
+
+    void OnMouseExit()
+    {
+        //The mouse is no longer hovering over the GameObject so output this message each frame
+        Debug.Log("Mouse is no longer on GameObject.");
+        isHoveredOver = false;
+    }
+
 
 
     void RaycastDirection(Vector3 direction)
@@ -51,15 +80,37 @@ public class Seat : MonoBehaviour
         }
     }
 
+    Seat GetNeighboringSeat(Vector3 direction)
+    {
+        RaycastHit hit;
 
+        // Send a raycast in the specified direction
+        if (Physics.Raycast(transform.position, direction, out hit, 55))
+        {
+            if (hit.transform.tag == "seat")
+            {
+                return hit.transform.GetComponent<Seat>();
+            }
+        }
+        return null;
+    }
 
     #region Meth-ods
 
     void InitializeNeighbors()
     {
-
+        west = GetNeighboringSeat(Vector3.left);
+        east = GetNeighboringSeat(Vector3.right);
+        north = GetNeighboringSeat(Vector3.forward);
+        south = GetNeighboringSeat(Vector3.back);
     }
 
+
+    public void OnClick()
+    {
+        Debug.Log("Clicked this.");
+        ClassroomManager.Instance.OnClickSeat(this);
+    }
 
     #endregion
 
