@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -13,11 +14,31 @@ public enum StudentType
 
 }
 
+
+
+
+
+
 public class Student : MonoBehaviour
 {
 
     NavMeshAgent _agent;
     Vector3 goal;
+
+    public bool Setting_RandomType;
+    public StudentType Setting_StudentType;
+    StudentType _type;
+    public StudentType Type
+    {
+        get
+        {
+            return _type;
+        }
+    }
+
+
+
+
     float minDistance
     {
         get
@@ -55,10 +76,24 @@ public class Student : MonoBehaviour
     {
         _agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         ClassroomManager.Instance.RegisterStudent(this);
+        InitializeStudentType();
 
     }
+    void InitializeStudentType()
+    {
+        if (Setting_RandomType)
+        {
 
-
+            StudentType[] values = StudentType.GetValues(typeof(StudentType)).Cast<StudentType>().ToArray();
+            int randomIndex = Random.Range(0, values.Length);
+            _type = values[randomIndex];
+        }
+        else
+        {
+            _type = Setting_StudentType;
+        }
+    }
+   
 
     public void ChangeSeat(Seat target)
     {
