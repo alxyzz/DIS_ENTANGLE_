@@ -1,9 +1,67 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ClassroomManager : MonoBehaviour
 {
+
+    #region settings
+
+
+    public float settings_StudentNavigationMinimumTargetDistance = 0.5f;
+
+
+    #endregion
+
+    int focusedPeople
+    {
+        get
+        {
+            return students.FindAll(x => x.Focused == true).Count;
+        }
+    }
+    int peopleWithoutModifiers
+    {
+        get
+        {
+            return students.FindAll(x => x.Focused == false && x.Annoyed == false).Count;
+        }
+    }
+    int disturbedPeople
+    {
+        get
+        {
+            return students.FindAll(x => x.Annoyed == true).Count;
+        }
+    }
+
+    bool classIsReadyToTeach
+    {
+        get
+        {
+            if (focusedPeople > disturbedPeople)
+            {
+                return true;
+            }
+            else return false;
+        }
+    }
+
+    List<Student> students = new();
+    List<Seat> seats = new();
+
+
+
+    public void RegisterStudent(Student s)
+    {
+        students.Add(s);
+    }
+
+    public void RegisterSeat(Seat s)
+    {
+        seats.Add(s);
+    }
+
+
     private static ClassroomManager _instance;
     public static ClassroomManager Instance
     {
@@ -31,6 +89,28 @@ public class ClassroomManager : MonoBehaviour
         }
     }
 
+
+
+
+    void Victory()
+    {
+
+    }
+
+    /// <summary>
+    ///runs post move, checks victory condition
+    /// </summary>
+    void PostMove()
+    {
+        if (classIsReadyToTeach)
+        {
+            Victory();
+        }
+        else
+        {
+
+        }
+    }
 
     //call this from clicked seat
     public void OnClickSeat(Seat s)

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Seat : MonoBehaviour
 {
@@ -6,6 +7,13 @@ public class Seat : MonoBehaviour
     Seat west;
     Seat south;
     Seat north;
+
+
+    [SerializeReference] Image statefeedback;
+
+    [SerializeField] Color annoyedColor;
+    [SerializeField] Color normalColor;
+    [SerializeField] Color focusedColor;
 
     bool isHoveredOver;
 
@@ -18,7 +26,37 @@ public class Seat : MonoBehaviour
     {
         GetStudentInChildren();
         InitializeNeighbors();
+
+
+        ClassroomManager.Instance.RegisterSeat(this);
     }
+
+
+
+    public void UpdateState()
+    {
+        if (occupant == null) return;
+
+        if (occupant.Focused)
+        {
+            statefeedback.color = focusedColor;
+            return;
+        }
+        if (occupant.Annoyed)
+        {
+            statefeedback.color = annoyedColor;
+            return;
+        }
+        else
+        {
+            statefeedback.color = normalColor;
+            return;
+        }
+      
+    }
+
+
+
 
     void GetStudentInChildren()
     {
