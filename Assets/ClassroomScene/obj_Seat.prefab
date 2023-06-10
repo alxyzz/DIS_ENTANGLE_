@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7230956884099467311}
   - component: {fileID: 4384500265349694586}
   - component: {fileID: 5300854370905467034}
-  m_Layer: 5
+  m_Layer: 2
   m_Name: img_stateFeedabck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 5049608006920762110}
   - component: {fileID: 5049608006920762111}
   m_Layer: 5
-  m_Name: Image
+  m_Name: seatImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,7 +165,7 @@ GameObject:
   - component: {fileID: 5049608006992660880}
   - component: {fileID: 5049608006992660881}
   - component: {fileID: 5049608006992660893}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: obj_Seat
   m_TagString: Seat
   m_Icon: {fileID: 0}
@@ -277,9 +277,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5049608006992660882}
     m_Modifications:
+    - target: {fileID: 8312048091339999326, guid: a559324cf62983543a520744084ed56f, type: 3}
+      propertyPath: m_Layer
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8312048092263136548, guid: a559324cf62983543a520744084ed56f, type: 3}
       propertyPath: m_Name
       value: obj_Student
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312048092263136548, guid: a559324cf62983543a520744084ed56f, type: 3}
+      propertyPath: m_Layer
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8312048092263136549, guid: a559324cf62983543a520744084ed56f, type: 3}
       propertyPath: m_RootOrder

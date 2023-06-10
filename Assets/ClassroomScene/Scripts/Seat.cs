@@ -1,7 +1,8 @@
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Seat : MonoBehaviour
+public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
     Seat east;
     Seat west;
@@ -31,7 +32,10 @@ public class Seat : MonoBehaviour
         ClassroomManager.Instance.RegisterSeat(this);
     }
 
+    void DoStudentEffect()
+    {
 
+    }
 
     public void UpdateState()
     {
@@ -71,33 +75,26 @@ public class Seat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0))
-        {
-            if (isHoveredOver)
-            {
-                OnClick();
-            }
-        }
+        
 
         
 
     }
 
-
-    void OnMouseOver()
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        //If your mouse hovers over the GameObject with the script attached, output this message
         Debug.Log("Mouse is over GameObject.");
         isHoveredOver = true;
     }
 
-    void OnMouseExit()
+    public void OnPointerExit(PointerEventData eventData)
     {
-        //The mouse is no longer hovering over the GameObject so output this message each frame
         Debug.Log("Mouse is no longer on GameObject.");
         isHoveredOver = false;
     }
 
+
+   
 
 
     void RaycastDirection(Vector3 direction)
@@ -143,12 +140,10 @@ public class Seat : MonoBehaviour
         south = GetNeighboringSeat(Vector3.back);
     }
 
+   
 
-    public void OnClick()
-    {
-        Debug.Log("Clicked this.");
-        ClassroomManager.Instance.OnClickSeat(this);
-    }
+
+
 
     #endregion
 

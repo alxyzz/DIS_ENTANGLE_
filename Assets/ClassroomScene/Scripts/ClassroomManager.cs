@@ -76,6 +76,7 @@ public class ClassroomManager : MonoBehaviour
     GameObject seatGraphic;
 
 
+
     void Awake()
     {
         if (Instance != null)
@@ -89,7 +90,42 @@ public class ClassroomManager : MonoBehaviour
         }
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Mouse0))
+        {
+            Debug.LogWarning("clicked LMB ");
+            DoClick();
+        }
 
+    }
+
+
+    void DoClick()
+    {
+
+        // Cast a ray from the mouse position into the scene
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        // Check if the ray hits a GameObject
+        if (Physics.Raycast(ray, out hit))
+        {
+            // Check if the hit GameObject is the one you want to detect clicks on
+            if (hit.collider.gameObject == gameObject)
+            {
+                if (hit.collider.gameObject.tag == "Seat")
+                {
+                    Seat b = hit.collider.gameObject.GetComponent<Seat>();
+
+                    OnClickSeat(b);
+
+                }
+
+                // Perform any desired actions here
+            }
+        }
+    }
 
 
     void Victory()
@@ -115,6 +151,9 @@ public class ClassroomManager : MonoBehaviour
     //call this from clicked seat
     public void OnClickSeat(Seat s)
     {
+
+        Debug.LogWarning("clicked seat ");
+
         if (s.occupant == null)
         {
             //throw new System.Exception("ClassroomManager@OnClickSeat() - seat had no occupant.");
@@ -135,7 +174,7 @@ public class ClassroomManager : MonoBehaviour
 
     void UpdateClickedSeat(bool delete = false)
     {
-        if (delete == true )
+        if (delete == true)
         {
             lastClickedSeat = null;
             seatGraphic.SetActive(false);
@@ -148,7 +187,7 @@ public class ClassroomManager : MonoBehaviour
             }
             seatGraphic.SetActive(true);
         }
-        
+
 
     }
     /// <summary>
@@ -165,7 +204,7 @@ public class ClassroomManager : MonoBehaviour
             Student s1 = seatB.occupant;
 
             s1.ChangeSeat(seatA);
-            
+
         }
         if (seatA.occupant != null)
         {
@@ -174,8 +213,8 @@ public class ClassroomManager : MonoBehaviour
             s2.ChangeSeat(seatB);
 
         }
-     
-      
+
+
         lastClickedSeat.occupant = null;
         UpdateClickedSeat(true);
     }
