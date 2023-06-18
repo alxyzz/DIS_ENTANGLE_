@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
     //private AIController _ai;
     public Transform player;             // Reference to the player's transform
+    PlayerScript _pscript;
     public float detectionRange = 5f;    // Range at which the enemy detects the player
     public float attackRange = 2f;        // Range at which the enemy initiates a hit
     public float attackDelay = 2f;        // Range at which the enemy initiates a hit
@@ -27,7 +28,7 @@ public class Enemy : MonoBehaviour
         //}
         initialRotation = transform.rotation;
         navMeshAgent = GetComponent<NavMeshAgent>();
-       
+        _pscript = player.GetComponent<PlayerScript>();
     }
 
     public void ReceiveHit(Vector3 playerPos)
@@ -96,6 +97,7 @@ public class Enemy : MonoBehaviour
     {
         // Perform the attack logic here
         Debug.Log("Enemy hits the player!");
+        _pscript.GetHit();
     }
 }
 

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 [RequireComponent(typeof(CharacterController))]
 public class PlayerScript : MonoBehaviour
 {
@@ -130,9 +132,13 @@ public class PlayerScript : MonoBehaviour
     }
    
 
-    void Hit()
+    public void GetHit()
     {
-
+        _health -= 15;
+        if (_health < 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
     }
 
 
