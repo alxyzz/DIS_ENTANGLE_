@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     #region Combat
-    bool isAlive, hasWeapon;
+    bool isAlive, hasWeapon = true;
     [SerializeReference]GameObject weapon;
     Animator wepAnim;
 
@@ -47,6 +47,31 @@ public class PlayerScript : MonoBehaviour
         hasWeapon = true;
     }
 
+
+    void MeleeAttack()
+    {
+        RaycastHit hit;
+
+        // Create a raycast from the camera forward direction
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+
+        // Perform the raycast and check for a hit within the attack range
+        if (Physics.Raycast(ray, out hit, 5f))
+        {
+            // Check if the hit object has a health component
+            Enemy enemyHit = hit.collider.GetComponent<Enemy>();
+            if (enemyHit != null)
+            {
+                Debug.Log("just hit an enemy.");
+                enemyHit.ReceiveHit(transform.position);
+                
+            }else
+            { 
+            Debug.Log("just hit empty air.");
+            }
+        }
+    }
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -79,12 +104,9 @@ public class PlayerScript : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse0) && hasWeapon)
         {
-            moveDirection.y = jumpSpeed;
+            MeleeAttack();
         }
-        if (Input.GetKeyDown(KeyCode.E) && !hasWeapon)
-        {
-            
-        }
+        
 
         // Apply gravity. Gravity is multiplied by deltaTime twice (once here, and once below
         // when the moveDirection is multiplied by deltaTime). This is because gravity should be applied

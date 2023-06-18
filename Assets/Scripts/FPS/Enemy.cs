@@ -1,30 +1,101 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class Enemy : MonoBehaviour
 {
-    private AIController _ai;
+    //private AIController _ai;
+    public Transform player;             // Reference to the player's transform
+    public float detectionRange = 5f;    // Range at which the enemy detects the player
+    public float attackRange = 2f;        // Range at which the enemy initiates a hit
+    public float attackDelay = 2f;        // Range at which the enemy initiates a hit
+    private NavMeshAgent navMeshAgent;    // Reference to the NavMeshAgent component
 
+    public float knockbackForce = 5f;
+
+    private float timeSinceLastAttack;
+    bool ragdolling;
+    private Rigidbody rbody;
+    Quaternion initialRotation;
     // Start is called before the first frame update
     void Start()
     {
-        if (_ai == null)
+        //if (_ai == null)
+        //{
+        //    _ai = new AIController();
+        //}
+        initialRotation = transform.rotation;
+        navMeshAgent = GetComponent<NavMeshAgent>();
+       
+    }
+
+    public void ReceiveHit(Vector3 playerPos)
+    {
+        if (rbody == null)
         {
-            _ai = new AIController();
+            StartCoroutine(gotHit(playerPos));
+
         }
     }
 
-
-    void HasApproachedPlayer()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
+    IEnumerator gotHit(Vector3 playpos)
     {
         
+         rbody = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
+        rbody.isKinematic = false;
+        navMeshAgent.isStopped = true;
+        Vector3 direction = (rbody.transform.position - playpos).normalized;
+        rbody.AddForce(direction * knockbackForce, ForceMode.Force);
+        rbody.AddTorque(transform.up * 5f * 1f);
+        yield return new WaitForSecondsRealtime(5f);
+        Destroy(rbody);
+        navMeshAgent.isStopped = false;
+        transform.rotation = initialRotation;
+       
+
+
+    }
+    private void Update()
+    {
+        timeSinceLastAttack += Time.deltaTime;
+
+        if (rbody != null)
+        {
+            return;
+        }
+
+        // Calculate the distance between the enemy and the player
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
+        navMeshAgent.speed = 5;
+
+        navMeshAgent.SetDestination(player.position);
+        if (distanceToPlayer <= attackRange && timeSinceLastAttack > attackDelay)
+        {
+           
+            timeSinceLastAttack = 0;
+            // Initiate a hit or attack
+            AttackPlayer();
+        }
+        else if (distanceToPlayer > 20)
+        {
+            navMeshAgent.speed = int.MaxValue;
+        }
+        if (distanceToPlayer < 1.5f)
+        {
+            navMeshAgent.isStopped = true;
+        }
+        else
+        {
+            navMeshAgent.isStopped = false;
+            
+        }
+    }
+
+    private void AttackPlayer()
+    {
+        // Perform the attack logic here
+        Debug.Log("Enemy hits the player!");
     }
 }
 
@@ -62,7 +133,7 @@ class Chasing : EnemyState
 
     public override void Execute(PlayerScript uPlayer, double dt) { }
 
-    public override  void Exit(PlayerScript uPlayer) { }
+    public override void Exit(PlayerScript uPlayer) { }
 
 };
 
@@ -90,44 +161,44 @@ class Hitting : EnemyState
 
 
 // Implement the AI controller
-public class AIController
-{
-    private EnemyState currentState;
+//public class AIController
+//{
+//    private EnemyState currentState;
 
-    public Transform target; // Reference to the target the AI is interacting with
+//    public Transform target; // Reference to the target the AI is interacting with
 
-    private int TimeElapsed;
+//    private int TimeElapsed;
 
-    private void Start()
-    {
-        // Initialize the AI with the starting state
-        currentState = new PatrolState(target);
-        currentState.EnterState();
-    }
+//    private void Start()
+//    {
+//        // Initialize the AI with the starting state
+//        //currentState = new PatrolState(target);
+//        //currentState.EnterState();
+//    }
 
-    private void Update(float timedeltatime) //call this on update
-    {
-        TimeElapsed += timedeltatime;
-        // Update the current state
-        currentState.UpdateState();
+//    private void Update(float timedeltatime) //call this on update
+//    {
+//        //TimeElapsed += timedeltatime;
+//        //// Update the current state
+//        //currentState.UpdateState();
 
-        // Transition to a new state if necessary
-        if (/* Some condition to transition to chase state */)
-        {
-            TransitionToState(new ChaseState(target));
-        }
-        else if (/* Some condition to transition to patrol state */)
-        {
-            TransitionToState(new PatrolState(target));
-        }
-    }
+//        //// Transition to a new state if necessary
+//        //if (/* Some condition to transition to chase state */)
+//        //{
+//        //    TransitionToState(new ChaseState(target));
+//        //}
+//        //else if (/* Some condition to transition to patrol state */)
+//        //{
+//        //    TransitionToState(new PatrolState(target));
+//        //}
+//    }
 
-    private void TransitionToState(IAIState newState)
-    {
-        TimeElapsed = 0;
-        currentState.ExitState();
-        currentState = newState;
-        currentState.EnterState();
-    }
-}
+//    //private void TransitionToState(IAIState newState)
+//    //{
+//    //    TimeElapsed = 0;
+//    //    currentState.ExitState();
+//    //    currentState = newState;
+//    //    currentState.EnterState();
+//    //}
+//}
 
