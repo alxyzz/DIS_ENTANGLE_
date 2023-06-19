@@ -131,6 +131,19 @@ public class PlayerScript : MonoBehaviour
         }
     }
    
+    void OnTriggerEnter(Collider other)
+    {
+        switch (other.tag)
+        {
+
+            case "WolfEscape":
+                SceneManager.LoadScene("VideoSceneTest", LoadSceneMode.Single);
+                //loads the video
+                break;
+            default:
+                break;
+        }
+    }
 
     public void GetHit()
     {
