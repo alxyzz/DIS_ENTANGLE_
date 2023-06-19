@@ -17,4 +17,14 @@ public class Seat : MonoBehaviour
     {
         
     }
+
+
+    public void OnClick()
+    {
+
+    }
+
+
+
+
 }
