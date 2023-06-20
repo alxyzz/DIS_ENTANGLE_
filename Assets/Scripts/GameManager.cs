@@ -23,13 +23,13 @@ public class GameManager : MonoBehaviour
     public Act CurrentAct;
     public Level CurrentLevel;
 
-    public void ChangeLevel()
-    {
-        switch (switch_on)
-        {
-            default:
-        }
-    }
+    //public void ChangeLevel()
+    //{
+    //    switch (switch_on)
+    //    {
+    //        default:
+    //    }
+    //}
 
     // Start is called before the first frame update
     void Start()

@@ -29,7 +29,6 @@ public class ClassroomManager : MonoBehaviour
 
     Seat selection;
 
-    public void
 
 
 
