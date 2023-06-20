@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Seat : MonoBehaviour
 {
-    Image studentImage;
+    public Image studentImage;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +21,7 @@ public class Seat : MonoBehaviour
 
     public void OnClick()
     {
-
+        ClassroomManager.Instance.OnClickSeat(this);
     }
 
 
