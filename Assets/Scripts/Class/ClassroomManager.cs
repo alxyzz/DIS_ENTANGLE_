@@ -38,24 +38,44 @@ public class ClassroomManager : MonoBehaviour
 
     public void OnClickSeat(Seat s)
     {
-        if (selection != null)
+        //gets values of clicked stuff
+        
+       
+
+
+
+        if (selection == null)
         {
             selection = s;
-            firstI = s.GetComponent<Image>();
-            first = firstI.sprite;
+            firstI = selection.studentImage;
+            Debug.Log("Clicked first student with name " + selection.gameObject.name);
+            if (firstI != null)
+            {
+                first = firstI.sprite;
+
+            }
 
         }
         else
         {
+            Debug.Log("Clicked second student with name " + selection.gameObject.name);
+            
+            secondI = s.studentImage;
+            if (secondI != null)
+            {
+                second = secondI.sprite;
 
+            }
+            Debug.Log("Replacing student sprites.");
 
-            secondI = s.GetComponent<Image>();
-            second = firstI.sprite;
+           
 
             ReplaceIfNotNull(firstI, second);
             ReplaceIfNotNull(secondI, first);
-
-            secondI.sprite = first;
+            firstI = null;
+            secondI = null;
+            second = null;
+            first = null;
 
             selection = null;
 
