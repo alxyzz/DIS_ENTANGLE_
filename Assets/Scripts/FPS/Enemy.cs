@@ -42,14 +42,14 @@ public class Enemy : MonoBehaviour
 
     IEnumerator gotHit(Vector3 playpos)
     {
-        
-         rbody = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
-        rbody.isKinematic = false;
+        //initializes physics
+        rbody = gameObject.AddComponent(typeof(Rigidbody)) as Rigidbody;
         navMeshAgent.isStopped = true;
         Vector3 direction = (rbody.transform.position - playpos).normalized;
         rbody.AddForce(direction * knockbackForce, ForceMode.Force);
         rbody.AddTorque(transform.up * 5f * 1f);
         yield return new WaitForSecondsRealtime(5f);
+        //disables physics and enables navigation
         Destroy(rbody);
         navMeshAgent.isStopped = false;
         transform.rotation = initialRotation;
@@ -68,7 +68,13 @@ public class Enemy : MonoBehaviour
 
         // Calculate the distance between the enemy and the player
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-        navMeshAgent.speed = 5;
+        if (navMeshAgent.speed != 5)
+        {
+            navMeshAgent.speed = 5;
+            navMeshAgent.angularSpeed = 300;
+            navMeshAgent.isStopped= true;
+            navMeshAgent.isStopped= false;
+        }
 
         navMeshAgent.SetDestination(player.position);
         if (distanceToPlayer <= attackRange && timeSinceLastAttack > attackDelay)

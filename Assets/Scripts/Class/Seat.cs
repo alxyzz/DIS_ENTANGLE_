@@ -3,8 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class Student
+{
+
+}
+
+
+
 public class Seat : MonoBehaviour
 {
+    public Student student;
     public Image studentImage;
     bool moving;
     Vector3 Target;
