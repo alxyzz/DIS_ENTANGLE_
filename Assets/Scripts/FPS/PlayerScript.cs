@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Video;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerScript : MonoBehaviour
@@ -137,7 +138,7 @@ public class PlayerScript : MonoBehaviour
         {
 
             case "WolfEscape":
-                SceneManager.LoadScene("VideoSceneTest", LoadSceneMode.Single);
+                SceneManager.LoadScene("VideoTest", LoadSceneMode.Single);
                 //loads the video
                 break;
             default:
@@ -153,6 +154,13 @@ public class PlayerScript : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
+
+
+    
+
+
+
+
 
 
     #endregion

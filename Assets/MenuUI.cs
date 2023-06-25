@@ -11,7 +11,7 @@ public class MenuUI : MonoBehaviour
     }
     public void OnClickWolfblade()
     {
-        SceneManager.LoadScene("Wolfblade");
+        SceneManager.LoadScene("FPS_Test");
 
     }
     public void OnClickTextGame()
@@ -20,8 +20,14 @@ public class MenuUI : MonoBehaviour
 
     }
     public void OnClickTextVideo()
-    {
+    {   
         SceneManager.LoadScene("VideoTest");
+
+    }
+
+    public void OnClickExit()
+    {
+        Application.Quit();
 
     }
 }
