@@ -10,12 +10,26 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public Image cardPortrait;
     public GameObject highlight;
-    public StudentSerializableObject student;
+    [HideInInspector]public Student student;
+    public StudentSerializableObject studentObject;
 
     void Start()
     {
+        UnpackSO();
         student.chosenName = PickRandomName();
         Refresh();
+    }
+
+    void UnpackSO()
+    {
+        Student b = new Student();
+        b.DESC = studentObject.DESC;
+        b.LANE_MODIFIER = studentObject.LANE_MODIFIER;
+        b.portrait = studentObject.portrait;
+        b.ROW_MODIFIER = studentObject.ROW_MODIFIER;
+        b.STAT_LEARNING = studentObject.STAT_LEARNING;
+        b.seatedImage = studentObject.seatedImage;
+        student = b;
     }
 
     public void Refresh()
@@ -25,6 +39,15 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     string PickRandomName()
     {
+
+        if (student.Names.Count == 1)
+        {
+            return student.Names[0];
+        }
+        if (student.Names.Count == 0 && student.Names == null)
+        {
+            return "MISSING#";
+        }
         return student.Names[Random.Range(0, student.Names.Count)];
     }
 
