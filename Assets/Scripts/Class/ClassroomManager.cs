@@ -97,9 +97,10 @@ public class ClassroomManager : MonoBehaviour
     void OnPlaceCard()
     {
         lastSelectedCard.ToggleHighLight(false);
-        lastSelectedCard = null;
         HideCardInfo();
         Destroy(lastSelectedCard.gameObject);
+        lastSelectedCard = null;
+
     }
     public void OnSelectCard(StudentCard b)
     {
@@ -201,8 +202,9 @@ public class ClassroomManager : MonoBehaviour
                 return;
             }
             s.student = lastSelectedCard.student;
-            lastSelectedCard = null;
             OnPlaceCard();
+            s.Refresh();
+            lastSelectedCard = null;
         }
 
 

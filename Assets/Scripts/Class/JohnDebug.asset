@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: JohnDebug
   m_EditorClassIdentifier: 
   chosenName: John Debug
-  seatedImage: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
+  seatedImage: {fileID: 21300000, guid: f56199092366aaf40ba4c35f6fbf568f, type: 3}
   portrait: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
   Names:
   - John Debug
