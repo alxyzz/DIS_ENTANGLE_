@@ -11,10 +11,16 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     public Image cardPortrait;
     public GameObject highlight;
     [HideInInspector]public Student student;
-    public StudentSerializableObject studentObject;
+    [HideInInspector] StudentSerializableObject studentObject;
 
     void Start()
     {
+        
+    }
+
+    public void Initialize(StudentSerializableObject SO)
+    {
+        studentObject = SO;
         UnpackSO();
         student.chosenName = PickRandomName();
         Refresh();

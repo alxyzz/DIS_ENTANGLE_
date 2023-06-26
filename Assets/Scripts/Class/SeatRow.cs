@@ -6,7 +6,7 @@ using UnityEngine;
 public class SeatRow : MonoBehaviour
 {
 
-    [SerializeField]List<Seat> seats = new();
+   public List<Seat> seats = new();
     [SerializeReference] TextMeshProUGUI UI_rowmod;
 
     public float ROW_MODIFIER

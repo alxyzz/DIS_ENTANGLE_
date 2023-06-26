@@ -35,9 +35,17 @@ public class ClassroomManager : MonoBehaviour
 
     Seat lastSelectedSeat;
     StudentCard lastSelectedCard;
-    List<StudentSerializableObject> studentTypes = new();
+   [SerializeReference] List<StudentSerializableObject> studentTypes = new();
+    List<SeatRow> rows = new();
 
-    List<StudentCard> cards = new();
+    int SETTING_AMT_STARTING_CARDS = 10;
+    int SETTING_AESTHETIC_AMT_CARDS_PER_SIDE = 5;
+    List<StudentCard> leftCards = new(); //this is populated on start
+    List<StudentCard> rightCards = new(); //this is populated on start
+    [SerializeReference] GameObject StudentCardPrefab;
+    [SerializeReference] GameObject LeftCardParent;
+    [SerializeReference] GameObject RightCardParent;
+    List<Seat> seats = new();
 
 
     #region UI
@@ -93,7 +101,10 @@ public class ClassroomManager : MonoBehaviour
     {
         if (lastSelectedCard == b)
         {
+            lastSelectedCard.ToggleHighLight(false);
+
             lastSelectedCard = null;
+
             HideCardInfo();
             return;
         }
@@ -120,6 +131,8 @@ public class ClassroomManager : MonoBehaviour
     void Start()
     {
         UI_CardInfo.SetActive(false);
+        InitializeSeats();
+        InitializeCards();
     }
 
 
@@ -128,8 +141,39 @@ public class ClassroomManager : MonoBehaviour
 
     void InitializeSeats()
     {
-
+        foreach (var item in rows)
+        {
+            seats.AddRange(item.seats);
+        }
     }
+
+    void InitializeCards()
+    {
+        //initialize card objects on both sides up to the maximum
+        List<StudentCard> cds = new();
+        int cardsMade = 0;
+        while (leftCards.Count < SETTING_AESTHETIC_AMT_CARDS_PER_SIDE && cardsMade < SETTING_AMT_STARTING_CARDS)
+        {
+            StudentCard b = Instantiate(StudentCardPrefab, LeftCardParent.transform).GetComponent<StudentCard>();
+            cardsMade++;
+            cds.Add(b);
+            leftCards.Add(b);
+        }
+        while (rightCards.Count < SETTING_AESTHETIC_AMT_CARDS_PER_SIDE && cardsMade < SETTING_AMT_STARTING_CARDS)
+        {
+            StudentCard b = Instantiate(StudentCardPrefab, RightCardParent.transform).GetComponent<StudentCard>();
+            cardsMade++;
+            cds.Add(b);
+            rightCards.Add(b);
+
+        }
+        //initialize student card data
+        foreach (var item in cds)
+        {
+            item.Initialize(studentTypes[Random.Range(0, studentTypes.Count)]);
+        }
+    }
+
     public void OnClickSeat(Seat s)
     {
         //gets values of clicked stuff
