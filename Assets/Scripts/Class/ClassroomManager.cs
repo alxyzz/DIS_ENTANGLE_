@@ -1,13 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 
 
 
 public class ClassroomManager : MonoBehaviour
 {
+    #region singleton
     private static ClassroomManager _instance;
     public static ClassroomManager Instance
     {
@@ -16,6 +16,7 @@ public class ClassroomManager : MonoBehaviour
             return _instance;
         }
     }
+
     void Awake()
     {
         if (_instance != null)
@@ -30,72 +31,145 @@ public class ClassroomManager : MonoBehaviour
         }
     }
 
+    #endregion
 
-    Seat selection;
+    Seat lastSelectedSeat;
+    StudentCard lastSelectedCard;
+    List<StudentSerializableObject> studentTypes = new();
+
+    List<StudentCard> cards = new();
 
 
-    Sprite first, second; 
-    
-    Image firstI, secondI;
+    #region UI
+    public GameObject UI_PauseMenu, UI_Options, cardInfo;
+
+    public TextMeshProUGUI currentlySelectedCardName;
+    public TextMeshProUGUI currentlySelectedCardDesc;
+    public TextMeshProUGUI currentlySelectedCardModifier;
 
 
+    #endregion
+
+
+    void HideCardInfo()
+    {
+        cardInfo.SetActive(false); 
+    }
+
+    void DisplayCardInfo()
+    {
+        cardInfo.SetActive(true);
+
+        currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
+        currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
+        currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
+    }
+
+    public void OnHoverCard(StudentCard b)
+    {
+        if (lastSelectedCard != null)
+        {
+            return;
+        }
+
+        lastSelectedCard = b;
+        DisplayCardInfo();
+
+
+    }
+
+    public void OnLeaveHover()
+    {
+        if (lastSelectedCard == null)
+        {
+            HideCardInfo();
+
+        }
+
+    }
+
+
+    public void OnSelectCard(StudentCard b)
+    {
+        if (lastSelectedCard == b)
+        {
+            lastSelectedCard = null;
+            HideCardInfo();
+            return;
+        }
+        if (lastSelectedCard != null)
+        {
+            lastSelectedCard.ToggleHighLight(false);
+        }
+
+        lastSelectedCard = b;
+        lastSelectedCard.ToggleHighLight(true);
+        DisplayCardInfo();
+
+    }
+    #region Settings
+
+
+    #endregion
+
+
+    #region UnityMethods
+
+
+
+    void Start()
+    {
+
+    }
+
+
+    #endregion
+
+
+    void InitializeSeats()
+    {
+
+    }
     public void OnClickSeat(Seat s)
     {
         //gets values of clicked stuff
-        
-       
-
-
-
-        if (selection == null)
+        if (lastSelectedSeat == null)
         {
-            selection = s;
-            firstI = selection.studentImage;
-            Debug.Log("Clicked first student with name " + selection.gameObject.name);
-            if (firstI != null)
-            {
-                first = firstI.sprite;
+            lastSelectedSeat = s;
+            Debug.Log("Clicked first student with name " + lastSelectedSeat.gameObject.name);
 
-            }
 
         }
         else
         {
-            Debug.Log("Clicked second student with name " + selection.gameObject.name);
-            
-            secondI = s.studentImage;
-            if (secondI != null)
+            Debug.Log("Clicked second student with name " + lastSelectedSeat.gameObject.name);
+            StudentSerializableObject seatcurrentlyclicked = null;
+            StudentSerializableObject studentFromlastSelectedSeat = null;
+
+            if (s.student != null)
             {
-                second = secondI.sprite;
+                seatcurrentlyclicked = s.student;
 
             }
-            Debug.Log("Replacing student sprites.");
+            if (lastSelectedSeat.student != null)
+            {
+                studentFromlastSelectedSeat = lastSelectedSeat.student;
 
-           
+            }
 
-            ReplaceIfNotNull(firstI, second);
-            ReplaceIfNotNull(secondI, first);
-            firstI = null;
-            secondI = null;
-            second = null;
-            first = null;
+            lastSelectedSeat.student = seatcurrentlyclicked;
+            s.student = studentFromlastSelectedSeat;
 
-            selection = null;
+
+            s.PostMove();
+            lastSelectedSeat.PostMove();
+
+            lastSelectedSeat = null;
 
         }
     }
 
-    void ReplaceIfNotNull(Image b, Sprite s)
-    {
-        if (s == null)
-        {
-            b.sprite = null;
-        }
-        else
-        {
-            b.sprite = s;
-        }
-    }
+
 
 
 
