@@ -1,19 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Student
-{
 
-}
 
 
 
 public class Seat : MonoBehaviour
 {
-    public Student student;
-    public Image studentImage;
+    [HideInInspector]public SeatRow row;
+    [HideInInspector] public SeatRow column;
+    [HideInInspector] public Student student;
+    public Image ui_studentImage;
+    public TextMeshProUGUI ui_learningFactor;
+    public float LEARNING_FACTOR
+    {
+        get
+        {
+
+           
+            float b = 0;
+            if (student!= null)
+            {
+                return (b + student.STAT_LEARNING + row.ROW_MODIFIER + column.ROW_MODIFIER);
+            }
+            else
+            {
+                return 0;
+            }
+            
+        }
+    }
     bool moving;
     Vector3 Target;
     Vector3 posStart;
@@ -21,33 +40,39 @@ public class Seat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        studentImage = InitializeChild();
+        Debug.Log("TEST!");
+        ui_studentImage = InitializeChild();
         Button b = GetComponent<Button>();
-        b.targetGraphic = studentImage;
+        if (ui_studentImage == null)
+        {
+            Debug.LogError("ui_studentImage is null at gameobject " + gameObject.name);
+        }
+        if (ui_learningFactor == null)
+        {
+            Debug.LogError("ui_learningFactor is null at gameobject " + gameObject.name);
+        }
+        b.targetGraphic = ui_studentImage;
         b.onClick.AddListener(delegate () { OnClick(); });
     }
 
-    void Move()
-    {
-        if (posStart == Vector3.zero)
-        {
-            posStart = transform.position;
-        }
-        transform.position = Vector3.Lerp(posStart, Target, lerp);
-        lerp += 0.05f;
+    //void Move()
+    //{
+    //    if (posStart == Vector3.zero)
+    //    {
+    //        posStart = transform.position;
+    //    }
+    //    transform.position = Vector3.Lerp(posStart, Target, lerp);
+    //    lerp += 0.05f;
 
-        if (transform.position == Target)
-        {
-            lerp = 0;
-            moving = false;
-            posStart = Vector3.zero;
-        }
-    }
+    //    if (transform.position == Target)
+    //    {
+    //        lerp = 0;
+    //        moving = false;
+    //        posStart = Vector3.zero;
+    //    }
+    //}
 
-    public void ReplaceImage(Image b)
-    {
-        studentImage = b;
-    }
+    
 
     Image InitializeChild()
     {
@@ -67,16 +92,23 @@ public class Seat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (moving)
-        {
-            Move();
-        }
+        
     }
-    public void SetupMovement(Vector3 target)
-    {
-        Target = target;
-        moving = true;
 
+    public void Refresh()
+    {
+        if (student != null)
+        {
+            ui_studentImage.enabled = true;
+            ui_learningFactor.text = (student.STAT_LEARNING + row.ROW_MODIFIER).ToString();
+            ui_studentImage.sprite = student.seatedImage;
+        }
+        else
+        {
+            ui_studentImage.enabled = false;
+            ui_learningFactor.text = "";
+            ui_studentImage.sprite = null ;
+        }
     }
 
     public void OnClick()
