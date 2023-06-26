@@ -10,9 +10,9 @@ using UnityEngine.UI;
 
 public class Seat : MonoBehaviour
 {
-    public SeatRow row;
-    public SeatRow column;
-    public StudentSerializableObject student;
+    [HideInInspector]public SeatRow row;
+    [HideInInspector] public SeatRow column;
+    [HideInInspector] public Student student;
     public Image ui_studentImage;
     public TextMeshProUGUI ui_learningFactor;
     public float LEARNING_FACTOR
@@ -40,8 +40,17 @@ public class Seat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log("TEST!");
         ui_studentImage = InitializeChild();
         Button b = GetComponent<Button>();
+        if (ui_studentImage == null)
+        {
+            Debug.LogError("ui_studentImage is null at gameobject " + gameObject.name);
+        }
+        if (ui_learningFactor == null)
+        {
+            Debug.LogError("ui_learningFactor is null at gameobject " + gameObject.name);
+        }
         b.targetGraphic = ui_studentImage;
         b.onClick.AddListener(delegate () { OnClick(); });
     }
@@ -85,19 +94,13 @@ public class Seat : MonoBehaviour
     {
         
     }
-    public void SetupMovement(Vector3 target)
-    {
-        Target = target;
-        moving = true;
 
-    }
-
-    public void PostMove()
+    public void Refresh()
     {
         if (student != null)
         {
             ui_studentImage.enabled = true;
-            ui_learningFactor.text = student.LANE_MODIFIER.ToString();
+            ui_learningFactor.text = (student.STAT_LEARNING + row.ROW_MODIFIER).ToString();
             ui_studentImage.sprite = student.seatedImage;
         }
         else

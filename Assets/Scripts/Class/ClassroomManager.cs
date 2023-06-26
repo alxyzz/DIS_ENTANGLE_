@@ -1,9 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
-
-
+using UnityEngine.EventSystems;
 
 public class ClassroomManager : MonoBehaviour
 {
@@ -70,7 +68,7 @@ public class ClassroomManager : MonoBehaviour
 
         currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
         currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
-        currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
+        //currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
     }
 
     public void OnHoverCard(StudentCard b)
@@ -134,8 +132,21 @@ public class ClassroomManager : MonoBehaviour
         InitializeSeats();
         InitializeCards();
     }
+    //private GameObject lastHoveredObject;
+    void FixedUpdate()
+    {
+        //if (EventSystem.current.IsPointerOverGameObject())
+        //{
+        //    GameObject hoveredObject = EventSystem.current.currentSelectedGameObject;
 
-
+        //    // Check if the currently hovered object is different from the last one
+        //    if (hoveredObject != lastHoveredObject)
+        //    {
+        //        Debug.Log("Mouse over: " + hoveredObject.name);
+        //        lastHoveredObject = hoveredObject;
+        //    }
+        //}
+    }
     #endregion
 
 
@@ -176,41 +187,51 @@ public class ClassroomManager : MonoBehaviour
 
     public void OnClickSeat(Seat s)
     {
-        //gets values of clicked stuff
-        if (lastSelectedSeat == null)
+
+        if (lastSelectedCard != null)
         {
-            lastSelectedSeat = s;
-            Debug.Log("Clicked first student with name " + lastSelectedSeat.gameObject.name);
-
-
+            s.student = lastSelectedCard.student;
+            s.Refresh();
         }
-        else
-        {
-            Debug.Log("Clicked second student with name " + lastSelectedSeat.gameObject.name);
-            StudentSerializableObject seatcurrentlyclicked = null;
-            StudentSerializableObject studentFromlastSelectedSeat = null;
-
-            if (s.student != null)
-            {
-                seatcurrentlyclicked = s.student;
-
-            }
-            if (lastSelectedSeat.student != null)
-            {
-                studentFromlastSelectedSeat = lastSelectedSeat.student;
-
-            }
-
-            lastSelectedSeat.student = seatcurrentlyclicked;
-            s.student = studentFromlastSelectedSeat;
 
 
-            s.PostMove();
-            lastSelectedSeat.PostMove();
 
-            lastSelectedSeat = null;
 
-        }
+        ////gets values of clicked stuff
+        //if (lastSelectedSeat == null)
+        //{
+        //    lastSelectedSeat = s;
+        //    Debug.Log("Clicked first student with name " + lastSelectedSeat.gameObject.name);
+
+
+        //}
+        //else
+        //{
+        //    Debug.Log("Clicked second student with name " + lastSelectedSeat.gameObject.name);
+        //    StudentSerializableObject seatcurrentlyclicked = null;
+        //    StudentSerializableObject studentFromlastSelectedSeat = null;
+
+        //    if (s.student != null)
+        //    {
+        //        seatcurrentlyclicked = s.student;
+
+        //    }
+        //    if (lastSelectedSeat.student != null)
+        //    {
+        //        studentFromlastSelectedSeat = lastSelectedSeat.student;
+
+        //    }
+
+        //    lastSelectedSeat.student = seatcurrentlyclicked;
+        //    s.student = studentFromlastSelectedSeat;
+
+
+        //    s.PostMove();
+        //    lastSelectedSeat.PostMove();
+
+        //    lastSelectedSeat = null;
+
+        //}
     }
 
 

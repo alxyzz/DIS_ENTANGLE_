@@ -16,7 +16,11 @@ public class SeatRow : MonoBehaviour
             float b = 0;
             foreach (var item in seats)
             {
-                b += item.student.ROW_MODIFIER;
+                if (item.student != null)
+                {
+                        b += item.student.ROW_MODIFIER;
+                }
+                else return 0;
             }
             return b;
         }

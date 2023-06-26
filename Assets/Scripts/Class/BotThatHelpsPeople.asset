@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
-  m_Name: JohnDebug
+  m_Name: BotThatHelpsPeople
   m_EditorClassIdentifier: 
-  chosenName: John Debug
-  seatedImage: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
-  portrait: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
+  chosenName: Robert
+  seatedImage: {fileID: 21300000, guid: 9a4b65c08527a434ba125bf47271ae81, type: 3}
+  portrait: {fileID: 21300000, guid: 9a4b65c08527a434ba125bf47271ae81, type: 3}
   Names:
-  - John Debug
-  - John Debug
-  STAT_LEARNING: 5
-  DESC: 'dumb ass kid '
-  ROW_MODIFIER: 0
+  - RobotGuy
+  - RobotGirl
+  STAT_LEARNING: 1
+  DESC: skynet robot
+  ROW_MODIFIER: 15

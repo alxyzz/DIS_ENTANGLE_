@@ -21,9 +21,9 @@ public class Student
     [Header("Student description")]
     public string DESC;
 
-    [Header("Modifier for the entire lane")]
-    public float LANE_MODIFIER;
+    //[Header("Modifier for the entire lane")]
+    //public float LANE_MODIFIER;
 
     [Header("Modifier for the entire row")]
-    public float ROW_MODIFIER;
+    public float ROW_MODIFIER = 0;
 }

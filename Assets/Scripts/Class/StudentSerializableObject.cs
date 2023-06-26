@@ -7,7 +7,7 @@ using UnityEngine;
 public class StudentSerializableObject : ScriptableObject
 {
 
-    public string chosenName;
+    public string chosenName = "";
     
     [Header("Seated image")]
     public Sprite seatedImage;
@@ -19,16 +19,16 @@ public class StudentSerializableObject : ScriptableObject
     public List<string> Names = new();
 
     [Header("Base learning state")]
-    public float STAT_LEARNING;
+    public float STAT_LEARNING = 0;
 
     [Header("Student description")]
-    public string DESC;
+    public string DESC = "";
 
-    [Header("Modifier for the entire lane")]
-    public float LANE_MODIFIER;
+    //[Header("Modifier for the entire lane")]
+    //public float LANE_MODIFIER;
 
     [Header("Modifier for the entire row")]
-    public float ROW_MODIFIER;
+    public float ROW_MODIFIER = 0;
 
 
 

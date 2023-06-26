@@ -30,11 +30,12 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         Student b = new Student();
         b.DESC = studentObject.DESC;
-        b.LANE_MODIFIER = studentObject.LANE_MODIFIER;
+        //b.LANE_MODIFIER = studentObject.LANE_MODIFIER;
         b.portrait = studentObject.portrait;
         b.ROW_MODIFIER = studentObject.ROW_MODIFIER;
         b.STAT_LEARNING = studentObject.STAT_LEARNING;
         b.seatedImage = studentObject.seatedImage;
+        b.Names = studentObject.Names;
         student = b;
     }
 
