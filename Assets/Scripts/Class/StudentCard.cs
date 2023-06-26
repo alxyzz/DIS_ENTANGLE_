@@ -44,7 +44,7 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             return student.Names[0];
         }
-        if (student.Names.Count == 0 && student.Names == null)
+        if (student.Names.Count == 0 || student.Names == null)
         {
             return "MISSING#";
         }

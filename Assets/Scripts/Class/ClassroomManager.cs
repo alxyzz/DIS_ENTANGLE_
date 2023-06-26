@@ -41,7 +41,7 @@ public class ClassroomManager : MonoBehaviour
 
 
     #region UI
-    public GameObject UI_PauseMenu, UI_Options, cardInfo;
+    public GameObject UI_PauseMenu, UI_Options, UI_CardInfo;
 
     public TextMeshProUGUI currentlySelectedCardName;
     public TextMeshProUGUI currentlySelectedCardDesc;
@@ -53,12 +53,12 @@ public class ClassroomManager : MonoBehaviour
 
     void HideCardInfo()
     {
-        cardInfo.SetActive(false); 
+        UI_CardInfo.SetActive(false); 
     }
 
     void DisplayCardInfo()
     {
-        cardInfo.SetActive(true);
+        UI_CardInfo.SetActive(true);
 
         currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
         currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
@@ -119,7 +119,7 @@ public class ClassroomManager : MonoBehaviour
 
     void Start()
     {
-
+        UI_CardInfo.SetActive(false);
     }
 
 
