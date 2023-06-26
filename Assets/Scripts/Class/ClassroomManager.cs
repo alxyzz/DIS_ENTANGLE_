@@ -94,7 +94,13 @@ public class ClassroomManager : MonoBehaviour
 
     }
 
-
+    void OnPlaceCard()
+    {
+        lastSelectedCard.ToggleHighLight(false);
+        lastSelectedCard = null;
+        HideCardInfo();
+        Destroy(lastSelectedCard.gameObject);
+    }
     public void OnSelectCard(StudentCard b)
     {
         if (lastSelectedCard == b)
@@ -190,12 +196,20 @@ public class ClassroomManager : MonoBehaviour
 
         if (lastSelectedCard != null)
         {
+            if (s.student != null)
+            {
+                return;
+            }
             s.student = lastSelectedCard.student;
-            s.Refresh();
+            lastSelectedCard = null;
+            OnPlaceCard();
         }
 
 
-
+        foreach (var item in seats)
+        {
+            item.Refresh();
+        }
 
         ////gets values of clicked stuff
         //if (lastSelectedSeat == null)
