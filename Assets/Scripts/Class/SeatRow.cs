@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 
 public class SeatRow : MonoBehaviour
-{
-
+{[Header("All IDs must be identical and are used to build the grid for calculations. so count up or down normally")]
+    public int SeatID;
    public List<Seat> seats = new();
     [SerializeReference] TextMeshProUGUI UI_rowmod;
 

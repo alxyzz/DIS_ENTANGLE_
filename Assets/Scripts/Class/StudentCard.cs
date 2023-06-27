@@ -37,7 +37,10 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         b.seatedImage = studentObject.seatedImage;
         b.Names = studentObject.Names;
         student = b;
-    }
+        b.prereq = studentObject.prereq;
+
+        b.effect = studentObject.effect;
+}
 
     public void Refresh()
     {

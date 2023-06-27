@@ -10,6 +10,12 @@ using UnityEngine.UI;
 
 public class Seat : MonoBehaviour
 {
+
+    #region happiness calculations
+  
+
+
+    #endregion
     [HideInInspector]public SeatRow row;
     [HideInInspector] public SeatRow column;
     [HideInInspector] public Student student;
@@ -108,6 +114,50 @@ public class Seat : MonoBehaviour
             ui_studentImage.enabled = false;
             ui_learningFactor.text = "";
             ui_studentImage.sprite = null ;
+        }
+
+        switch (student.prereq)
+        {
+            case StudentPrerequisite.NEEDS_NOTHING:
+
+                DoEffect();
+
+                break;
+            case StudentPrerequisite.NEEDS_HAPPINESS_LEVEL:
+                DoEffect();
+                break;
+            case StudentPrerequisite.NEEDS_SPECIFIC_ROW:
+                DoEffect();
+                break;
+            case StudentPrerequisite.NEEDS_NEIGHBORS:
+                DoEffect();
+                break;
+            default:
+                break;
+        }
+    }
+
+
+    void DoEffect()
+    {
+        switch (student.effect)
+        {
+            case StudentEffects.None:
+                break;
+            case StudentEffects.GAIN_ALL_OTHER_ROWS:
+                break;
+            case StudentEffects.GAIN_OWN_ROW:
+                break;
+            case StudentEffects.GAIN_SELF:
+                break;
+            case StudentEffects.SET_AVERAGE_OF_NEIGHBORS:
+                break;
+            case StudentEffects.GAIN_SELF_AND_NEIGHBORS:
+                break;
+            case StudentEffects.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE:
+                break;
+            default:
+                break;
         }
     }
 

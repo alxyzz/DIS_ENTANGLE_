@@ -31,6 +31,22 @@ public class ClassroomManager : MonoBehaviour
 
     #endregion
 
+
+    List<List<Seat>> _seatGrid = new List<List<Seat>>();
+    float averageHappiness
+    {
+        get
+        {
+            float b = 0;
+            foreach (var item in seats)
+            {
+                b += item.LEARNING_FACTOR;
+            }
+            return b;
+        }
+    }
+    float goalhappiness = 15;
+
     Seat lastSelectedSeat;
     StudentCard lastSelectedCard;
    [SerializeReference] List<StudentSerializableObject> studentTypes = new();
@@ -43,6 +59,9 @@ public class ClassroomManager : MonoBehaviour
     [SerializeReference] GameObject StudentCardPrefab;
     [SerializeReference] GameObject LeftCardParent;
     [SerializeReference] GameObject RightCardParent;
+    [SerializeReference] GameObject WinPanel;
+
+
     List<Seat> seats = new();
 
 
@@ -94,6 +113,23 @@ public class ClassroomManager : MonoBehaviour
 
     }
 
+    void CheckWinCondition()
+    {
+        if (averageHappiness >= goalhappiness)
+        {
+
+        }
+
+
+
+
+
+
+        void Win()
+        {
+            WinPanel.SetActive(true);
+        }
+    }
     void OnPlaceCard()
     {
         lastSelectedCard.ToggleHighLight(false);
@@ -136,23 +172,15 @@ public class ClassroomManager : MonoBehaviour
     void Start()
     {
         UI_CardInfo.SetActive(false);
+        WinPanel.SetActive(false);
+
         InitializeSeats();
         InitializeCards();
     }
     //private GameObject lastHoveredObject;
     void FixedUpdate()
     {
-        //if (EventSystem.current.IsPointerOverGameObject())
-        //{
-        //    GameObject hoveredObject = EventSystem.current.currentSelectedGameObject;
-
-        //    // Check if the currently hovered object is different from the last one
-        //    if (hoveredObject != lastHoveredObject)
-        //    {
-        //        Debug.Log("Mouse over: " + hoveredObject.name);
-        //        lastHoveredObject = hoveredObject;
-        //    }
-        //}
+       
     }
     #endregion
 
@@ -164,7 +192,13 @@ public class ClassroomManager : MonoBehaviour
             seats.AddRange(item.seats);
         }
     }
+    public void Restart()
+    {
+        int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
+        // Reload the current scene
+        UnityEngine.SceneManagement.SceneManager.LoadScene(currentSceneIndex);
+    }
     void InitializeCards()
     {
         //initialize card objects on both sides up to the maximum
@@ -212,7 +246,7 @@ public class ClassroomManager : MonoBehaviour
         {
             item.Refresh();
         }
-
+        CheckWinCondition();
         ////gets values of clicked stuff
         //if (lastSelectedSeat == null)
         //{

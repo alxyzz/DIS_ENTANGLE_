@@ -6,6 +6,19 @@ public class Student
 {
     public string chosenName;
 
+    public float EFFECTIVE_HAPPINESS //happiness post all modifiers
+    {
+        get
+        {
+            return 0;
+        }
+    }
+
+
+
+
+
+
     [Header("Seated image")]
     public Sprite seatedImage;
 
@@ -15,7 +28,7 @@ public class Student
     [Header("Names to be picked at random")]
     public List<string> Names = new();
 
-    [Header("Base learning state")]
+    [Header("Base happiness state")]
     public float STAT_LEARNING;
 
     [Header("Student description")]
@@ -26,4 +39,9 @@ public class Student
 
     [Header("Modifier for the entire row")]
     public float ROW_MODIFIER = 0;
+
+    public StudentPrerequisite prereq;
+
+    [Header("Effect of prerequisite being met.")]
+    public StudentEffects effect;
 }
