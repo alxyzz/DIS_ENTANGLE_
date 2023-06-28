@@ -1246,7 +1246,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 155799314}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1676426022}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &155799314
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7860,6 +7872,10 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 915a460cfabdc4e4abc9714c64ab1cf9, type: 2}
   - {fileID: 11400000, guid: 6c2c665f35add674fb442659e86f4954, type: 2}
   - {fileID: 11400000, guid: 6c2c665f35add674fb442659e86f4954, type: 2}
+  rows:
+  - {fileID: 1347735390}
+  - {fileID: 181596637}
+  - {fileID: 378747505}
   StudentCardPrefab: {fileID: 1599526064483994961, guid: 4a78e56d0fd0c8745b1ba890a96d14e0,
     type: 3}
   LeftCardParent: {fileID: 657581499}
@@ -7871,6 +7887,7 @@ MonoBehaviour:
   currentlySelectedCardName: {fileID: 572377586}
   currentlySelectedCardDesc: {fileID: 299897793}
   currentlySelectedCardModifier: {fileID: 1359417071}
+  completion: {fileID: 100004981}
 --- !u!1 &1681854934
 GameObject:
   m_ObjectHideFlags: 0

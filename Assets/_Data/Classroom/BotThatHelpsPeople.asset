@@ -20,7 +20,7 @@ MonoBehaviour:
   STAT_LEARNING: 5
   DESC: learning robot
   ROW_MODIFIER: 6
-  prereq: 0
-  prereq_argument: 0
-  effect: 0
+  prereq: 1
+  prereq_argument: 2
+  effect: 6
   effect_argument: 0
