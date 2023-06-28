@@ -5,12 +5,13 @@ using UnityEngine;
 public class Student
 {
     public string chosenName;
-
+    public SeatRow row;
     public float EFFECTIVE_HAPPINESS //happiness post all modifiers
     {
         get
         {
-            return 0;
+            float b = STAT_LEARNING + row.ROW_MODIFIER;
+            return b;
         }
     }
 
@@ -40,8 +41,8 @@ public class Student
     [Header("Modifier for the entire row")]
     public float ROW_MODIFIER = 0;
 
-    public StudentPrerequisite prereq;
+    public StudentPrerequisite prereq = StudentPrerequisite.NEEDS_NOTHING;
 
     [Header("Effect of prerequisite being met.")]
-    public StudentEffects effect;
+    public StudentEffects effect= StudentEffects.None;
 }

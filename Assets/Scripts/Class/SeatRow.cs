@@ -26,6 +26,24 @@ public class SeatRow : MonoBehaviour
         }
     }
 
+
+    public float TotalHappinessInRow
+    {
+        get
+        {
+            float b = 0;
+
+            foreach (var item in seats)
+            {
+                if (item.student != null)
+                {
+                    b += item.student.EFFECTIVE_HAPPINESS;
+                }
+            }
+            return b;
+        }
+    }
+
     private void Start()
     {
         foreach (var item in seats)
@@ -41,7 +59,7 @@ public class SeatRow : MonoBehaviour
 
     public void Refresh()
     {
-
+        UI_rowmod.text = TotalHappinessInRow.ToString();
     }
 
 
