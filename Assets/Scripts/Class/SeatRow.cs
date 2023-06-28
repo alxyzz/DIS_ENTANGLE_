@@ -4,8 +4,8 @@ using TMPro;
 using UnityEngine;
 
 public class SeatRow : MonoBehaviour
-{
-
+{[Header("All IDs must be identical and are used to build the grid for calculations. so count up or down normally")]
+    public int SeatID;
    public List<Seat> seats = new();
     [SerializeReference] TextMeshProUGUI UI_rowmod;
 
@@ -26,6 +26,24 @@ public class SeatRow : MonoBehaviour
         }
     }
 
+
+    public float TotalHappinessInRow
+    {
+        get
+        {
+            float b = 0;
+
+            foreach (var item in seats)
+            {
+                if (item.student != null)
+                {
+                    b += item.student.EFFECTIVE_HAPPINESS;
+                }
+            }
+            return b;
+        }
+    }
+
     private void Start()
     {
         foreach (var item in seats)
@@ -41,7 +59,7 @@ public class SeatRow : MonoBehaviour
 
     public void Refresh()
     {
-
+        UI_rowmod.text = TotalHappinessInRow.ToString();
     }
 
 

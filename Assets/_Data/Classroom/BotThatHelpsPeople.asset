@@ -17,7 +17,10 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 9a4b65c08527a434ba125bf47271ae81, type: 3}
   Names:
   - RobotGuy
-  - RobotGirl
-  STAT_LEARNING: 1
-  DESC: skynet robot
-  ROW_MODIFIER: 15
+  STAT_LEARNING: 5
+  DESC: learning robot
+  ROW_MODIFIER: 6
+  prereq: 1
+  prereq_argument: 2
+  effect: 6
+  effect_argument: 0

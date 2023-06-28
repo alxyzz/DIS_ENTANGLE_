@@ -5,25 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MenuUI : MonoBehaviour
 {
-    public void OnClickClassroom()
+    public void OnClickPlay()
     {
-        SceneManager.LoadScene("ClassroomScene");
+        GameManager.Instance.AdvanceLevel();
+        GameManager.Instance.Transition();
     }
-    public void OnClickWolfblade()
-    {
-        SceneManager.LoadScene("FPS_Test");
 
-    }
-    public void OnClickTextGame()
-    {
-        SceneManager.LoadScene("TextGameScene");
-
-    }
-    public void OnClickTextVideo()
-    {   
-        SceneManager.LoadScene("VideoTest");
-
-    }
 
     public void OnClickExit()
     {
