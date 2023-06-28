@@ -50,7 +50,7 @@ public class ClassroomManager : MonoBehaviour
     Seat lastSelectedSeat;
     StudentCard lastSelectedCard;
    [SerializeReference] List<StudentSerializableObject> studentTypes = new();
-    List<SeatRow> rows = new();
+    [SerializeReference] List<SeatRow> rows = new();
 
     int SETTING_AMT_STARTING_CARDS = 10;
     int SETTING_AESTHETIC_AMT_CARDS_PER_SIDE = 5;
@@ -72,6 +72,8 @@ public class ClassroomManager : MonoBehaviour
     public TextMeshProUGUI currentlySelectedCardDesc;
     public TextMeshProUGUI currentlySelectedCardModifier;
 
+    public TextMeshProUGUI completion;
+
 
     #endregion
 
@@ -89,7 +91,11 @@ public class ClassroomManager : MonoBehaviour
         currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
         //currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
     }
+    public void OnWinClickProceed()
+    {
 
+        UnityEngine.SceneManagement.SceneManager.LoadScene("WOLFBLADE_ESCAPE");
+    }
     public void OnHoverCard(StudentCard b)
     {
         if (lastSelectedCard != null)
@@ -117,9 +123,9 @@ public class ClassroomManager : MonoBehaviour
     {
         if (averageHappiness >= goalhappiness)
         {
-
+            Win();
         }
-
+        completion.text = averageHappiness.ToString() + "/" + goalhappiness.ToString();
 
 
 
@@ -236,8 +242,10 @@ public class ClassroomManager : MonoBehaviour
                 return;
             }
             s.student = lastSelectedCard.student;
+            s.student.row = s.row;
             OnPlaceCard();
             s.Refresh();
+            s.row.Refresh();
             lastSelectedCard = null;
         }
 

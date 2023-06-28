@@ -1570,7 +1570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 0
+  SeatID: 2
   seats:
   - {fileID: 1017611955}
   - {fileID: 695813558}
@@ -2404,7 +2404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 0
+  SeatID: 3
   seats:
   - {fileID: 1280608232}
   - {fileID: 1424553250}
@@ -6455,7 +6455,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 0
+  SeatID: 1
   seats:
   - {fileID: 2434455987532053406}
   - {fileID: 778526146}
@@ -7048,7 +7048,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1430466626}
   m_Layer: 5
-  m_Name: GameObject
+  m_Name: rows
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7864,8 +7864,9 @@ MonoBehaviour:
     type: 3}
   LeftCardParent: {fileID: 657581499}
   RightCardParent: {fileID: 1490073034}
-  UI_PauseMenu: {fileID: 0}
-  UI_Options: {fileID: 0}
+  WinPanel: {fileID: 1681854934}
+  UI_PauseMenu: {fileID: 31822688}
+  UI_Options: {fileID: 1074514819}
   UI_CardInfo: {fileID: 545079140}
   currentlySelectedCardName: {fileID: 572377586}
   currentlySelectedCardDesc: {fileID: 299897793}

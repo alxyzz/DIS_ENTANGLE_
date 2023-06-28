@@ -28,9 +28,10 @@ public class Seat : MonoBehaviour
 
            
             float b = 0;
-            if (student!= null)
+            if (student != null)
             {
-                return (b + student.STAT_LEARNING + row.ROW_MODIFIER + column.ROW_MODIFIER);
+                if (row == null) Debug.LogError("ROW WAS NULL");
+                return (b + student.STAT_LEARNING + row.ROW_MODIFIER);
             }
             else
             {
@@ -103,6 +104,7 @@ public class Seat : MonoBehaviour
 
     public void Refresh()
     {
+       
         if (student != null)
         {
             ui_studentImage.enabled = true;
@@ -114,6 +116,7 @@ public class Seat : MonoBehaviour
             ui_studentImage.enabled = false;
             ui_learningFactor.text = "";
             ui_studentImage.sprite = null ;
+            return;
         }
 
         switch (student.prereq)

@@ -17,7 +17,10 @@ MonoBehaviour:
   portrait: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
   Names:
   - John Debug
-  - John Debug
   STAT_LEARNING: 5
-  DESC: 'dumb ass kid '
-  ROW_MODIFIER: 0
+  DESC: annoying kid
+  ROW_MODIFIER: -5
+  prereq: 0
+  prereq_argument: 0
+  effect: 0
+  effect_argument: 0
