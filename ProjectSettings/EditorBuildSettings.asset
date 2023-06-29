@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/TestMenuScene.unity
+    path: Assets/Scenes/MENU_CONTAINS_GAMEMANAGER.unity
     guid: cc34b4bc3396f944fafaac2aca86fd74
   - enabled: 1
     path: Assets/Scenes/OutdoorsScene.unity
@@ -15,9 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/VideoSceneTest.unity
     guid: 29d607d060761464aa50b8b5180442b6
   - enabled: 1
-    path: Assets/Scenes/ClassroomScene.unity
+    path: Assets/Scenes/MRMISTA_CLASSROOM.unity
     guid: 0498ce6fa9a1e6341a1535f2d3f3c049
   - enabled: 1
-    path: Assets/Scenes/FPS_Test.unity
+    path: Assets/Scenes/WOLFBLADE_ESCAPE.unity
     guid: e73a82ed9d09730498001ac433e1d91b
   m_configObjects: {}

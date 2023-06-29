@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
+  m_Name: JohnDebug
+  m_EditorClassIdentifier: 
+  chosenName: John Debug
+  seatedImage: {fileID: 21300000, guid: f56199092366aaf40ba4c35f6fbf568f, type: 3}
+  portrait: {fileID: 21300000, guid: 3bc89fa934596b24ba00bbe7a1fea023, type: 3}
+  Names:
+  - John Debug
+  STAT_LEARNING: 5
+  DESC: annoying kid
+  ROW_MODIFIER: -5
+  prereq: 0
+  prereq_argument: 0
+  effect: 0
+  effect_argument: 0
