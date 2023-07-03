@@ -19,7 +19,7 @@ public class JournalManager : MonoBehaviour
         get
         {
             bool b = true;
-            foreach (var item in sequence)
+            foreach (var item in currentPage)
             {
                 if (!item.IsSolved)
                 {
@@ -46,20 +46,20 @@ public class JournalManager : MonoBehaviour
     }
 
     #endregion
-    public List<List<JournalSequenceObject>> sequenceObjects = new();
+    public List<List<JournalPageObject>> sequenceObjects = new();
 
-    List<List<JournalSegment>> allsequences = new();
+    List<List<JournalPage>> allPages = new();
 
-    TextMeshProUGUI sentence;
+    TextMeshProUGUI txt_Sentence;
     public List<JournalAnswerButton> buttons;
 
-    List<JournalSegment> sequence = new();
-    string currentText
+    List<JournalPage> currentPage = new();
+    string CURR_PAGE_TEXT
     {
         get
         {
             string b = "";
-            foreach (var item in sequence)
+            foreach (var item in currentPage)
             {
                 b += item.Content;
             }
@@ -69,7 +69,7 @@ public class JournalManager : MonoBehaviour
     public void OnClickButton(string s)
     {
         bool b = false;
-        foreach (var item in sequence)
+        foreach (var item in currentPage)
         {
             item.TrySolve(s);
         }
@@ -77,9 +77,9 @@ public class JournalManager : MonoBehaviour
     }
     void Refresh()
     {
-        sentence.text = currentText;
+        txt_Sentence.text = CURR_PAGE_TEXT;
         bool b = true;
-        foreach (var item in sequence)
+        foreach (var item in currentPage)
         {
             if (!item.IsSolved)
             {
@@ -98,27 +98,27 @@ public class JournalManager : MonoBehaviour
     {
         if (next)
         {
-            if (allsequences[allsequences.IndexOf(sequence) + 1] == null)
+            if (allPages[allPages.IndexOf(currentPage) + 1] == null)
             {
                 Win();
                 return;
             }
-            sequence = allsequences[allsequences.IndexOf(sequence) + 1];
+            currentPage = allPages[allPages.IndexOf(currentPage) + 1];
         }
         else
         {
-            if (allsequences[0] == null)
+            if (allPages[0] == null)
             {
                 throw new System.Exception("JournalManager@InitializePage() - did not have any sequences and thus could not initialize a page.");
             }
-            sequence = allsequences[0];
+            currentPage = allPages[0];
         }
 
-
+        txt_Sentence.text = CURR_PAGE_TEXT;
         //initializes buttons
-        for (int i = 0; i < sequence.Count; i++)
+        for (int i = 0; i < currentPage.Count; i++)
         {
-            buttons[i].text.text = sequence[i].Word;
+            buttons[i].text.text = currentPage[i].Word;
         }
 
     }
@@ -129,14 +129,18 @@ public class JournalManager : MonoBehaviour
     }
     void Init()
     {
+
+        //allsequences has pages
+        //each p
+
         foreach (var item in sequenceObjects)
         {
-            List<JournalSegment> b = new();
+            List<JournalPage> b = new();
             foreach (var t in item)
             {
-                b.Add(new JournalSegment(t.good, t.word));
+                b.Add(new JournalPage(t.good, t.word));
             }
-            allsequences.Add(b);
+            allPages.Add(b);
         }
     }
     // Start is called before the first frame update

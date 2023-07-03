@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu(fileName = "New JournalSequenceObject", menuName = "JournalSequenceObject")]
-public class JournalSequenceObject : ScriptableObject
+public class JournalPageObject : ScriptableObject
 {
    [Header("Sentence when completed.")]
     public string good;
@@ -21,7 +21,7 @@ public class JournalSequenceObject : ScriptableObject
 
 
 
-public class JournalSegment {
+public class JournalPage {
 
     public string Content
     {
@@ -36,9 +36,8 @@ public class JournalSegment {
     }
 
 
-    public JournalSegment(string g, string w)
+    public JournalPage(string g, string w)
     {
-
         good = g;
         word = w;
         string dots = new string('.', w.Length);
