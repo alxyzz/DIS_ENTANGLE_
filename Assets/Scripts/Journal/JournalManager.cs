@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class JournalManager : MonoBehaviour
 {
@@ -12,6 +11,22 @@ public class JournalManager : MonoBehaviour
         get
         {
             return _instance;
+        }
+    }
+
+    bool hasWon
+    {
+        get
+        {
+            bool b = true;
+            foreach (var item in sequence)
+            {
+                if (!item.IsSolved)
+                {
+                    b = false;
+                }
+            }
+            return b;
         }
     }
 
@@ -31,14 +46,12 @@ public class JournalManager : MonoBehaviour
     }
 
     #endregion
-    [SerializeReference] List<List<JournalSequenceObject>> sequenceObjects = new();
+    public List<List<JournalSequenceObject>> sequenceObjects = new();
 
     List<List<JournalSegment>> allsequences = new();
 
     TextMeshProUGUI sentence;
     public List<JournalAnswerButton> buttons;
-    List<JournalAnswerButton> usedButtons;
-    List<JournalAnswerButton> unusedButtons;
 
     List<JournalSegment> sequence = new();
     string currentText
@@ -94,18 +107,20 @@ public class JournalManager : MonoBehaviour
         }
         else
         {
-            if (allsequences == null || allsequences[0] == null)
+            if (allsequences[0] == null)
             {
                 throw new System.Exception("JournalManager@InitializePage() - did not have any sequences and thus could not initialize a page.");
             }
             sequence = allsequences[0];
         }
-        
+
+
+        //initializes buttons
         for (int i = 0; i < sequence.Count; i++)
         {
             buttons[i].text.text = sequence[i].Word;
         }
-       
+
     }
     void Win()
     {
@@ -121,6 +136,7 @@ public class JournalManager : MonoBehaviour
             {
                 b.Add(new JournalSegment(t.good, t.word));
             }
+            allsequences.Add(b);
         }
     }
     // Start is called before the first frame update
@@ -133,54 +149,54 @@ public class JournalManager : MonoBehaviour
 
     #region Text position finder
 
-//    public TextMeshProUGUI textComp;
-//    public int charIndex;
-//    public Canvas canvas;
-//    void PrintPos()
-//    {
-//        string text = textComp.text;
+    //    public TextMeshProUGUI textComp;
+    //    public int charIndex;
+    //    public Canvas canvas;
+    //    void PrintPos()
+    //    {
+    //        string text = textComp.text;
 
-//        if (charIndex >= text.Length)
-//            return;
+    //        if (charIndex >= text.Length)
+    //            return;
 
-//        TextGenerator textGen = new TextGenerator(text.Length);
+    //        TextGenerator textGen = new TextGenerator(text.Length);
 
-//        int newLine = text.Substring(0, charIndex).Split('\n').Length - 1;
-//        int whiteSpace = text.Substring(0, charIndex).Split(' ').Length - 1;
-//        int indexOfTextQuad = (charIndex * 4) + (newLine * 4) - 4;
-//        if (indexOfTextQuad < textGen.vertexCount)
-//        {
-//            Vector3 avgPos = (textGen.verts[indexOfTextQuad].position +
-//            textGen.verts[indexOfTextQuad + 1].position +
-//            textGen.verts[indexOfTextQuad + 2].position +
-//            textGen.verts[indexOfTextQuad + 3].position) / 4f;
+    //        int newLine = text.Substring(0, charIndex).Split('\n').Length - 1;
+    //        int whiteSpace = text.Substring(0, charIndex).Split(' ').Length - 1;
+    //        int indexOfTextQuad = (charIndex * 4) + (newLine * 4) - 4;
+    //        if (indexOfTextQuad < textGen.vertexCount)
+    //        {
+    //            Vector3 avgPos = (textGen.verts[indexOfTextQuad].position +
+    //            textGen.verts[indexOfTextQuad + 1].position +
+    //            textGen.verts[indexOfTextQuad + 2].position +
+    //            textGen.verts[indexOfTextQuad + 3].position) / 4f;
 
-//            print(avgPos);
-//            PrintWorldPos(avgPos);
-//        }
-//        else
-//        {
-//            Debug.LogError("Out of text bound");
-//        }
-//    }
+    //            print(avgPos);
+    //            PrintWorldPos(avgPos);
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Out of text bound");
+    //        }
+    //    }
 
-//    void PrintWorldPos(Vector3 testPoint)
-//    {
-//        Vector3 worldPos = textComp.transform.TransformPoint(testPoint);
-//        print(worldPos);
-//        new GameObject("point").transform.position = worldPos;
-//        Debug.DrawRay(worldPos, Vector3.up, Color.red, 50f);
-//    }
+    //    void PrintWorldPos(Vector3 testPoint)
+    //    {
+    //        Vector3 worldPos = textComp.transform.TransformPoint(testPoint);
+    //        print(worldPos);
+    //        new GameObject("point").transform.position = worldPos;
+    //        Debug.DrawRay(worldPos, Vector3.up, Color.red, 50f);
+    //    }
 
-//    void OnGUI()
-//    {
-//        if (GUI.Button(new Rect(10, 10, 100, 80), "Test"))
-//        {
-//            PrintPos();
-//        }
-//    }
+    //    void OnGUI()
+    //    {
+    //        if (GUI.Button(new Rect(10, 10, 100, 80), "Test"))
+    //        {
+    //            PrintPos();
+    //        }
+    //    }
 
-////[82165-findletterposinuitext.zip|82165]
+    ////[82165-findletterposinuitext.zip|82165]
 
 
     #endregion
