@@ -31,22 +31,24 @@ public class StudentSerializableObject : ScriptableObject
     public float ROW_MODIFIER = 0;
 
     [Header("Prerequisite to meet.")]
-    public StudentPrerequisite prereq;
+    public StudentEffectPrerequisite prereq;
 
     [Header("Number related to prereq. Be it happiness level, or row, or howm any neighbors,.")]
-    public int prereq_argument;
+    public float PREREQ_ARGUMENT = 0;
 
     [Header("Effect of prerequisite being met.")]
-    public StudentEffects effect;
+    public StudentEffectType effect;
 
-    [Header("Number related to effect. affects the gain or malus or whatever")]
-    public int effect_argument;
+    [Header("Effect argument 1/left")]
+    public float EFFECT_ARG_ONE = 0;
 
+    [Header("Effect argument 2/right")]
+    public float EFFECT_ARG_two = 0;
 }
 
 
 
-public enum StudentPrerequisite
+public enum StudentEffectPrerequisite
 {
     NEEDS_NOTHING,
     NEEDS_HAPPINESS_LEVEL,
@@ -54,7 +56,7 @@ public enum StudentPrerequisite
     NEEDS_NEIGHBORS
 }
 
-public enum StudentEffects
+public enum StudentEffectType
 {
     None,
     GAIN_ALL_OTHER_ROWS,
