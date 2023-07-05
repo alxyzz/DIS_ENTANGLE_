@@ -32,7 +32,9 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
 
-    List<List<Seat>> _seatGrid = new List<List<Seat>>();
+    
+    [HideInInspector]public List<Seat> LIST_SEATS = new();
+    [HideInInspector] public List<SeatRow> LIST_ROWS = new(); 
     float averageHappiness
     {
         get
@@ -180,7 +182,7 @@ public class ClassroomManager : MonoBehaviour
         UI_CardInfo.SetActive(false);
         WinPanel.SetActive(false);
 
-        InitializeSeats();
+       // InitializeSeats();  initialized in the seatRow script
         InitializeCards();
     }
     //private GameObject lastHoveredObject;
@@ -191,13 +193,7 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
 
-    void InitializeSeats()
-    {
-        foreach (var item in rows)
-        {
-            seats.AddRange(item.seats);
-        }
-    }
+  
     public void Restart()
     {
         int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
