@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SeatRow : MonoBehaviour
 {[Header("All IDs must be identical and are used to build the grid for calculations. so count up or down normally")]
-    public int SeatID;
+    public int rowID;
    public List<Seat> seats = new();
     [SerializeReference] TextMeshProUGUI UI_rowmod;
 
@@ -52,8 +52,11 @@ public class SeatRow : MonoBehaviour
             {
                 throw new System.Exception("seat at row " + gameObject.name + " already has a row... this must mean we have overlapping stuff. not good.");
             }
+            ClassroomManager.Instance.LIST_SEATS.Add(item);
             item.row = this; 
         }
+
+        
     }
 
 
