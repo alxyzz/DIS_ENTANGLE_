@@ -19,6 +19,163 @@ public class Seat : MonoBehaviour
     [HideInInspector]public SeatRow row;
     [HideInInspector] public SeatRow column;
     [HideInInspector] public Student student;
+
+
+    public Seat GetLeftNeighbor(Seat b)
+    {
+
+
+
+        return null;
+    }
+    public Seat GetRightNeighbor(Seat b)
+    {
+
+
+        return null;
+    }
+
+    //     Possible prerequisits:
+    //None = always active
+    //if own happiness stat is above or below a certain value
+    //if in a certain row
+    //if self has neighbours
+    
+    
+    void RefreshEffect()
+    {
+        ChangeEffect(undo: true);
+        switch (student.prereq)
+        {
+            case StudentEffectPrerequisite.NEEDS_NOTHING:
+                ChangeEffect();
+                break;
+            case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
+                if (student.EFFECTIVE_HAPPINESS >  student.PREREQ_ARGUMENT)
+                {
+                    ChangeEffect();
+                }
+                else
+                {
+                    Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have the required happiness level.");
+                }
+                break;
+            case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
+                if (row != null)
+                {
+                    if (row.rowID == student.PREREQ_ARGUMENT)
+                    {
+                        ChangeEffect();
+                    }
+                    else
+                    {
+                        Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have the required row.");
+                    }
+                }
+                break;
+            case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
+                if (GetLeftNeighbor(this) != null && GetRightNeighbor(this) != null)
+                {
+                    ChangeEffect();
+                }
+                else
+                {
+                    Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have enough neighbors.");
+                }
+                break;
+            default:
+                break;
+        }
+    }
+    void ChangeEffect(bool undo = false)
+    {
+        if (undo)
+        {
+            
+            return;
+        }
+
+        switch (student.effect)
+        {
+            case StudentEffectType.None:
+                Debug.Log("Initialized effect with no effect. :)");
+                break;
+            case StudentEffectType.GAIN_ALL_OTHER_ROWS:
+                int rownumber = row.rowID;
+                foreach (var item in ClassroomManager.Instance.LIST_ROWS)
+                {
+                    if (item.rowID != rownumber)
+                    {
+                        foreach (var sea in item.seats)
+                        {
+                            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_ALL_OTHER_ROWS);
+                        }
+                    }
+                }
+                break;
+            case StudentEffectType.GAIN_OWN_ROW:
+                int sameNumber = row.rowID;
+                foreach (var item in ClassroomManager.Instance.LIST_ROWS)
+                {
+                    if (item.rowID == sameNumber)
+                    {
+                        foreach (var sea in item.seats)
+                        {
+                            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
+                        }
+                    }
+                }
+                break;
+            case StudentEffectType.GAIN_SELF:
+               AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
+                break;
+            case StudentEffectType.SET_AVERAGE_OF_NEIGHBORS:
+                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.SET_AVERAGE_OF_NEIGHBORS);
+                break;
+            case StudentEffectType.GAIN_SELF_AND_NEIGHBORS:
+                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                Seat left = GetLeftNeighbor(this);
+                Seat right = GetRightNeighbor(this);
+
+                if (left != null)
+                {
+                    left.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                }
+                if (right != null)
+                {
+                    right.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                }
+
+                break;
+            case StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE:
+                Seat lefty = GetLeftNeighbor(this);
+                Seat righty = GetRightNeighbor(this);
+
+                if (lefty != null)
+                {
+                    lefty.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
+                }
+                if (righty != null)
+                {
+                    righty.AssignModifiers(student, student.EFFECT_ARG_two, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
+                }
+                break;
+            default:
+                Debug.LogError("Got undefined student effect type, for some reason.");
+                break;
+        }
+
+    }
+
+
+    //    Effects:
+    //all other rows get +X
+    //own row gets +X
+    //self has +X
+    //Sets own happiness to the combined value of neighbours
+    //Neighbouring students and self get +X
+    //Left neighbour gets +X and right neighbour +X
+
     public Image ui_studentImage;
     public TextMeshProUGUI ui_learningFactor;
     public float LEARNING_FACTOR
@@ -80,7 +237,46 @@ public class Seat : MonoBehaviour
     //}
 
     
+    public void AssignModifiers(Student source, float mod, StudentEffectType type)
+    {
 
+
+
+    }
+
+
+    /// <summary>
+    /// removes all modifiers sourced from the source. or any at all.
+    /// </summary>
+    /// <param name="source"></param>
+    public void RemoveModifiers(Student source = null)
+    {
+        if (student.modifiers.Count < 1)
+        {
+            return;
+        }
+        List<(Student, float, StudentEffectType)> toRemove = new();
+        foreach (var item in student.modifiers)
+        {
+            if (source != null)
+            {
+                if (item.Item1 == source)
+                {
+                    toRemove.Add(item);
+                }
+            }
+            else
+            {
+                toRemove.Add(item);
+            }
+            
+        }
+
+        foreach (var item in toRemove)
+        {
+            student.modifiers.Remove(item);
+        }
+    }
     Image InitializeChild()
     {
         foreach (Transform child in transform)
@@ -121,19 +317,19 @@ public class Seat : MonoBehaviour
 
         switch (student.prereq)
         {
-            case StudentPrerequisite.NEEDS_NOTHING:
+            case StudentEffectPrerequisite.NEEDS_NOTHING:
 
-                DoEffect();
+                ChangeEffect();
 
                 break;
-            case StudentPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                DoEffect();
+            case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
+                ChangeEffect();
                 break;
-            case StudentPrerequisite.NEEDS_SPECIFIC_ROW:
-                DoEffect();
+            case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
+                ChangeEffect();
                 break;
-            case StudentPrerequisite.NEEDS_NEIGHBORS:
-                DoEffect();
+            case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
+                ChangeEffect();
                 break;
             default:
                 break;
@@ -141,31 +337,11 @@ public class Seat : MonoBehaviour
     }
 
 
-    void DoEffect()
-    {
-        switch (student.effect)
-        {
-            case StudentEffects.None:
-                break;
-            case StudentEffects.GAIN_ALL_OTHER_ROWS:
-                break;
-            case StudentEffects.GAIN_OWN_ROW:
-                break;
-            case StudentEffects.GAIN_SELF:
-                break;
-            case StudentEffects.SET_AVERAGE_OF_NEIGHBORS:
-                break;
-            case StudentEffects.GAIN_SELF_AND_NEIGHBORS:
-                break;
-            case StudentEffects.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE:
-                break;
-            default:
-                break;
-        }
-    }
+  
 
     public void OnClick()
     {
+        RemoveModifiers();
         Debug.Log("Clicked student.");
         ClassroomManager.Instance.OnClickSeat(this);
     }

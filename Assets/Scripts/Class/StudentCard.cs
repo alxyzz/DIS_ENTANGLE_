@@ -39,8 +39,16 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         student = b;
         b.prereq = studentObject.prereq;
 
+        b.PREREQ_ARGUMENT = studentObject.PREREQ_ARGUMENT;
+
         b.effect = studentObject.effect;
-}
+
+        b.EFFECT_ARG_ONE = studentObject.EFFECT_ARG_ONE;
+        b.EFFECT_ARG_two = studentObject.EFFECT_ARG_two;
+
+
+
+    }
 
     public void Refresh()
     {
