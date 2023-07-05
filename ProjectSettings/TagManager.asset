@@ -4,13 +4,12 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Stick
-  - Seat
+  - WolfEscape
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PostProcessing
   - Water
   - UI
   - 
