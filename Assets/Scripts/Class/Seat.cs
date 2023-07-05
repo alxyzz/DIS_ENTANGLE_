@@ -98,6 +98,7 @@ public class Seat : MonoBehaviour
         switch (student.effect)
         {
             case StudentEffectType.None:
+                Debug.Log("Initialized effect with no effect. :)");
                 break;
             case StudentEffectType.GAIN_ALL_OTHER_ROWS:
                 int rownumber = row.rowID;
@@ -160,6 +161,7 @@ public class Seat : MonoBehaviour
                 }
                 break;
             default:
+                Debug.LogError("Got undefined student effect type, for some reason.");
                 break;
         }
 
@@ -243,7 +245,10 @@ public class Seat : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// removes all modifiers sourced from the source. or any at all.
+    /// </summary>
+    /// <param name="source"></param>
     public void RemoveModifiers(Student source = null)
     {
         if (student.modifiers.Count < 1)
