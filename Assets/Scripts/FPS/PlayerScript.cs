@@ -151,7 +151,7 @@ public class PlayerScript : MonoBehaviour
         _health -= 15;
         if (_health < 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            WolfFPSManager.Instance.Lose();
         }
     }
 

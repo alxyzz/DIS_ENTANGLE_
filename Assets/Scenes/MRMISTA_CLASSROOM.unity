@@ -1505,7 +1505,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 2
+  rowID: 0
   seats:
   - {fileID: 1017611955}
   - {fileID: 695813558}
@@ -2339,7 +2339,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 3
+  rowID: 0
   seats:
   - {fileID: 1280608232}
   - {fileID: 1424553250}
@@ -2787,6 +2787,75 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470055645}
   m_CullTransparentMesh: 1
+--- !u!1001 &473677284
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6400444012615409812, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_Name
+      value: NonBloomyGlobalVolume
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 560.538
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 281.56906
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.038544178
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6400444012615409834, guid: 541e7859fc705cb408c45e92997953cb,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 541e7859fc705cb408c45e92997953cb, type: 3}
 --- !u!1 &500763986
 GameObject:
   m_ObjectHideFlags: 0
@@ -6102,7 +6171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4541fd0f2ef91d4f8e39c11fcedf109, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SeatID: 1
+  rowID: 0
   seats:
   - {fileID: 2434455987532053406}
   - {fileID: 778526146}
@@ -7501,6 +7570,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d997a7e959f4a8488fc19cd7e1c2e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LIST_SEATS: []
+  LIST_ROWS: []
   studentTypes:
   - {fileID: 11400000, guid: 6c2c665f35add674fb442659e86f4954, type: 2}
   - {fileID: 11400000, guid: 915a460cfabdc4e4abc9714c64ab1cf9, type: 2}
