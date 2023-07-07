@@ -12,14 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: DistracterRight
   m_EditorClassIdentifier: 
-  chosenName: 
-  seatedImage: {fileID: 0}
+  chosenName: Distractor Right
+  seatedImage: {fileID: 21300000, guid: bc8106b13db046242861ea07ff46dbbd, type: 3}
   portrait: {fileID: 0}
-  Names: []
+  Names:
+  - Glubglub Level 5 Barbarian
+  - Leap Frog
+  - Askazor Flamebelcher
+  - "Hyetwar der Zerst\xF6rer"
   STAT_LEARNING: 0
   DESC: The left adjacent student gains +2 and the right neighbor gains -2
   ROW_MODIFIER: 0
   prereq: 0
-  prereq_argument: 0
-  effect: 0
-  effect_argument: 0
+  PREREQ_ARGUMENT: 0
+  effect: 5
+  EFFECT_ARG_ONE: 0
+  EFFECT_ARG_two: -2
