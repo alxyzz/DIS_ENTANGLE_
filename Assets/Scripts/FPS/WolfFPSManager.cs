@@ -31,44 +31,70 @@ public class WolfFPSManager : MonoBehaviour
 
     #endregion
 
+    public TMPro.TextMeshProUGUI countdownText;
 
+    private float timeRemaining = 90.0f; // 1 minute 30 seconds
 
-    public float SETTING_TIME_TO_WIN;
-     float TIME_REMAINING;
-    bool started;
+    public List<UnityEngine.AI.NavMeshAgent> ai = new();
 
-    // Start is called before the first frame update
+    private bool timerIsRunning = false;
+
+    public void CustomStart()
+    {
+        timerIsRunning = true;
+        foreach (var item in ai)
+        {
+            item.enabled = true;
+        }
+    }
+
+   
     void Start()
     {
-        
+        foreach (var item in ai)
+        {
+            item.enabled = false;
+        }
     }
+  
 
 
-
-    public void InitiateCountdown()
-    {
-
-    }
+   
 
     // Update is called once per frame
     void Update()
     {
-        if (started)
+
+        if (timerIsRunning)
         {
-            TIME_REMAINING -= Time.deltaTime;
-            if (TIME_REMAINING == 0)
+            if (timeRemaining > 0)
             {
+                timeRemaining -= Time.deltaTime;
+                UpdateCountdownText();
+            }
+            else
+            {
+                timeRemaining = 0;
+                timerIsRunning = false;
+                // Call your method here
                 WinWolfblade();
             }
         }
+
+    
     }
 
-
+    private void UpdateCountdownText()
+    {
+        int minutes = Mathf.FloorToInt(timeRemaining / 60);
+        int seconds = Mathf.FloorToInt(timeRemaining % 60);
+        countdownText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
 
 
     void WinWolfblade()
     {
-
+        WinScreenScript.Instance.PopUp();
     }
 
 

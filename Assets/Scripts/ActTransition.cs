@@ -6,7 +6,7 @@ using UnityEngine;
 public class ActTransition : MonoBehaviour
 {
     TextMeshProUGUI texty;
-
+  
 
 
     void Start()

@@ -35,13 +35,36 @@ public class Seat : MonoBehaviour
         return null;
     }
 
+    [HideInInspector] public List<(Student, float, StudentEffectType)> modifiers = new();
+    [HideInInspector] public List<(Student, float, StudentEffectType)> modifiedByThis = new();
+
+
+    void CheckForNullEffects()
+    {
+        foreach (var item in modifiers)
+        {
+            if (item.Item1 == null)
+            {
+                modifiers.Remove(item);
+            }
+        }
+
+        foreach (var item in modifiedByThis)
+        {
+            if (item.Item1 == null)
+            {
+                modifiers.Remove(item);
+            }
+        }
+    }
+
     //     Possible prerequisits:
     //None = always active
     //if own happiness stat is above or below a certain value
     //if in a certain row
     //if self has neighbours
-    
-    
+
+
     void RefreshEffect()
     {
         ChangeEffect(undo: true);
@@ -245,38 +268,41 @@ public class Seat : MonoBehaviour
     }
 
 
-    /// <summary>
-    /// removes all modifiers sourced from the source. or any at all.
-    /// </summary>
-    /// <param name="source"></param>
-    public void RemoveModifiers(Student source = null)
-    {
-        if (student.modifiers.Count < 1)
-        {
-            return;
-        }
-        List<(Student, float, StudentEffectType)> toRemove = new();
-        foreach (var item in student.modifiers)
-        {
-            if (source != null)
-            {
-                if (item.Item1 == source)
-                {
-                    toRemove.Add(item);
-                }
-            }
-            else
-            {
-                toRemove.Add(item);
-            }
+    ///// <summary>
+    ///// removes all modifiers sourced from the source. or any at all.
+    ///// </summary>
+    ///// <param name="source"></param>
+    //public void RemoveModifiers(Student source = null)
+    //{
+    //    if (student.modifiers.Count < 1)
+    //    {
+    //        return;
+    //    }
+    //    List<(Student, float, StudentEffectType)> toRemove = new();
+    //    foreach (var item in student.modifiers)
+    //    {
+    //        if (source != null)
+    //        {
+    //            if (item.Item1 == source)
+    //            {
+    //                toRemove.Add(item);
+    //            }
+    //        }
+    //        else
+    //        {
+    //            toRemove.Add(item);
+    //        }
             
-        }
+    //    }
 
-        foreach (var item in toRemove)
-        {
-            student.modifiers.Remove(item);
-        }
-    }
+    //    foreach (var item in toRemove)
+    //    {
+    //        student.modifiers.Remove(item);
+    //    }
+    //}
+
+
+   
     Image InitializeChild()
     {
         foreach (Transform child in transform)
@@ -341,7 +367,7 @@ public class Seat : MonoBehaviour
 
     public void OnClick()
     {
-        RemoveModifiers();
+
         Debug.Log("Clicked student.");
         ClassroomManager.Instance.OnClickSeat(this);
     }
