@@ -48,6 +48,12 @@ public class SeatRow : MonoBehaviour
     {
         foreach (var item in seats)
         {
+            if (item == null)
+            {
+                Debug.LogError("Seat was null @ SeatRow" + gameObject.name + ", you probably need to reassign a missing seat reference.");
+
+                return;
+            }
             if (item.row != null)
             {
                 throw new System.Exception("seat at row " + gameObject.name + " already has a row... this must mean we have overlapping stuff. not good.");

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public class ClassroomManager : MonoBehaviour
 {
@@ -32,15 +31,21 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
 
-    
-    [HideInInspector]public List<Seat> LIST_SEATS = new();
-    [HideInInspector] public List<SeatRow> LIST_ROWS = new(); 
+
+    #region provisory goal
+    int stuffplaced;
+
+    #endregion
+
+
+    [HideInInspector] public List<Seat> LIST_SEATS = new();
+    [HideInInspector] public List<SeatRow> LIST_ROWS = new();
     float averageHappiness
     {
         get
         {
             float b = 0;
-            foreach (var item in seats)
+            foreach (var item in LIST_SEATS)
             {
                 b += item.LEARNING_FACTOR;
             }
@@ -51,7 +56,7 @@ public class ClassroomManager : MonoBehaviour
 
     Seat lastSelectedSeat;
     StudentCard lastSelectedCard;
-   [SerializeReference] List<StudentSerializableObject> studentTypes = new();
+    [SerializeReference] List<StudentSerializableObject> studentTypes = new();
     [SerializeReference] List<SeatRow> rows = new();
 
     int SETTING_AMT_STARTING_CARDS = 10;
@@ -64,7 +69,6 @@ public class ClassroomManager : MonoBehaviour
     [SerializeReference] GameObject WinPanel;
 
 
-    List<Seat> seats = new();
 
 
     #region UI
@@ -82,7 +86,7 @@ public class ClassroomManager : MonoBehaviour
 
     void HideCardInfo()
     {
-        UI_CardInfo.SetActive(false); 
+        UI_CardInfo.SetActive(false);
     }
 
     void DisplayCardInfo()
@@ -123,19 +127,23 @@ public class ClassroomManager : MonoBehaviour
 
     void CheckWinCondition()
     {
-        if (averageHappiness >= goalhappiness)
+        //if (averageHappiness >= goalhappiness)
+        //{
+        //    Win();
+        //}
+        //completion.text = averageHappiness.ToString() + "/" + goalhappiness.ToString();
+
+
+
+        if (stuffplaced > 7)
         {
             Win();
         }
-        completion.text = averageHappiness.ToString() + "/" + goalhappiness.ToString();
-
-
-
-
 
         void Win()
         {
-            WinPanel.SetActive(true);
+            //WinPanel.SetActive(true);
+            WinScreenScript.Instance.PopUp();
         }
     }
     void OnPlaceCard()
@@ -180,20 +188,19 @@ public class ClassroomManager : MonoBehaviour
     void Start()
     {
         UI_CardInfo.SetActive(false);
-        WinPanel.SetActive(false);
 
-       // InitializeSeats();  initialized in the seatRow script
+        // InitializeSeats();  initialized in the seatRow script
         InitializeCards();
     }
     //private GameObject lastHoveredObject;
     void FixedUpdate()
     {
-       
+
     }
     #endregion
 
 
-  
+
     public void Restart()
     {
         int currentSceneIndex = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
@@ -228,6 +235,40 @@ public class ClassroomManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// removes the modifiers caused by a certain student from all students
+    /// </summary>
+    /// <param name="source"></param>
+    public void RemoveStudentAndEffects(Student source)
+    {
+        //if (source.modifiedByThis.Count < 1)
+        //{
+        //    return;
+        //}
+
+        List<(Seat,(Student, float, StudentEffectType))> toRemove = new();
+        foreach (var seaty in LIST_SEATS)
+        {
+            foreach (var item in seaty.modifiers)
+            {
+
+                if (item.Item1 == source)
+                {
+
+                    (Seat, (Student, float, StudentEffectType)) b = new(seaty, (item.Item1, item.Item2, item.Item3));
+                    toRemove.Add(b);
+                }
+
+
+            }
+        }
+        foreach (var item in toRemove)
+        {
+            item.Item1.modifiers.Remove(item.Item2);
+
+        }
+    }
+
     public void OnClickSeat(Seat s)
     {
 
@@ -235,18 +276,24 @@ public class ClassroomManager : MonoBehaviour
         {
             if (s.student != null)
             {
+                Debug.Log("Clicked occupied seat, doing nothing.");
                 return;
             }
+
+            //RemoveStudentAndEffects(s.student);
+      
             s.student = lastSelectedCard.student;
             s.student.row = s.row;
             OnPlaceCard();
             s.Refresh();
             s.row.Refresh();
             lastSelectedCard = null;
+            stuffplaced++;
+
         }
 
 
-        foreach (var item in seats)
+        foreach (var item in LIST_SEATS)
         {
             item.Refresh();
         }

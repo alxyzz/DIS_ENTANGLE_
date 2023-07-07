@@ -46,12 +46,14 @@ public class JournalManager : MonoBehaviour
     }
 
     #endregion
-    public List<List<JournalPageObject>> sequenceObjects = new();
+    public List<JournalPageObject> firstPage = new();
+    public List<JournalPageObject> secondPage = new();
+     List<List<JournalPageObject>> sequenceObjects = new();
 
     List<List<JournalPage>> allPages = new();
 
     TextMeshProUGUI txt_Sentence;
-    public List<JournalAnswerButton> buttons;
+    public List<JournalAnswerButton> buttons = new();
 
     List<JournalPage> currentPage = new();
     string CURR_PAGE_TEXT
@@ -92,7 +94,7 @@ public class JournalManager : MonoBehaviour
         }
     }
     /// <summary>
-    /// initializes the next page in the stack
+    /// initializes the page in the stack. if next is true, we initialize the second
     /// </summary>
     void InitializePage(bool next)
     {
@@ -107,6 +109,10 @@ public class JournalManager : MonoBehaviour
         }
         else
         {
+            if (allPages == null)
+            {
+                throw new System.Exception("JournalManager@InitializePage() - allPages was NULL for some bad reason.");
+            }
             if (allPages[0] == null)
             {
                 throw new System.Exception("JournalManager@InitializePage() - did not have any sequences and thus could not initialize a page.");
@@ -132,6 +138,11 @@ public class JournalManager : MonoBehaviour
 
         //allsequences has pages
         //each p
+
+
+        sequenceObjects.Add(firstPage);
+        sequenceObjects.Add(secondPage);
+
 
         foreach (var item in sequenceObjects)
         {

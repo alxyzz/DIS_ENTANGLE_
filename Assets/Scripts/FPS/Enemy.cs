@@ -65,6 +65,11 @@ public class Enemy : MonoBehaviour
     {
         timeSinceLastAttack += Time.deltaTime;
 
+        if (!navMeshAgent.enabled)
+        {
+            return;
+        }
+
         if (rbody != null)
         {
             return;
