@@ -46,7 +46,7 @@ public class WinScreenScript : MonoBehaviour
 
     public void OnClickProceed()
     {
-        GameManager.Instance.Transition();
+        GameManager.Instance.ChangeLevel();
     }
 
     public void OnClickRestart()

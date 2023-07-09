@@ -14,6 +14,12 @@ public class ClassroomManager : MonoBehaviour
         }
     }
 
+
+
+
+
+
+
     void Awake()
     {
         if (_instance != null)
@@ -53,10 +59,11 @@ public class ClassroomManager : MonoBehaviour
         }
     }
     float goalhappiness = 15;
+    ///goal is to get a percentage of students happy
 
     Seat lastSelectedSeat;
     StudentCard lastSelectedCard;
-    [SerializeReference] List<StudentSerializableObject> studentTypes = new();
+    [SerializeReference] List<StudentSerializableObject> StudentSequence = new();
     [SerializeReference] List<SeatRow> rows = new();
 
     int SETTING_AMT_STARTING_CARDS = 10;
@@ -67,7 +74,6 @@ public class ClassroomManager : MonoBehaviour
     [SerializeReference] GameObject LeftCardParent;
     [SerializeReference] GameObject RightCardParent;
     [SerializeReference] GameObject WinPanel;
-
 
 
 
@@ -229,9 +235,14 @@ public class ClassroomManager : MonoBehaviour
 
         }
         //initialize student card data
-        foreach (var item in cds)
-        {
-            item.Initialize(studentTypes[Random.Range(0, studentTypes.Count)]);
+        //foreach (var item in cds)
+        //{ //random
+        //    item.Initialize(StudentSequence[Random.Range(0, StudentSequence.Count)]);
+        //}
+
+        for (int i = 0; i < StudentSequence.Count; i++)
+        {//preset choice
+            cds[i].Initialize(StudentSequence[i]);
         }
     }
 
@@ -298,41 +309,7 @@ public class ClassroomManager : MonoBehaviour
             item.Refresh();
         }
         CheckWinCondition();
-        ////gets values of clicked stuff
-        //if (lastSelectedSeat == null)
-        //{
-        //    lastSelectedSeat = s;
-        //    Debug.Log("Clicked first student with name " + lastSelectedSeat.gameObject.name);
-
-
-        //}
-        //else
-        //{
-        //    Debug.Log("Clicked second student with name " + lastSelectedSeat.gameObject.name);
-        //    StudentSerializableObject seatcurrentlyclicked = null;
-        //    StudentSerializableObject studentFromlastSelectedSeat = null;
-
-        //    if (s.student != null)
-        //    {
-        //        seatcurrentlyclicked = s.student;
-
-        //    }
-        //    if (lastSelectedSeat.student != null)
-        //    {
-        //        studentFromlastSelectedSeat = lastSelectedSeat.student;
-
-        //    }
-
-        //    lastSelectedSeat.student = seatcurrentlyclicked;
-        //    s.student = studentFromlastSelectedSeat;
-
-
-        //    s.PostMove();
-        //    lastSelectedSeat.PostMove();
-
-        //    lastSelectedSeat = null;
-
-        //}
+      
     }
 
 
