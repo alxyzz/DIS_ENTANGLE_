@@ -15,11 +15,11 @@ MonoBehaviour:
   chosenName: 
   seatedImage: {fileID: 0}
   portrait: {fileID: 0}
-  Names: []
   STAT_LEARNING: 0
   DESC: If they are not in the last row, the row they are on gains +1
   ROW_MODIFIER: 0
   prereq: 2
-  prereq_argument: 1
+  PREREQ_ARGUMENT: 1
   effect: 2
-  effect_argument: 1
+  EFFECT_ARG_ONE: 1
+  EFFECT_ARG_two: 0

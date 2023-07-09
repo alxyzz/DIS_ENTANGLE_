@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Student
 {
-    public string chosenName;
+    public string chosenName = "";
     public SeatRow row;
     public float EFFECTIVE_HAPPINESS //happiness post all modifiers
     {
@@ -48,14 +48,11 @@ public class Student
     [Header("Portrait image")]
     public Sprite portrait;
 
-    [Header("Names to be picked at random")]
-    public List<string> Names = new();
-
     [Header("Base happiness state")]
     public float STAT_LEARNING;
 
     [Header("Student description")]
-    public string DESC;
+    public string DESC = "";
 
     //[Header("Modifier for the entire lane")]
     //public float LANE_MODIFIER;

@@ -62,7 +62,7 @@ public class ClassroomManager : MonoBehaviour
     ///goal is to get a percentage of students happy
 
     Seat lastSelectedSeat;
-    StudentCard lastSelectedCard;
+    StudentCard selectedCard;
     [SerializeReference] List<StudentSerializableObject> StudentSequence = new();
     [SerializeReference] List<SeatRow> rows = new();
 
@@ -92,36 +92,46 @@ public class ClassroomManager : MonoBehaviour
 
     void HideCardInfo()
     {
-        UI_CardInfo.SetActive(false);
+        if (selectedCard != null)
+        {
+            OnHoverCard(selectedCard);
+        }
+        else
+        {
+            UI_CardInfo.SetActive(false);
+        }
+
     }
 
     void DisplayCardInfo()
     {
         UI_CardInfo.SetActive(true);
-        if (currentlySelectedCardName != null)
+        if (selectedCard != null)
         {
-            if (lastSelectedCard != null)
+            if (selectedCard.student != null)
             {
-                currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
-                currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
+
+
+                currentlySelectedCardName.text = selectedCard.student.chosenName;
+                currentlySelectedCardDesc.text = selectedCard.student.DESC;
             }
         }
-       
+
         //currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
     }
     public void OnWinClickProceed()
     {
 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("WOLFBLADE_ESCAPE");
+        GameManager.Instance.ChangeLevel();
     }
     public void OnHoverCard(StudentCard b)
     {
-        if (lastSelectedCard != null)
-        {
-            return;
-        }
+        //if (lastSelectedCard != null)
+        //{
+        //    return;
+        //}
 
-        lastSelectedCard = b;
+        selectedCard = b;
         DisplayCardInfo();
 
 
@@ -129,25 +139,15 @@ public class ClassroomManager : MonoBehaviour
 
     public void OnLeaveHover()
     {
-        if (lastSelectedCard == null)
-        {
-            HideCardInfo();
-
-        }
+        HideCardInfo();
 
     }
 
     void CheckWinCondition()
     {
-        //if (averageHappiness >= goalhappiness)
-        //{
-        //    Win();
-        //}
-        //completion.text = averageHappiness.ToString() + "/" + goalhappiness.ToString();
 
 
-
-        if (stuffplaced > 7)
+        if (happy >= happinessThreshold)
         {
             Win();
         }
@@ -160,22 +160,24 @@ public class ClassroomManager : MonoBehaviour
     }
     void OnPlaceCard()
     {
-        lastSelectedCard.ToggleHighLight(false);
+        selectedCard.ToggleHighLight(false);
         HideCardInfo();
-        Destroy(lastSelectedCard.gameObject);
-        lastSelectedCard = null;
+        Destroy(selectedCard.gameObject);
+        selectedCard = null;
 
+
+        CheckWinCondition();
     }
     [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
-    float happinessThreshold = 0;
+    float happinessThreshold = 12;
     int happy
     {
         get
         {
             int hp = 0;
             foreach (var item in LIST_SEATS)
-            {
-                if (item.student.EFFECTIVE_HAPPINESS > 1)
+            {fix this shit
+                if (item.student.EFFECTIVE_HAPPINESS > 0)
                 {
                     hp += 1;
                 }
@@ -191,22 +193,22 @@ public class ClassroomManager : MonoBehaviour
     }
     public void OnSelectCard(StudentCard b)
     {
-        if (lastSelectedCard == b)
+        if (selectedCard == b)
         {
-            lastSelectedCard.ToggleHighLight(false);
+            selectedCard.ToggleHighLight(false);
 
-            lastSelectedCard = null;
+            selectedCard = null;
 
             HideCardInfo();
             return;
         }
-        if (lastSelectedCard != null)
+        if (selectedCard != null)
         {
-            lastSelectedCard.ToggleHighLight(false);
+            selectedCard.ToggleHighLight(false);
         }
 
-        lastSelectedCard = b;
-        lastSelectedCard.ToggleHighLight(true);
+        selectedCard = b;
+        selectedCard.ToggleHighLight(true);
         DisplayCardInfo();
 
     }
@@ -248,14 +250,8 @@ public class ClassroomManager : MonoBehaviour
         //initialize card objects on both sides up to the maximum
         List<StudentCard> cds = new();
         int cardsMade = 0;
-        while (leftCards.Count < SETTING_AESTHETIC_AMT_CARDS_PER_SIDE && cardsMade < SETTING_AMT_STARTING_CARDS)
-        {
-            StudentCard b = Instantiate(StudentCardPrefab, LeftCardParent.transform).GetComponent<StudentCard>();
-            cardsMade++;
-            cds.Add(b);
-            leftCards.Add(b);
-        }
-        while (rightCards.Count < SETTING_AESTHETIC_AMT_CARDS_PER_SIDE && cardsMade < SETTING_AMT_STARTING_CARDS)
+
+        while (cardsMade < SETTING_AMT_STARTING_CARDS)
         {
             StudentCard b = Instantiate(StudentCardPrefab, RightCardParent.transform).GetComponent<StudentCard>();
             cardsMade++;
@@ -263,11 +259,7 @@ public class ClassroomManager : MonoBehaviour
             rightCards.Add(b);
 
         }
-        //initialize student card data
-        //foreach (var item in cds)
-        //{ //random
-        //    item.Initialize(StudentSequence[Random.Range(0, StudentSequence.Count)]);
-        //}
+
 
         for (int i = 0; i < StudentSequence.Count; i++)
         {//preset choice
@@ -279,14 +271,14 @@ public class ClassroomManager : MonoBehaviour
     /// removes the modifiers caused by a certain student from all students
     /// </summary>
     /// <param name="source"></param>
-    public void RemoveStudentAndEffects(Student source)
+    public void RemoveEffects(Student source)
     {
         //if (source.modifiedByThis.Count < 1)
         //{
         //    return;
         //}
-
-        List<(Seat,(Student, float, StudentEffectType))> toRemove = new();
+        also make this work 
+        List<(Seat, (Student, float, StudentEffectType))> SeatsToClean = new();
         foreach (var seaty in LIST_SEATS)
         {
             foreach (var item in seaty.modifiers)
@@ -294,43 +286,77 @@ public class ClassroomManager : MonoBehaviour
 
                 if (item.Item1 == source)
                 {
-
-                    (Seat, (Student, float, StudentEffectType)) b = new(seaty, (item.Item1, item.Item2, item.Item3));
-                    toRemove.Add(b);
+                    try
+                    {
+                        seaty.modifiers.Remove(item);
+                    }
+                    catch (System.Exception)
+                    {
+                        Debug.LogError("ClassroomManager@RemoveStudentEffects - could not remove the effects because list was modified during removal.");
+                        throw;
+                    }
+                    
+                    //(Seat, (Student, float, StudentEffectType)) b = new(seaty, (item.Item1, item.Item2, item.Item3));
+                    //SeatsToClean.Add(b);
                 }
 
 
             }
         }
-        foreach (var item in toRemove)
-        {
-            item.Item1.modifiers.Remove(item.Item2);
 
-        }
+
+        //for (int i = SeatsToClean.Count; i < 0; i--)
+        //{
+
+        //}
+        //foreach (var item in SeatsToClean)
+        //{
+        //    item.Item1.modifiers.Remove(item.Item2);
+
+        //}
     }
 
-    public void OnClickSeat(Seat s)
+
+    public void OnClickRestart()
+    {
+        Debug.Log("Clicked restart.");
+        if (GameManager.Instance == null)
+        {
+            Debug.LogWarning("The GameManager script is not loaded, because you probably didn't start from the menu. This disables using Restart, but no worries, you can still play.");
+            return;
+        }
+        GameManager.Instance.ChangeLevel(false, true);
+    }
+
+    public void OnClickGotoMenu()
+    {
+        Debug.Log("Clicked goto menu.");
+
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene("MAIN_MENU");
+
+
+    }
+    void PlaceStudent(Seat s)
     {
 
-        if (lastSelectedCard != null)
+        if (s.student != null)
         {
-            if (s.student != null)
-            {
-                Debug.Log("Clicked occupied seat, doing nothing.");
-                return;
-            }
-
-            //RemoveStudentAndEffects(s.student);
-      
-            s.student = lastSelectedCard.student;
-            s.student.row = s.row;
-            OnPlaceCard();
-            s.Refresh();
-            s.row.Refresh();
-            lastSelectedCard = null;
-            stuffplaced++;
-
+            Debug.Log("Clicked occupied seat, doing nothing.");
+            return;
         }
+
+        //RemoveStudentAndEffects(s.student);
+
+        s.student = selectedCard.student;
+        s.student.row = s.row;
+        OnPlaceCard();
+        s.Refresh();
+        s.row.Refresh();
+        selectedCard = null;
+        stuffplaced++;
+
+
 
 
         foreach (var item in LIST_SEATS)
@@ -338,7 +364,14 @@ public class ClassroomManager : MonoBehaviour
             item.Refresh();
         }
         CheckWinCondition();
-      
+    }
+    public void OnClickSeat(Seat s)
+    {
+
+        if (selectedCard != null)
+        {
+            PlaceStudent(s);
+        }
     }
 
 

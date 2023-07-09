@@ -15,11 +15,11 @@ MonoBehaviour:
   chosenName: 
   seatedImage: {fileID: 0}
   portrait: {fileID: 0}
-  Names: []
   STAT_LEARNING: 1
   DESC: The left adjacent student gains -2 and the right neighbor gains +2
   ROW_MODIFIER: 0
   prereq: 0
-  prereq_argument: 0
+  PREREQ_ARGUMENT: 0
   effect: 6
-  effect_argument: 2
+  EFFECT_ARG_ONE: -2
+  EFFECT_ARG_two: 2

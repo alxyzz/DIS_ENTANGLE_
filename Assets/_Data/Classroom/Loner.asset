@@ -15,11 +15,11 @@ MonoBehaviour:
   chosenName: Wolfblade
   seatedImage: {fileID: 0}
   portrait: {fileID: 0}
-  Names: []
   STAT_LEARNING: -1
   DESC: If this student is adjacent to another, she gains -2
   ROW_MODIFIER: 0
   prereq: 3
-  prereq_argument: 1
+  PREREQ_ARGUMENT: 2
   effect: 3
-  effect_argument: -2
+  EFFECT_ARG_ONE: -2
+  EFFECT_ARG_two: 0

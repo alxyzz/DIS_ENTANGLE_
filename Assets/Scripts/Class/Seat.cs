@@ -67,16 +67,20 @@ public class Seat : MonoBehaviour
 
     void RefreshEffect()
     {
-        ChangeEffect(undo: true);
+        if (student == null)
+        {
+            return;
+        }
+        ClassroomManager.Instance.RemoveEffects(student);
         switch (student.prereq)
         {
             case StudentEffectPrerequisite.NEEDS_NOTHING:
-                ChangeEffect();
+                ApplyEffect();
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
                 if (student.EFFECTIVE_HAPPINESS >  student.PREREQ_ARGUMENT)
                 {
-                    ChangeEffect();
+                    ApplyEffect();
                 }
                 else
                 {
@@ -88,7 +92,7 @@ public class Seat : MonoBehaviour
                 {
                     if (row.rowID == student.PREREQ_ARGUMENT)
                     {
-                        ChangeEffect();
+                        ApplyEffect();
                     }
                     else
                     {
@@ -99,7 +103,7 @@ public class Seat : MonoBehaviour
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
                 if (GetLeftNeighbor(this) != null && GetRightNeighbor(this) != null)
                 {
-                    ChangeEffect();
+                    ApplyEffect();
                 }
                 else
                 {
@@ -110,13 +114,9 @@ public class Seat : MonoBehaviour
                 break;
         }
     }
-    void ChangeEffect(bool undo = false)
+    void ApplyEffect()
     {
-        if (undo)
-        {
-            
-            return;
-        }
+       
 
         switch (student.effect)
         {
@@ -345,17 +345,21 @@ public class Seat : MonoBehaviour
         {
             case StudentEffectPrerequisite.NEEDS_NOTHING:
 
-                ChangeEffect();
+                ApplyEffect();
 
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                ChangeEffect();
+                if (student.EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
+                {
+                    ApplyEffect();
+                }
+                
                 break;
             case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
-                ChangeEffect();
+                ApplyEffect();
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                ChangeEffect();
+                ApplyEffect();
                 break;
             default:
                 break;

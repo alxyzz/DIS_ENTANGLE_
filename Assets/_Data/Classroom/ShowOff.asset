@@ -15,11 +15,11 @@ MonoBehaviour:
   chosenName: Jim
   seatedImage: {fileID: 0}
   portrait: {fileID: 0}
-  Names: []
   STAT_LEARNING: 1
   DESC: When this student has a learning effect of 3+ then all other rows get -1
   ROW_MODIFIER: 0
   prereq: 1
-  prereq_argument: 3
+  PREREQ_ARGUMENT: 3
   effect: 1
-  effect_argument: -1
+  EFFECT_ARG_ONE: -1
+  EFFECT_ARG_two: 0

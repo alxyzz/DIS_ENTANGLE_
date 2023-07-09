@@ -86,8 +86,8 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
-    public void ChangeLevel( bool advancePlot = true)
+    [HideInInspector]public bool SkipIntro = false;
+    public void ChangeLevel( bool advancePlot = true, bool skipintro = false)
     {
         if (level >= 6)
         {
@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour
 
         }
         //act 1
-
+        SkipIntro = skipintro;
         //A.classroom game
         //janitor smoking, wolfblade looking out window
         //B.wolfblade FPS game

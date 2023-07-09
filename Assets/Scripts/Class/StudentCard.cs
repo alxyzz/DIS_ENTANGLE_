@@ -17,12 +17,13 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         
     }
+    
 
     public void Initialize(StudentSerializableObject SO)
     {
         studentObject = SO;
         UnpackSO();
-        student.chosenName = PickRandomName();
+        student.chosenName = SO.chosenName;
         Refresh();
     }
 
@@ -35,7 +36,6 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         b.ROW_MODIFIER = studentObject.ROW_MODIFIER;
         b.STAT_LEARNING = studentObject.STAT_LEARNING;
         b.seatedImage = studentObject.seatedImage;
-        b.Names = studentObject.Names;
         student = b;
         b.prereq = studentObject.prereq;
 
@@ -52,22 +52,17 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void Refresh()
     {
-        cardPortrait.sprite = student.portrait;
+        if (student.portrait != null)
+        {
+            cardPortrait.sprite = student.portrait;
+
+        }
+        else
+        {
+            Debug.Log("Card " + student.GetType() + " had no portrait.");
+        }
     }
 
-    string PickRandomName()
-    {
-
-        if (student.Names.Count == 1)
-        {
-            return student.Names[0];
-        }
-        if (student.Names.Count == 0 || student.Names == null)
-        {
-            return "MISSING#";
-        }
-        return student.Names[Random.Range(0, student.Names.Count)];
-    }
 
     public void ToggleHighLight(bool b)
     {
@@ -76,6 +71,7 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnClick()
     {
+        Debug.Log("CLICKED CARD.");
         ClassroomManager.Instance.OnSelectCard(this);
     }
 
