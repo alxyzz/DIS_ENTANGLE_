@@ -98,9 +98,15 @@ public class ClassroomManager : MonoBehaviour
     void DisplayCardInfo()
     {
         UI_CardInfo.SetActive(true);
-
-        currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
-        currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
+        if (currentlySelectedCardName != null)
+        {
+            if (lastSelectedCard != null)
+            {
+                currentlySelectedCardName.text = lastSelectedCard.student.chosenName;
+                currentlySelectedCardDesc.text = lastSelectedCard.student.DESC;
+            }
+        }
+       
         //currentlySelectedCardModifier.text = lastSelectedCard.student.LANE_MODIFIER.ToString();
     }
     public void OnWinClickProceed()
@@ -159,6 +165,29 @@ public class ClassroomManager : MonoBehaviour
         Destroy(lastSelectedCard.gameObject);
         lastSelectedCard = null;
 
+    }
+    [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
+    float happinessThreshold = 0;
+    int happy
+    {
+        get
+        {
+            int hp = 0;
+            foreach (var item in LIST_SEATS)
+            {
+                if (item.student.EFFECTIVE_HAPPINESS > 1)
+                {
+                    hp += 1;
+                }
+            }
+            return hp;
+        }
+    }
+
+    int students = 12;
+    void RefreshHappinessFeedback()
+    {
+        txt_HappinessFeedback.text = happinessThreshold.ToString();
     }
     public void OnSelectCard(StudentCard b)
     {
