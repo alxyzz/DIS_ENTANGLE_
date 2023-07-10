@@ -93,6 +93,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
                 if (left != null && right != null)
                 {
+                    Debug.Log("Wolfblade just activated.");
                     DoEffect();
                 }
                 else

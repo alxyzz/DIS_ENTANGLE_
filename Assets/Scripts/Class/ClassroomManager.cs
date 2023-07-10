@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ClassroomManager : MonoBehaviour
 {
@@ -248,10 +249,15 @@ public class ClassroomManager : MonoBehaviour
 
     #endregion
 
-
     #region UnityMethods
 
-
+    void Start()
+    {
+        if (GameManager.Instance == null)
+        {
+            SceneManager.LoadScene("MAIN_MENU");
+        }
+    }
 
    
 

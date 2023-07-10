@@ -2075,6 +2075,18 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 338225775}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &338225777 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
+    type: 3}
+  m_PrefabInstance: {fileID: 338225775}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5cc33793bc397174dae1095119f52810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &341668485
 GameObject:
   m_ObjectHideFlags: 0
@@ -7271,6 +7283,7 @@ MonoBehaviour:
   LIST_SEATS: []
   LIST_ROWS: []
   txt_HappinessFeedback: {fileID: 100004981}
+  loading: {fileID: 338225777}
 --- !u!1 &1681854934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 973760519789916023, guid: 377b3ed5cdc1ec844ad2e59ef81a9774,

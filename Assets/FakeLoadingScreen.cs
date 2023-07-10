@@ -40,15 +40,19 @@ public class FakeLoadingScreen : MonoBehaviour
 
     IEnumerator delayedTransition()
     {
-        if (GameManager.Instance.SkipIntro)
+        if (GameManager.Instance != null)
         {
-            GameManager.Instance.SkipIntro = false;
-            if (StartMethod != null)
+            if (GameManager.Instance.SkipIntro)
             {
-                StartMethod.Invoke();
+                GameManager.Instance.SkipIntro = false;
+                if (StartMethod != null)
+                {
+                    StartMethod.Invoke();
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
+        
 
 
         yield return new WaitForSecondsRealtime(6f);
