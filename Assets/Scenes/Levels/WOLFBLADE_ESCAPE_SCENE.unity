@@ -4399,13 +4399,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
+  m_UVScale: {x: 1, y: 0.9336846}
+  m_UVBias: {x: 0, y: 0.066315435}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.4645152, y: -0.083192885, z: 0}
-  m_Size: {x: 13.359031, y: 3.1663857, z: 1}
+  m_Offset: {x: -1.4645152, y: 0.0217973, z: 0}
+  m_Size: {x: 13.359031, y: 2.9564054, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &215785200
@@ -4610,13 +4610,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 0.9079408}
+  m_UVScale: {x: 1, y: 0.85262024}
   m_UVBias: {x: 0, y: 0.092059255}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.4645152, y: 0.06255472, z: 0}
-  m_Size: {x: 13.359031, y: 2.8748906, z: 1}
+  m_Offset: {x: -1.4645152, y: -0.025028706, z: 0}
+  m_Size: {x: 13.359031, y: 2.6997237, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &230218993
@@ -7344,13 +7344,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
+  m_UVScale: {x: 1, y: 1.0003668}
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0}
-  m_Size: {x: 3, y: 3, z: 1}
+  m_Offset: {x: 0, y: 0.0005503297, z: 0}
+  m_Size: {x: 3, y: 3.0011005, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &310515581
@@ -8644,13 +8644,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
+  m_UVScale: {x: 1, y: 0.9623072}
+  m_UVBias: {x: 0, y: 0.037692804}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.4645152, y: -0.083192885, z: 0}
-  m_Size: {x: 13.359031, y: 3.1663857, z: 1}
+  m_Offset: {x: -1.4645152, y: -0.023517847, z: 0}
+  m_Size: {x: 13.359031, y: 3.0470357, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &364466116
@@ -10385,13 +10385,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
+  m_UVScale: {x: 1, y: 0.89312303}
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: 1.1340294, y: 0, z: 0}
-  m_Size: {x: 5.268061, y: 3, z: 1}
+  m_Offset: {x: 1.1340294, y: -0.16031557, z: 0}
+  m_Size: {x: 5.268061, y: 2.679369, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &425823326
@@ -12949,13 +12949,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 0.88147503}
-  m_UVBias: {x: 0, y: 0.11852492}
+  m_UVScale: {x: 0.5590676, y: 0.84667534}
+  m_UVBias: {x: 0.44093263, y: 0.11852492}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.4645152, y: 0.104455054, z: 0}
-  m_Size: {x: 13.359031, y: 2.79109, z: 1}
+  m_Offset: {x: 1.4807014, y: 0.049360633, z: 0}
+  m_Size: {x: 7.4685974, y: 2.6809013, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &522883632
@@ -15331,13 +15331,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1.0662445, y: 1}
-  m_UVBias: {x: -0.071466915, y: 0}
+  m_UVScale: {x: 1.0662445, y: 0.78797233}
+  m_UVBias: {x: -0.071466915, y: 0.16167873}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.331747, y: -0.083192825, z: 0}
-  m_Size: {x: 9.596203, y: 3.1663857, z: 1}
+  m_Offset: {x: -1.331747, y: 0.09306347, z: 0}
+  m_Size: {x: 9.596203, y: 2.495024, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &623590427
@@ -16088,13 +16088,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
+  m_UVScale: {x: 1, y: 0.8424947}
+  m_UVBias: {x: 0, y: 0.1046283}
   m_AffectsTransparency: 0
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -1.4275979, y: -0.083192825, z: 0}
-  m_Size: {x: 4.9330683, y: 3.1663857, z: 1}
+  m_Offset: {x: -1.427598, y: -0.0012604594, z: 0}
+  m_Size: {x: 4.9330683, y: 2.667663, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &658714299
@@ -16323,13 +16323,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
+  m_UVScale: {x: 1, y: 0.88873327}
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -0.24071729, y: 0.20352983, z: 0}
-  m_Size: {x: 8.017554, y: 3.4070597, z: 1}
+  m_Offset: {x: -0.24071741, y: 0.013983548, z: 0}
+  m_Size: {x: 8.017554, y: 3.027967, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &669600000
@@ -16340,7 +16340,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 669599998}
   m_LocalRotation: {x: 0.00000031292436, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7001705, y: 2.30023, z: 10.50105}
+  m_LocalPosition: {x: 1.821, y: 2.30023, z: 10.50105}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19610,7 +19610,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 137.13312
+      value: 149.17342
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
@@ -19625,7 +19625,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -11.352696
+      value: -11.556
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
@@ -26297,7 +26297,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 137.13312
+      value: 143.11212
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
@@ -26312,7 +26312,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.974936
+      value: -16.076
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0024fdb1fe927fc4caa5739f34063d93,
         type: 3}
@@ -33608,13 +33608,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
+  m_UVScale: {x: 1, y: 0.9649322}
   m_UVBias: {x: 0, y: 0}
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -0.24071729, y: 0.20352983, z: 0}
-  m_Size: {x: 8.017554, y: 3.4070597, z: 1}
+  m_Offset: {x: -0.24071741, y: 0.14379066, z: 0}
+  m_Size: {x: 8.017554, y: 3.2875814, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &1460021303
@@ -38673,7 +38673,7 @@ MonoBehaviour:
   m_EndAngleFade: 180
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
-  m_AffectsTransparency: 0
+  m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
   m_Offset: {x: 0, y: 0, z: 0}
@@ -46154,13 +46154,13 @@ MonoBehaviour:
   m_FadeScale: 0.9
   m_StartAngleFade: 180
   m_EndAngleFade: 180
-  m_UVScale: {x: 1, y: 1}
-  m_UVBias: {x: 0, y: 0}
+  m_UVScale: {x: 1, y: 0.98173565}
+  m_UVBias: {x: 0, y: 0.018264396}
   m_AffectsTransparency: 1
   m_DecalLayerMask: 1
   m_ScaleMode: 0
-  m_Offset: {x: -0.49847555, y: -0.4907668, z: 0}
-  m_Size: {x: 1.5030489, y: 2.0184665, z: 1}
+  m_Offset: {x: -0.49847555, y: -0.47233367, z: 0}
+  m_Size: {x: 1.5030489, y: 1.9816005, z: 1}
   m_FadeFactor: 1
   m_Version: 2
 --- !u!4 &1955199538
