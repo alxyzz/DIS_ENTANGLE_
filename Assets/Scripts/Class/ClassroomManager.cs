@@ -62,9 +62,7 @@ public class ClassroomManager : MonoBehaviour
     [SerializeReference] List<StudentSerializableObject> Students_ACT2 = new();
 
 
-    int SETTING_AESTHETIC_AMT_CARDS_PER_SIDE = 5;
-    List<StudentCard> leftCards = new(); //this is populated on start
-    List<StudentCard> rightCards = new(); //this is populated on start
+    List<StudentCard> CARDS = new(); //this is populated on start
 
 
     bool hoveringOverCard = false;
@@ -299,7 +297,7 @@ public class ClassroomManager : MonoBehaviour
                 StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                 cardsMade++;
                 cds.Add(b);
-                rightCards.Add(b);
+                CARDS.Add(b);
 
             }
             if (GameManager.Instance.MrMistaInstance == 1)
@@ -309,7 +307,7 @@ public class ClassroomManager : MonoBehaviour
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
 
@@ -325,7 +323,7 @@ public class ClassroomManager : MonoBehaviour
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
                 while (cardsMade < Students_ACT2.Count)
@@ -333,7 +331,7 @@ public class ClassroomManager : MonoBehaviour
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
 
@@ -352,7 +350,7 @@ public class ClassroomManager : MonoBehaviour
                 StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                 cardsMade++;
                 cds.Add(b);
-                rightCards.Add(b);
+                CARDS.Add(b);
 
             }
 
