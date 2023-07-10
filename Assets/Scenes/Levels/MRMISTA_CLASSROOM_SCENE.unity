@@ -7247,8 +7247,7 @@ MonoBehaviour:
   currentlySelectedCardName: {fileID: 572377586}
   currentlySelectedCardDesc: {fileID: 299897793}
   currentlySelectedCardLearning: {fileID: 1313508661}
-  completion: {fileID: 100004981}
-  txt_HappinessFeedback: {fileID: 0}
+  txt_HappinessFeedback: {fileID: 100004981}
 --- !u!1 &1681854934 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 973760519789916023, guid: 377b3ed5cdc1ec844ad2e59ef81a9774,
