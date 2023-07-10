@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
-  m_Name: TeachersPet
+  m_Name: Friendly Helper
   m_EditorClassIdentifier: 
-  chosenName: Teachers Pet
-  seatedImage: {fileID: 21300000, guid: 4decdd572abd60b4da0cf3f724728cd2, type: 3}
+  chosenName: Friendly Helper
+  seatedImage: {fileID: 21300000, guid: c908e480a24aed845ab7502ec4d824f0, type: 3}
   portrait: {fileID: 0}
   Names:
-  - Clara Netto
-  - Anna Kantenherr
-  - Dan Jameson
-  - Chad Hubris
-  STAT_LEARNING: 0
-  DESC: If they are not in the last row, the row they are on gains +1
+  - Naturo Sakuse
+  - Timmy Trombone
+  - "Uludag Ganzgro\xDF"
+  - Jasmine Potter
+  STAT_LEARNING: 2
+  DESC: Adjacent cards gain +1, but for each neighbor the buddy gain -1
   ROW_MODIFIER: 0
-  prereq: 2
+  prereq: 3
   PREREQ_ARGUMENT: 0
-  effect: 2
-  EFFECT_ARG_ONE: 1
-  EFFECT_ARG_two: 1
+  effect: 5
+  EFFECT_ARG_ONE: 0
+  EFFECT_ARG_two: 0

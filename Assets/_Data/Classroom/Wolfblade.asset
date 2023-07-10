@@ -10,16 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
-  m_Name: Buddy
+  m_Name: Wolfblade
   m_EditorClassIdentifier: 
-  chosenName: Dean
-  seatedImage: {fileID: 21300000, guid: 6957a74c1ccc0b740838eda62edb6cb2, type: 3}
-  portrait: {fileID: 21300000, guid: 05adbc3df61420b409e4bd771251e5c7, type: 3}
-  STAT_LEARNING: 0
-  DESC: Dean is a very pleasant person. Having two adjacent cards gain +1.
+  chosenName: Loner
+  seatedImage: {fileID: 21300000, guid: e4e97e282d025b64c9e9725eaf269771, type: 3}
+  portrait: {fileID: 0}
+  Names:
+  - Wolfblade
+  STAT_LEARNING: -1
+  DESC: If this student is adjacent to another, she gains -2
   ROW_MODIFIER: 0
   prereq: 3
   PREREQ_ARGUMENT: 0
-  effect: 5
-  EFFECT_ARG_ONE: 1
-  EFFECT_ARG_two: 1
+  effect: 3
+  EFFECT_ARG_ONE: -2
+  EFFECT_ARG_two: 0

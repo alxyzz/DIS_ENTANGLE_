@@ -10,21 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
-  m_Name: TeachersPet
+  m_Name: Base+1
   m_EditorClassIdentifier: 
-  chosenName: Teachers Pet
-  seatedImage: {fileID: 21300000, guid: 4decdd572abd60b4da0cf3f724728cd2, type: 3}
+  chosenName: +1
+  seatedImage: {fileID: 21300000, guid: f0cff2b9204d6c845a0e8b067f6863a1, type: 3}
   portrait: {fileID: 0}
   Names:
-  - Clara Netto
-  - Anna Kantenherr
-  - Dan Jameson
-  - Chad Hubris
+  - Norm Man
+  - Tad Strange
+  - Leyla
+  - Wong
   STAT_LEARNING: 0
-  DESC: If they are not in the last row, the row they are on gains +1
+  DESC: No Effect
   ROW_MODIFIER: 0
-  prereq: 2
+  prereq: 0
   PREREQ_ARGUMENT: 0
-  effect: 2
-  EFFECT_ARG_ONE: 1
-  EFFECT_ARG_two: 1
+  effect: 0
+  EFFECT_ARG_ONE: 0
+  EFFECT_ARG_two: 0

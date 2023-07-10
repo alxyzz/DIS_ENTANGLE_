@@ -10,16 +10,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
-  m_Name: Loner
+  m_Name: Base-2
   m_EditorClassIdentifier: 
-  chosenName: Wolfblade
-  seatedImage: {fileID: 21300000, guid: e4e97e282d025b64c9e9725eaf269771, type: 3}
-  portrait: {fileID: 21300000, guid: 7fd5fc772a6686646b67a261a7fe4f40, type: 3}
-  STAT_LEARNING: -1
-  DESC: Wolfblade hates being next to other people; if not alone, lose -2.
+  chosenName: -2
+  seatedImage: {fileID: 21300000, guid: 40e47a85081b3a443bfc8e9af9845657, type: 3}
+  portrait: {fileID: 0}
+  Names:
+  - Chaz Dinglebon
+  - Deana
+  - Ezra Jibb
+  - Tommy Tokes
+  STAT_LEARNING: -2
+  DESC: No Effect
   ROW_MODIFIER: 0
-  prereq: 3
-  PREREQ_ARGUMENT: 2
-  effect: 3
-  EFFECT_ARG_ONE: -2
+  prereq: 0
+  PREREQ_ARGUMENT: 0
+  effect: 0
+  EFFECT_ARG_ONE: 0
   EFFECT_ARG_two: 0
