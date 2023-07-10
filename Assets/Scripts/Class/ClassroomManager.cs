@@ -37,15 +37,7 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
 
-
-    #region provisory goal
-    int stuffplaced;
-
-    #endregion
-
-
-    [HideInInspector] public List<Seat> LIST_SEATS = new();
-    [HideInInspector] public List<SeatRow> LIST_ROWS = new();
+    #region Variables
     float averageHappiness
     {
         get
@@ -64,33 +56,34 @@ public class ClassroomManager : MonoBehaviour
     Seat lastSelectedSeat;
     StudentCard HOVERED_CARD;
     StudentCard CLICKED_CARD;
+    Student HOVERED_STUDENT;
 
     [SerializeReference] List<StudentSerializableObject> Students_ACT1 = new();
     [SerializeReference] List<StudentSerializableObject> Students_ACT2 = new();
-    [SerializeReference] List<SeatRow> rows = new();
 
 
     int SETTING_AESTHETIC_AMT_CARDS_PER_SIDE = 5;
     List<StudentCard> leftCards = new(); //this is populated on start
     List<StudentCard> rightCards = new(); //this is populated on start
-    [SerializeReference] GameObject StudentCardPrefab;
-    [SerializeReference] GameObject CardParent;
-    [SerializeReference] GameObject WinPanel;
+
 
     bool hoveringOverCard = false;
-
-    #region UI
+    float happinessThreshold = 8;
+    #endregion
+    #region references
     public GameObject UI_CardInfo;
 
     public TextMeshProUGUI currentlySelectedCardName;
     public TextMeshProUGUI currentlySelectedCardDesc;
     public TextMeshProUGUI currentlySelectedCardLearning;
-    float happinessThreshold = 8;
-
-
+    [SerializeReference] GameObject StudentCardPrefab;
+    [SerializeReference] GameObject CardParent;
+    [SerializeReference] GameObject WinPanel;
+    [SerializeReference] List<SeatRow> rows = new();
+    [HideInInspector] public List<Seat> LIST_SEATS = new();
+    [HideInInspector] public List<SeatRow> LIST_ROWS = new();
     #endregion
 
-    public Student HOVERED_STUDENT;
 
 
 
@@ -400,10 +393,10 @@ public class ClassroomManager : MonoBehaviour
 
 
     }
-    void PlaceStudent(Seat s, Student st, bool placedCard)
+    void PlaceStudent(Seat s, Student st, bool placedFromCard)
     {
 
-        if (s.student != null && placedCard)
+        if (s.student != null && placedFromCard)
         {
             Debug.Log("Clicked occupied seat, doing nothing.");
             return;
@@ -413,15 +406,12 @@ public class ClassroomManager : MonoBehaviour
 
         s.student = st;
         s.student.row = s.row;
-        if (placedCard)
+        if (placedFromCard)
         {
             OnPlaceCard();
             CLICKED_CARD = null;
-            stuffplaced++;
 
         }
-
-
 
 
         RefreshEffects();
@@ -444,10 +434,6 @@ public class ClassroomManager : MonoBehaviour
 
         s.student = null;
         s.student.row = s.row;
-
-
-        stuffplaced++;
-
 
 
         RefreshEffects();
