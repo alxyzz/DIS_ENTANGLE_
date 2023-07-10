@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Copier
   m_EditorClassIdentifier: 
-  chosenName: Copier
+  chosenName: J. Copycat
   seatedImage: {fileID: 21300000, guid: 6957a74c1ccc0b740838eda62edb6cb2, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Boybot
-  - Mashin
-  - Optimur
-  - Dalex
+  portrait: {fileID: 21300000, guid: 05adbc3df61420b409e4bd771251e5c7, type: 3}
   STAT_LEARNING: 0
-  DESC: This student gains the combined learning effect of adjacent students.
+  DESC: Copycat gains the combined learning effect of adjacent students.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

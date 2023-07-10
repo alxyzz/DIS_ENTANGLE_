@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: ShowOff
   m_EditorClassIdentifier: 
-  chosenName: Show Off
+  chosenName: Sean Sho-Off
   seatedImage: {fileID: 21300000, guid: 6b94a00e3527aaf46bec11d1d1c14ea8, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Justin Schiffer
-  - Leonard Trampelfing
-  - Jenny Talia
-  - Noa Maria Florentia Marcon
+  portrait: {fileID: 21300000, guid: d760710b73b4fa749a5785fa8152f747, type: 3}
   STAT_LEARNING: 2
-  DESC: When this student has a learning effect of 3+ then all other rows get -1
+  DESC: When Sean has a learning effect of 3+ then all other rows get -1
   ROW_MODIFIER: 0
   prereq: 1
   PREREQ_ARGUMENT: 3

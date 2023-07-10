@@ -26,30 +26,25 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         studentObject = SO;
         UnpackSO();
-        student.chosenName = SO.chosenName;
         RefreshPortrait();
     }
 
     void UnpackSO()
     {
-        Student b = new Student();
-        b.DESC = studentObject.DESC;
-        //b.LANE_MODIFIER = studentObject.LANE_MODIFIER;
-        b.portrait = studentObject.portrait;
-        b.ROW_MODIFIER = studentObject.ROW_MODIFIER;
-        b.STAT_LEARNING = studentObject.STAT_LEARNING;
-        b.seatedImage = studentObject.seatedImage;
+       
+        Student b = new Student(studentObject.chosenName,
+                   studentObject.seatedImage,
+                    studentObject.portrait,
+                    studentObject.STAT_LEARNING,
+                   studentObject.DESC,
+                    studentObject.ROW_MODIFIER,
+                   studentObject.prereq,
+                    studentObject.PREREQ_ARGUMENT,
+                   studentObject.effect,
+                  studentObject.EFFECT_ARG_ONE,
+                  studentObject.EFFECT_ARG_two);
+     
         student = b;
-        b.prereq = studentObject.prereq;
-
-        b.PREREQ_ARGUMENT = studentObject.PREREQ_ARGUMENT;
-
-        b.effect = studentObject.effect;
-
-        b.EFFECT_ARG_ONE = studentObject.EFFECT_ARG_ONE;
-        b.EFFECT_ARG_two = studentObject.EFFECT_ARG_two;
-
-
 
     }
 

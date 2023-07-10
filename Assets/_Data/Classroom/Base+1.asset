@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Base+1
   m_EditorClassIdentifier: 
-  chosenName: +1
+  chosenName: Maria
   seatedImage: {fileID: 21300000, guid: f0cff2b9204d6c845a0e8b067f6863a1, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Norm Man
-  - Tad Strange
-  - Leyla
-  - Wong
-  STAT_LEARNING: 0
-  DESC: No Effect
+  portrait: {fileID: 21300000, guid: 9acd0c1400f92df49b3fb9885e623aeb, type: 3}
+  STAT_LEARNING: 1
+  DESC: Maria tends to stick to herself, no effect on neighbors. Very aesthetic handwriting.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

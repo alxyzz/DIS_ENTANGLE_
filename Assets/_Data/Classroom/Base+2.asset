@@ -12,16 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Base+2
   m_EditorClassIdentifier: 
-  chosenName: 
+  chosenName: Bobr
   seatedImage: {fileID: 21300000, guid: 5fc3a340431cc2944b05301f39b149a0, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Tiny Tina
-  - Sadam Andler
-  - Gyan Rosling
-  - Brom Tady
-  STAT_LEARNING: 0
-  DESC: No Effect
+  portrait: {fileID: 21300000, guid: d108a4b89b5a5f54bbb484f41385640a, type: 3}
+  STAT_LEARNING: 2
+  DESC: Bobr has an eidetic memory. Often found on his phone, reading the hit web
+    original novel Worm.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

@@ -38,58 +38,62 @@ public class ClassroomManager : MonoBehaviour
 
 
 
-    #region provisory goal
-    int stuffplaced;
+
+    #region settings
+    float happinessThreshold = 8; //this is used wether the variable 'happy' returns it or higher
+
+
 
     #endregion
 
-
-    [HideInInspector] public List<Seat> LIST_SEATS = new();
-    [HideInInspector] public List<SeatRow> LIST_ROWS = new();
-    float averageHappiness
+    #region Variables
+    int happy
     {
         get
         {
-            float b = 0;
+            int hp = 0;
             foreach (var item in LIST_SEATS)
             {
-                b += item.LEARNING_FACTOR;
+
+                if (item.EFFECTIVE_HAPPINESS > 0)
+                {
+                    hp += 1;
+                }
             }
-            return b;
+            Debug.Log(hp.ToString() + " happy students exist. Out of 8.");
+            return hp;
         }
     }
-    float goalhappiness = 15;
+
     ///goal is to get a percentage of students happy
 
     Seat lastSelectedSeat;
     StudentCard HOVERED_CARD;
     StudentCard CLICKED_CARD;
-    [SerializeReference] List<StudentSerializableObject> StudentSequence = new();
-    [SerializeReference] List<StudentSerializableObject> Act2Sequence = new();
-    [SerializeReference] List<SeatRow> rows = new();
+    Student HOVERED_STUDENT;
+
+    [SerializeReference] List<StudentSerializableObject> Students_ACT1 = new();
+    [SerializeReference] List<StudentSerializableObject> Students_ACT2 = new();
 
 
-    int SETTING_AESTHETIC_AMT_CARDS_PER_SIDE = 5;
-    List<StudentCard> leftCards = new(); //this is populated on start
-    List<StudentCard> rightCards = new(); //this is populated on start
-    [SerializeReference] GameObject StudentCardPrefab;
-    [SerializeReference] GameObject CardParent;
-    [SerializeReference] GameObject WinPanel;
+    List<StudentCard> CARDS = new(); //this is populated on start
 
-    bool hoveringOverCard = false;
 
-    #region UI
+    #endregion
+    #region references
     public GameObject UI_CardInfo;
 
     public TextMeshProUGUI currentlySelectedCardName;
     public TextMeshProUGUI currentlySelectedCardDesc;
-
-    public TextMeshProUGUI completion;
-
-
+    public TextMeshProUGUI currentlySelectedCardLearning;
+    [SerializeReference] GameObject StudentCardPrefab;
+    [SerializeReference] GameObject CardParent;
+    [SerializeReference] GameObject WinPanel;
+    [SerializeReference] List<SeatRow> rows = new();
+    [HideInInspector] public List<Seat> LIST_SEATS = new();
+    [HideInInspector] public List<SeatRow> LIST_ROWS = new();
     #endregion
 
-    public Student HOVERED_STUDENT;
 
 
 
@@ -101,6 +105,7 @@ public class ClassroomManager : MonoBehaviour
         {
             currentlySelectedCardName.text = HOVERED_STUDENT.chosenName;
             currentlySelectedCardDesc.text = HOVERED_STUDENT.DESC;
+            currentlySelectedCardLearning.text = "SHOWN ON LABEL";
         }
 
     }
@@ -135,6 +140,8 @@ public class ClassroomManager : MonoBehaviour
 
                     currentlySelectedCardName.text = HOVERED_CARD.student.chosenName;
                     currentlySelectedCardDesc.text = HOVERED_CARD.student.DESC;
+                    currentlySelectedCardLearning.text = HOVERED_CARD.student.STAT_LEARNING.ToString();
+
                 }
             }
         }
@@ -148,6 +155,7 @@ public class ClassroomManager : MonoBehaviour
 
                     currentlySelectedCardName.text = CLICKED_CARD.student.chosenName;
                     currentlySelectedCardDesc.text = CLICKED_CARD.student.DESC;
+                    currentlySelectedCardLearning.text = CLICKED_CARD.student.STAT_LEARNING.ToString();
                 }
             }
         }
@@ -186,22 +194,6 @@ public class ClassroomManager : MonoBehaviour
         CheckWinCondition();
     }
     [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
-    float happinessThreshold = 8;
-    int happy
-    {
-        get
-        {
-            int hp = 0;
-            foreach (var item in LIST_SEATS)
-            {
-                if (item.EFFECTIVE_HAPPINESS > 0)
-                {
-                    hp += 1;
-                }
-            }
-            return hp;
-        }
-    }
 
 
 
@@ -221,7 +213,6 @@ public class ClassroomManager : MonoBehaviour
 
     }
 
-    int students = 12;
     void RefreshHappinessFeedback()
     {
         txt_HappinessFeedback.text = happinessThreshold.ToString();
@@ -274,6 +265,7 @@ public class ClassroomManager : MonoBehaviour
         InitializeCards();
 
     }
+
     //private GameObject lastHoveredObject;
 
     #endregion
@@ -293,55 +285,55 @@ public class ClassroomManager : MonoBehaviour
         List<StudentCard> cds = new();
         int cardsMade = 0;
 
-      
+
         if (GameManager.Instance != null)
         {
-            while (cardsMade < StudentSequence.Count)
+            while (cardsMade < Students_ACT1.Count)
             {
                 StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                 cardsMade++;
                 cds.Add(b);
-                rightCards.Add(b);
+                CARDS.Add(b);
 
             }
-            if (GameManager.Instance.act == 1)
+            if (GameManager.Instance.MrMistaInstance == 1)
             {
-                while (cardsMade < StudentSequence.Count)
+                while (cardsMade < Students_ACT1.Count)
                 {
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
 
-                for (int i = 0; i < StudentSequence.Count; i++)
+                for (int i = 0; i < Students_ACT1.Count; i++)
                 {//preset choice
-                    cds[i].Initialize(StudentSequence[i]);
+                    cds[i].Initialize(Students_ACT1[i]);
                 }
             }
             else
             { //different cards on act 2
-                while (cardsMade < Act2Sequence.Count)
+                while (cardsMade < Students_ACT2.Count)
                 {
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
-                while (cardsMade < Act2Sequence.Count)
+                while (cardsMade < Students_ACT2.Count)
                 {
                     StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                     cardsMade++;
                     cds.Add(b);
-                    rightCards.Add(b);
+                    CARDS.Add(b);
 
                 }
 
-                for (int i = 0; i < Act2Sequence.Count; i++)
+                for (int i = 0; i < Students_ACT2.Count; i++)
                 {//preset choice
-                    cds[i].Initialize(Act2Sequence[i]);
+                    cds[i].Initialize(Students_ACT2[i]);
                 }
 
             }
@@ -349,21 +341,21 @@ public class ClassroomManager : MonoBehaviour
         else
         {
 
-            while (cardsMade < StudentSequence.Count)
+            while (cardsMade < Students_ACT1.Count)
             {
                 StudentCard b = Instantiate(StudentCardPrefab, CardParent.transform).GetComponent<StudentCard>();
                 cardsMade++;
                 cds.Add(b);
-                rightCards.Add(b);
+                CARDS.Add(b);
 
             }
 
-            for (int i = 0; i < StudentSequence.Count; i++)
+            for (int i = 0; i < Students_ACT1.Count; i++)
             {//preset choice
-                cds[i].Initialize(StudentSequence[i]);
+                cds[i].Initialize(Students_ACT1[i]);
             }
         }
-       
+
 
     }
 
@@ -371,9 +363,9 @@ public class ClassroomManager : MonoBehaviour
     /// removes the modifiers caused by a certain student from all students
     /// </summary>
     /// <param name="source"></param>
-    
 
-    
+
+
 
     public void OnClickRestart()
     {
@@ -395,9 +387,37 @@ public class ClassroomManager : MonoBehaviour
 
 
     }
-    void PlaceStudent(Seat s)
+    void PlaceStudent(Seat s, Student st, bool placedFromCard)
     {
 
+        if (s.student != null && placedFromCard)
+        {
+            Debug.Log("Clicked occupied seat, doing nothing.");
+            return;
+        }
+
+        //RemoveStudentAndEffects(s.student);
+
+        s.student = st;
+        s.student.row = s.row;
+        if (placedFromCard)
+        {
+            OnPlaceCard();
+            CLICKED_CARD = null;
+
+        }
+
+
+        RefreshEffects();
+        foreach (var item in LIST_SEATS)
+        {
+            item.RefreshGraphics();
+        }
+        CheckWinCondition();
+    }
+
+    void RemoveStudent(Seat s)
+    {
         if (s.student != null)
         {
             Debug.Log("Clicked occupied seat, doing nothing.");
@@ -406,13 +426,8 @@ public class ClassroomManager : MonoBehaviour
 
         //RemoveStudentAndEffects(s.student);
 
-        s.student = CLICKED_CARD.student;
+        s.student = null;
         s.student.row = s.row;
-        OnPlaceCard();
-
-        CLICKED_CARD = null;
-        stuffplaced++;
-
 
 
         RefreshEffects();
@@ -427,7 +442,57 @@ public class ClassroomManager : MonoBehaviour
         Debug.Log("Clicked a seat.");
         if (CLICKED_CARD != null)
         {
-            PlaceStudent(s);
+            PlaceStudent(s, CLICKED_CARD.student, true);
+        }
+        else
+        {
+            //if we havent clicked a seat, select it
+            if (lastSelectedSeat == null)
+            {
+                lastSelectedSeat = s;
+            }
+            //otherwise, if we have clicked a seat, switch them
+            else
+            {
+                //lastSelectedSeat.student
+                Student FirstSeatStudent = new Student(lastSelectedSeat.student.chosenName,
+
+                   lastSelectedSeat.student.seatedImage,
+                    lastSelectedSeat.student.portrait,
+                    lastSelectedSeat.student.STAT_LEARNING,
+                   lastSelectedSeat.student.DESC,
+                    lastSelectedSeat.student.ROW_MODIFIER,
+                   lastSelectedSeat.student.prereq,
+                    lastSelectedSeat.student.PREREQ_ARGUMENT,
+                   lastSelectedSeat.student.effect,
+                  lastSelectedSeat.student.EFFECT_ARG_ONE,
+                  lastSelectedSeat.student.EFFECT_ARG_two)
+                { };
+                Student secondSeatStudent = new Student(s.student.chosenName,
+                   s.student.seatedImage,
+                    s.student.portrait,
+                    s.student.STAT_LEARNING,
+                   s.student.DESC,
+                    s.student.ROW_MODIFIER,
+                   s.student.prereq,
+                    s.student.PREREQ_ARGUMENT,
+                   s.student.effect,
+                  s.student.EFFECT_ARG_ONE,
+                  s.student.EFFECT_ARG_two)
+                { };
+
+
+
+
+
+
+
+                RemoveStudent(lastSelectedSeat);
+                RemoveStudent(s);
+
+                PlaceStudent(lastSelectedSeat, secondSeatStudent, false);
+                PlaceStudent(s, FirstSeatStudent, false);
+            }
         }
         RefreshHappinessFeedback();
     }
