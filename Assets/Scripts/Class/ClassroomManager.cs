@@ -215,7 +215,7 @@ public class ClassroomManager : MonoBehaviour
 
     void RefreshHappinessFeedback()
     {
-        txt_HappinessFeedback.text = happinessThreshold.ToString();
+        txt_HappinessFeedback.text = happy.ToString() + "/8";
     }
     public void OnSelectCard(StudentCard b)
     {
