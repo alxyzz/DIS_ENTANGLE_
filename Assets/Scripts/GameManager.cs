@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
 
     #region settings
-    
+   
 
     #endregion
 
@@ -72,6 +72,8 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public int level = 1; //1 to 12
 
     #endregion
+
+  
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.H))

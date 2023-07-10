@@ -253,7 +253,12 @@ public class ClassroomManager : MonoBehaviour
 
 
 
-    void Start()
+   
+
+    //private GameObject lastHoveredObject;
+
+    #endregion
+    public void CustomStart()
     {
         UI_CardInfo.SetActive(false);
 
@@ -263,13 +268,7 @@ public class ClassroomManager : MonoBehaviour
             Debug.Log(item.name);
         }
         InitializeCards();
-
     }
-
-    //private GameObject lastHoveredObject;
-
-    #endregion
-
 
 
     public void Restart()

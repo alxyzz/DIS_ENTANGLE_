@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 262.38354, g: 325.1084, b: 430.30957, a: 1}
+  m_IndirectSpecularColor: {r: 261.80054, g: 324.32776, b: 429.24692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1925,7 +1925,7 @@ PrefabInstance:
     - target: {fileID: 596641847769482742, guid: cc5ded32236fe2246bf4d35a97633def,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 596641847769482743, guid: cc5ded32236fe2246bf4d35a97633def,
         type: 3}
@@ -2046,11 +2046,26 @@ PrefabInstance:
         type: 3}
       propertyPath: StartMethod.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1676426022}
+      objectReference: {fileID: 1676426027}
     - target: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
         type: 3}
       propertyPath: StartMethod.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
+        type: 3}
+      propertyPath: StartMethod.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: CustomStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
+        type: 3}
+      propertyPath: StartMethod.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: ClassroomManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
+        type: 3}
+      propertyPath: StartMethod.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cc5ded32236fe2246bf4d35a97633def, type: 3}
@@ -7223,30 +7238,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d997a7e959f4a8488fc19cd7e1c2e5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  LIST_SEATS: []
-  LIST_ROWS: []
-  StudentSequence:
-  - {fileID: 11400000, guid: 482f44025f4f89b46b6fe6e42215f5b6, type: 2}
-  - {fileID: 11400000, guid: 559d82d1337339848859ad0298c2508b, type: 2}
-  - {fileID: 11400000, guid: ad036f045c25b66438521401ccc3fe63, type: 2}
-  - {fileID: 11400000, guid: 39c0c03ebc9647948a0bc7862514695c, type: 2}
-  - {fileID: 11400000, guid: 5b955e2b78314714d8b6929c9fd0175a, type: 2}
-  - {fileID: 11400000, guid: eb96eed73d3bfb843b34d0d855a8792d, type: 2}
-  - {fileID: 11400000, guid: 91e8b83905e9d254b8762924f6b20b4e, type: 2}
-  - {fileID: 11400000, guid: b21714f02698ad444b022d297cb8be60, type: 2}
-  Act2Sequence: []
-  rows:
-  - {fileID: 555851880}
-  - {fileID: 233851}
-  - {fileID: 1347735390}
-  StudentCardPrefab: {fileID: 1599526064483994961, guid: 4a78e56d0fd0c8745b1ba890a96d14e0,
-    type: 3}
-  CardParent: {fileID: 1490073034}
-  WinPanel: {fileID: 1681854934}
+  Students_ACT1: []
+  Students_ACT2: []
   UI_CardInfo: {fileID: 545079140}
   currentlySelectedCardName: {fileID: 572377586}
   currentlySelectedCardDesc: {fileID: 299897793}
   currentlySelectedCardLearning: {fileID: 1313508661}
+  StudentCardPrefab: {fileID: 1599526064483994961, guid: 4a78e56d0fd0c8745b1ba890a96d14e0,
+    type: 3}
+  CardParent: {fileID: 1490073034}
+  WinPanel: {fileID: 1681854934}
+  rows:
+  - {fileID: 555851880}
+  - {fileID: 233851}
+  - {fileID: 1347735390}
+  LIST_SEATS: []
+  LIST_ROWS: []
   txt_HappinessFeedback: {fileID: 100004981}
 --- !u!1 &1681854934 stripped
 GameObject:
