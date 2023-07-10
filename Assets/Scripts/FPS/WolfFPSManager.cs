@@ -36,7 +36,6 @@ public class WolfFPSManager : MonoBehaviour
     [SerializeReference] GameObject PlayerPos_Act2;
     [SerializeReference] GameObject PlayerPos_Act3;
     [SerializeReference] GameObject PlayerObject;
-    [SerializeReference] Light LightComponent;
 
     [SerializeReference] GameObject DoorBlocker;
 
@@ -105,6 +104,7 @@ public class WolfFPSManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("If you start this directly from the scene, it will not have the act 2 or 3 features, only the act 1. ");
+        CustomStart();
     }
 
 
