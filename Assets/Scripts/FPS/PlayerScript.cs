@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Video;
 
 [RequireComponent(typeof(CharacterController))]
@@ -10,6 +11,8 @@ public class PlayerScript : MonoBehaviour
     #region Combat
     bool isAlive, hasWeapon = true;
     [SerializeReference]GameObject weapon;
+    [SerializeReference]Light Flashlight;
+    [SerializeReference] Slider healthSlider;
     Animator wepAnim;
 
     int _health;
