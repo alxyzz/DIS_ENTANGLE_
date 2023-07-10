@@ -84,8 +84,8 @@ public class ClassroomManager : MonoBehaviour
 
     public TextMeshProUGUI currentlySelectedCardName;
     public TextMeshProUGUI currentlySelectedCardDesc;
-
-    public TextMeshProUGUI completion;
+    public TextMeshProUGUI currentlySelectedCardLearning;
+    float happinessThreshold = 8;
 
 
     #endregion
@@ -102,6 +102,7 @@ public class ClassroomManager : MonoBehaviour
         {
             currentlySelectedCardName.text = HOVERED_STUDENT.chosenName;
             currentlySelectedCardDesc.text = HOVERED_STUDENT.DESC;
+            currentlySelectedCardLearning.text = "SHOWN ON LABEL";
         }
 
     }
@@ -136,6 +137,8 @@ public class ClassroomManager : MonoBehaviour
 
                     currentlySelectedCardName.text = HOVERED_CARD.student.chosenName;
                     currentlySelectedCardDesc.text = HOVERED_CARD.student.DESC;
+                    currentlySelectedCardLearning.text = HOVERED_CARD.student.STAT_LEARNING.ToString();
+
                 }
             }
         }
@@ -149,6 +152,7 @@ public class ClassroomManager : MonoBehaviour
 
                     currentlySelectedCardName.text = CLICKED_CARD.student.chosenName;
                     currentlySelectedCardDesc.text = CLICKED_CARD.student.DESC;
+                    currentlySelectedCardLearning.text = CLICKED_CARD.student.STAT_LEARNING.ToString();
                 }
             }
         }
@@ -187,7 +191,6 @@ public class ClassroomManager : MonoBehaviour
         CheckWinCondition();
     }
     [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
-    float happinessThreshold = 8;
     int happy
     {
         get
@@ -195,6 +198,7 @@ public class ClassroomManager : MonoBehaviour
             int hp = 0;
             foreach (var item in LIST_SEATS)
             {
+
                 if (item.EFFECTIVE_HAPPINESS > 0)
                 {
                     hp += 1;

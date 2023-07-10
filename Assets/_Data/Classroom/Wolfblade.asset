@@ -19,7 +19,7 @@ MonoBehaviour:
   DESC: If Wolfblade is adjacent to another, she gains -2
   ROW_MODIFIER: 0
   prereq: 3
-  PREREQ_ARGUMENT: 0
+  PREREQ_ARGUMENT: 1
   effect: 3
   EFFECT_ARG_ONE: -2
   EFFECT_ARG_two: 0

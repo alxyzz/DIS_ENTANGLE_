@@ -44,7 +44,7 @@ public class Student
     public Sprite portrait;
 
     [Header("Base happiness state")]
-    public float STAT_LEARNING;
+    public float STAT_LEARNING = 0;
 
     [Header("Student description")]
     public string DESC = "";
