@@ -181,7 +181,7 @@ public class ClassroomManager : MonoBehaviour
         void Win()
         {
             //WinPanel.SetActive(true);
-            WinScreenScript.Instance.PopUp();
+            GameManager.Instance.ChangeLevel();
         }
     }
     void OnPlaceCard()
@@ -215,7 +215,7 @@ public class ClassroomManager : MonoBehaviour
 
     void RefreshHappinessFeedback()
     {
-        txt_HappinessFeedback.text = happinessThreshold.ToString();
+        txt_HappinessFeedback.text = happy.ToString() + "/8";
     }
     public void OnSelectCard(StudentCard b)
     {
@@ -253,7 +253,12 @@ public class ClassroomManager : MonoBehaviour
 
 
 
-    void Start()
+   
+
+    //private GameObject lastHoveredObject;
+
+    #endregion
+    public void CustomStart()
     {
         UI_CardInfo.SetActive(false);
 
@@ -263,13 +268,7 @@ public class ClassroomManager : MonoBehaviour
             Debug.Log(item.name);
         }
         InitializeCards();
-
     }
-
-    //private GameObject lastHoveredObject;
-
-    #endregion
-
 
 
     public void Restart()

@@ -31,11 +31,12 @@ public class WolfFPSManager : MonoBehaviour
     #endregion
 
     public TMPro.TextMeshProUGUI countdownText;
-    [SerializeReference] GameObject YouDied;
+   // [SerializeReference] GameObject YouDied;
     [SerializeReference] GameObject PlayerPos_Act1;
     [SerializeReference] GameObject PlayerPos_Act2;
     [SerializeReference] GameObject PlayerPos_Act3;
     [SerializeReference] GameObject PlayerObject;
+    [SerializeReference] Light LightComponent;
 
     [SerializeReference] GameObject DoorBlocker;
 
