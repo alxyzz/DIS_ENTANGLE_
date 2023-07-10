@@ -3,21 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public enum Act
-{
-    One,
-    Two,
 
-}
-
-public enum Level
-{
-    Menu,
-    Classroom,
-    Wolfblade,
-    Paige,
-    Janitor
-}
 public class GameManager : MonoBehaviour
 {
     #region singleton
@@ -56,157 +42,194 @@ public class GameManager : MonoBehaviour
 
     #region refs
 
+    //A.classroom game
+    //janitor smoking, wolfblade looking out window
+    //B.wolfblade FPS game
+    //wolfblade sitting, paper hits her
+    //C.paige journal game
+    //janitor walks in, picks up paper
 
+    //act 2
+
+    //A.classroom game 2
+    //janitor looks at paper
+    //B.wolfblade FPS game 2
+    //wolfblade runs by janitor, trips, janitor fights bullies
+    //C.paige journal game 3D ?
     [Header("SCENE NAMES as a string")]
 
-    public string MENU;
-    public string MRMISTA_CLASSROOM;
-    public string WOLFBLADE_ESCAPE;
-    public string PAIGE_JOURNAL;
-    public string PAIGE_JOURNAL_3D;
-    public string JANITOR_CINEMATIC_1;
-    public string JANITOR_CINEMATIC_2;
-    public string JANITOR_CINEMATIC_3;
-    public string ENDGAME;
+    [HideInInspector] public string MAIN_MENU = "MAIN_MENU";
+    //games
+    [HideInInspector] public string MRMISTA_CLASSROOM_SCENE = "MRMISTA_CLASSROOM_SCENE"; //
+    [HideInInspector] public string WOLFBLADE_ESCAPE_SCENE = "WOLFBLADE_ESCAPE_SCENE";//
+    [HideInInspector] public string PAIGE_JOURNAL_SCENE = "PAIGE_JOURNAL_SCENE";//
+    [HideInInspector] public string PAIGE_JOURNAL_3D_SCENE = "PAIGE_JOURNAL_3D_SCENE";
 
+    //cinematics
+    [HideInInspector] public string JANITOR_SMOKE_CINEMATIC = "JANITOR_SMOKE_CINEMATIC";
+    [HideInInspector] public string WOLFBLADE_PAPER_HIT_CINEMATIC = "WOLFBLADE_PAPER_HIT_CINEMATIC";
+    [HideInInspector] public string JANITOR_PICKUP_PAPER_CINEMATIC = "JANITOR_PICKUP_PAPER_CINEMATIC";
+    [HideInInspector] public string JANITOR_LOOKS_AT_PAPER_CINEMATIC = "JANITOR_LOOKS_AT_PAPER_CINEMATIC";
+    [HideInInspector] public string JANITOR_FIGHT_CINEMATIC = "JANITOR_FIGHT_CINEMATIC";
 
-    public Act CurrentAct = Act.One;
-    public Level CurrentLevel = Level.Menu;
+    [HideInInspector] public string ENDGAME_MENU = "ENDGAME_MENU";
+
+    [HideInInspector] public int act = 1;
+    [HideInInspector]public int level = 1;
+
     #endregion
-    //public void ChangeLevel()
-    //{
-    //    switch (switch_on)
-    //    {
-    //        default:
-    //    }
-    //}
-
-
-    public void AdvanceLevel()
+    void Update()
     {
-        if (CurrentLevel == Level.Janitor)
+        if (Input.GetKeyDown(KeyCode.H))
         {
-            if (CurrentAct == Act.Two)
+            ChangeLevel();
+        }
+    }
+
+    [HideInInspector]public bool SkipIntro = false;
+    public void ChangeLevel( bool advancePlot = true, bool skipintro = false)
+    {
+        if (level >= 6)
+        {
+            act++;
+            level = 0;
+        }
+        if (advancePlot)
+        {
+            level++;
+
+        }
+        //act 1
+        SkipIntro = skipintro;
+        //A.classroom game
+        //janitor smoking, wolfblade looking out window
+        //B.wolfblade FPS game
+        //wolfblade sitting, paper hits her
+        //C.paige journal game
+        //janitor walks in, picks up paper
+
+        //act 2
+
+        //A.classroom game 2
+        //janitor looks at paper
+        //B.wolfblade FPS game 2
+        //wolfblade runs by janitor, trips, janitor fights bullies
+        //C.paige journal game 3D ?
+
+        //[HideInInspector] public string MAIN_MENU = "MAIN_MENU";
+        ////games
+        //[HideInInspector] public string MRMISTA_CLASSROOM_SCENE = "MRMISTA_CLASSROOM_SCENE"; //
+        //[HideInInspector] public string WOLFBLADE_ESCAPE_SCENE = "WOLFBLADE_ESCAPE_SCENE";//
+        //[HideInInspector] public string PAIGE_JOURNAL_SCENE = "PAIGE_JOURNAL_SCENE";//
+        //[HideInInspector] public string PAIGE_JOURNAL_3D_SCENE = "PAIGE_JOURNAL_3D_SCENE";
+
+        ////cinematics
+        //[HideInInspector] public string JANITOR_SMOKE_CINEMATIC = "JANITOR_SMOKE_CINEMATIC";
+        //[HideInInspector] public string WOLFBLADE_PAPER_HIT_CINEMATIC = "WOLFBLADE_PAPER_HIT_CINEMATIC";
+        //[HideInInspector] public string JANITOR_PICKUP_PAPER_CINEMATIC = "JANITOR_PICKUP_PAPER_CINEMATIC";
+        //[HideInInspector] public string JANITOR_LOOKS_AT_PAPER_CINEMATIC = "JANITOR_LOOKS_AT_PAPER_CINEMATIC";
+        //[HideInInspector] public string JANITOR_FIGHT_CINEMATIC = "JANITOR_FIGHT_CINEMATIC";
+
+        //[HideInInspector] public string ENDGAME_MENU = "ENDGAME_MENU";
+        if (act == 1)
+        {
+            switch (level)
             {
-                SceneManager.LoadScene(ENDGAME);
-                return;
+                case 1: //classroom
+                    SceneManager.LoadScene(MRMISTA_CLASSROOM_SCENE);
+
+                    break;
+
+                case 2: //janitor smoking cinematic | act 2 looking at paper
+                    SceneManager.LoadScene(JANITOR_SMOKE_CINEMATIC);
+                    break;
+
+                case 3://wolfblade FPS game
+                    SceneManager.LoadScene(WOLFBLADE_ESCAPE_SCENE);
+
+                    break;
+
+                case 4://woflblade sitting, paper hits
+                    SceneManager.LoadScene(WOLFBLADE_PAPER_HIT_CINEMATIC);
+
+                    break;
+                case 5://paige journal game
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+
+                    break;
+
+                case 6://janitor walks in, picks up paper
+                    SceneManager.LoadScene(JANITOR_PICKUP_PAPER_CINEMATIC);
+
+                    break;
+                case 0://janitor smoking cinematic | act 2 looking at paper
+                    throw new System.Exception("Error. Level in GameManager was 0. this means we fucked up somewhere.");
+                default:
+                   
+                    break;
             }
-            CurrentAct = Act.Two;
-            CurrentLevel = Level.Classroom;
-            return;
         }
-        if (CurrentLevel == Level.Menu)
+        else
         {
-            CurrentLevel = Level.Classroom;
+
+
+            //A.classroom game 2
+            //janitor looks at paper
+            //B.wolfblade FPS game 2
+            //wolfblade runs by janitor, trips, janitor fights bullies
+            //C.paige journal game 3D ?
+
+            switch (level)
+            {
+                case 1: //classroom GAME 2
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+                    break;
+
+                case 2: // act 2 looking at paper
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+                    break;
+
+                case 3://wolfblade FPS GAME 2
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+                    break;
+
+                case 4://wolfblade runs by janitor, trips, janitor fights bullies
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+                    break;
+                case 5://paige journal GAME 3D
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+
+                    break;
+                case 6://End Game Screen
+                    SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
+                    break;
+                case 0://janitor smoking cinematic | act 2 looking at paper
+                    throw new System.Exception("Error. Level in GameManager was 0. this means we fucked up somewhere.");
+                default:
+
+                    break;
+            }
         }
-        else if (CurrentLevel == Level.Classroom)
-        {
-            CurrentLevel = Level.Wolfblade;
-        }
-        else if (CurrentLevel == Level.Wolfblade)
-        {
-            CurrentLevel = Level.Paige;
-        }
-        else if (CurrentLevel == Level.Paige)
-        {
-            CurrentLevel = Level.Janitor;
-        }
+
+       
+       
+          
        
 
 
     }
-    public void Transition()
+   
+
+    public void BadEnding()
     {
-        switch (CurrentAct)
-        {
-            case Act.One:
-                break;
-            case Act.Two:
-                //load paige's scene in 3d
-                break;
-            default:
-                break;
-        }
-
-        switch (CurrentLevel)
-        {
-            case Level.Menu:
-                SceneManager.LoadScene(MENU);
-                break;
-            case Level.Classroom:
-                SceneManager.LoadScene(MRMISTA_CLASSROOM);
-                break;
-            case Level.Wolfblade:
-                SceneManager.LoadScene(WOLFBLADE_ESCAPE);
-                break;
-            case Level.Paige:
-                if (CurrentAct == Act.One)
-                {
-                    SceneManager.LoadScene(PAIGE_JOURNAL);
-
-                }
-                else
-                {
-                    SceneManager.LoadScene(PAIGE_JOURNAL_3D);
-
-                }
-                SceneManager.LoadScene(PAIGE_JOURNAL);
-                break;
-            case Level.Janitor:
-                if (CurrentAct == Act.One)
-                {
-                    SceneManager.LoadScene(JANITOR_CINEMATIC_1);
-
-                }
-                else
-                {
-                    SceneManager.LoadScene(JANITOR_CINEMATIC_2);
-
-                }
-                break;
-            default:
-                break;
-        }
+        SceneManager.LoadScene(JANITOR_FIGHT_CINEMATIC);
     }
 
-    public string GetTransitionText()
+    public void GoodEnding()
     {
-        string a = "";
-        switch (CurrentAct)
-        {
-            case Act.One:
-                a += "Act 1\n";
-                break;
-            case Act.Two:
-                a += "Act 2\n";
-                break;
-            default:
-                break;
-        }
-        switch (CurrentLevel)
-        {
-            
-            case Level.Classroom:
-                a += "The Classroom\nStarring Mr. Mista";
-                break;
-            case Level.Wolfblade:
-                a += "The Escape\nStarring Wolfblade";
-
-                break;
-            case Level.Paige:
-                a += "The Daydream\nStarring Paige";
-
-                break;
-            case Level.Janitor:
-                a += "The Classroom\nStarring the Janitor";
-
-                break;
-            default:
-                break;
-        }
-
-
-        return a;
+        SceneManager.LoadScene(JANITOR_LOOKS_AT_PAPER_CINEMATIC);
     }
+
+    
     
 }

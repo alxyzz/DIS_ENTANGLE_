@@ -12,14 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: DistracterLeft
   m_EditorClassIdentifier: 
-  chosenName: 
-  seatedImage: {fileID: 0}
-  portrait: {fileID: 0}
-  Names: []
-  STAT_LEARNING: 1
-  DESC: The left adjacent student gains -2 and the right neighbor gains +2
+  chosenName: Kid Win
+  seatedImage: {fileID: 21300000, guid: a6ebbfb8bdebebd479a1289b4aee13b6, type: 3}
+  portrait: {fileID: 21300000, guid: 6504d7731b4622a4289f34cb27132f97, type: 3}
+  STAT_LEARNING: 0
+  DESC: Kid Win is noisy and easily distracted, but funny. The left adjacent student
+    gains -2 and the right neighbor gains +2
   ROW_MODIFIER: 0
   prereq: 0
-  prereq_argument: 0
+  PREREQ_ARGUMENT: 0
   effect: 6
-  effect_argument: 2
+  EFFECT_ARG_ONE: -2
+  EFFECT_ARG_two: 2

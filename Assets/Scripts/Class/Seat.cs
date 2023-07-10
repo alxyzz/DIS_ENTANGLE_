@@ -1,62 +1,53 @@
-using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 
 
 
 
-public class Seat : MonoBehaviour
+public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
 
     #region happiness calculations
-  
+
 
 
     #endregion
-    [HideInInspector]public SeatRow row;
+    [HideInInspector] public SeatRow row;
     [HideInInspector] public SeatRow column;
     [HideInInspector] public Student student;
 
 
-    public Seat GetLeftNeighbor(Seat b)
+    [SerializeReference] public Seat left;
+    [SerializeReference] public Seat right;
+
+    public float EFFECTIVE_HAPPINESS //happiness post all modifiers
     {
+        get
+        {
+            if (student == null)
+            {
+                return 0;
+            }
+            float b = student.STAT_LEARNING + row.ROW_MODIFIER;
+            foreach (var item in modifiers)
+            {
 
-
-
-        return null;
+                b += item.Item2;
+            }
+            return b;
+        }
     }
-    public Seat GetRightNeighbor(Seat b)
-    {
 
-
-        return null;
-    }
 
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiers = new();
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiedByThis = new();
 
 
-    void CheckForNullEffects()
-    {
-        foreach (var item in modifiers)
-        {
-            if (item.Item1 == null)
-            {
-                modifiers.Remove(item);
-            }
-        }
-
-        foreach (var item in modifiedByThis)
-        {
-            if (item.Item1 == null)
-            {
-                modifiers.Remove(item);
-            }
-        }
-    }
+   
 
     //     Possible prerequisits:
     //None = always active
@@ -65,18 +56,22 @@ public class Seat : MonoBehaviour
     //if self has neighbours
 
 
-    void RefreshEffect()
+    public void CheckPrerequisiteAndDoEffect()
     {
-        ChangeEffect(undo: true);
+        if (student == null)
+        {
+            return;
+        }
+       
         switch (student.prereq)
         {
             case StudentEffectPrerequisite.NEEDS_NOTHING:
-                ChangeEffect();
+                DoEffect();
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                if (student.EFFECTIVE_HAPPINESS >  student.PREREQ_ARGUMENT)
+                if (EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
                 {
-                    ChangeEffect();
+                    DoEffect();
                 }
                 else
                 {
@@ -88,7 +83,7 @@ public class Seat : MonoBehaviour
                 {
                     if (row.rowID == student.PREREQ_ARGUMENT)
                     {
-                        ChangeEffect();
+                        DoEffect();
                     }
                     else
                     {
@@ -97,9 +92,9 @@ public class Seat : MonoBehaviour
                 }
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                if (GetLeftNeighbor(this) != null && GetRightNeighbor(this) != null)
+                if (left != null && right != null)
                 {
-                    ChangeEffect();
+                    DoEffect();
                 }
                 else
                 {
@@ -110,13 +105,9 @@ public class Seat : MonoBehaviour
                 break;
         }
     }
-    void ChangeEffect(bool undo = false)
+    void DoEffect()
     {
-        if (undo)
-        {
-            
-            return;
-        }
+
 
         switch (student.effect)
         {
@@ -124,63 +115,83 @@ public class Seat : MonoBehaviour
                 Debug.Log("Initialized effect with no effect. :)");
                 break;
             case StudentEffectType.GAIN_ALL_OTHER_ROWS:
+                // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
                 int rownumber = row.rowID;
-                foreach (var item in ClassroomManager.Instance.LIST_ROWS)
+                foreach (var item in ClassroomManager.Instance.LIST_SEATS)
                 {
-                    if (item.rowID != rownumber)
+                    if (item != this && item.row.rowID != rownumber)
                     {
-                        foreach (var sea in item.seats)
-                        {
-                            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_ALL_OTHER_ROWS);
-                        }
+                        item.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_ALL_OTHER_ROWS);
+
                     }
                 }
                 break;
             case StudentEffectType.GAIN_OWN_ROW:
-                int sameNumber = row.rowID;
-                foreach (var item in ClassroomManager.Instance.LIST_ROWS)
+                // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
+                foreach (var item in ClassroomManager.Instance.LIST_SEATS)
                 {
-                    if (item.rowID == sameNumber)
+                    if (item.row.rowID == row.rowID)
                     {
-                        foreach (var sea in item.seats)
-                        {
-                            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
-                        }
+                        item.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
                     }
                 }
+
+                student.ROW_MODIFIER = student.EFFECT_ARG_ONE;
+
                 break;
             case StudentEffectType.GAIN_SELF:
-               AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
+
+                //just gain to self
+                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
                 break;
             case StudentEffectType.SET_AVERAGE_OF_NEIGHBORS:
-                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.SET_AVERAGE_OF_NEIGHBORS);
-                break;
-            case StudentEffectType.GAIN_SELF_AND_NEIGHBORS:
-                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
-                Seat left = GetLeftNeighbor(this);
-                Seat right = GetRightNeighbor(this);
-
+                //sum up neighbors then gain it for yourself
+                // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK - could use a list but im not gonna. its the last day cut me some slack bro-man
+                float AoN = 0;
                 if (left != null)
                 {
-                    left.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                    AoN += left.EFFECTIVE_HAPPINESS;
+                }
+
+                if (right != null)
+                {
+                    AoN += right.EFFECTIVE_HAPPINESS;
+                }
+
+                if (right != null && left != null)
+                {
+                    AoN /= 2;
+                }
+                AssignModifiers(student, AoN, StudentEffectType.SET_AVERAGE_OF_NEIGHBORS);
+                break;
+            case StudentEffectType.GAIN_SELF_AND_NEIGHBORS:
+                //gain the bonus both to self and people nearby
+                // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
+                if (left != null)
+                {
+                    left.AssignModifiers(left.student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+
                 }
                 if (right != null)
                 {
-                    right.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                    right.AssignModifiers(right.student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+
                 }
+                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
 
                 break;
             case StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE:
-                Seat lefty = GetLeftNeighbor(this);
-                Seat righty = GetRightNeighbor(this);
+                //give a different bonus to neighbors
 
-                if (lefty != null)
+                // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
+
+                if (left != null)
                 {
-                    lefty.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
+                    left.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
                 }
-                if (righty != null)
+                if (right != null)
                 {
-                    righty.AssignModifiers(student, student.EFFECT_ARG_two, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
+                    right.AssignModifiers(student, student.EFFECT_ARG_two, StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE);
                 }
                 break;
             default:
@@ -206,18 +217,22 @@ public class Seat : MonoBehaviour
         get
         {
 
-           
+
             float b = 0;
             if (student != null)
             {
-                if (row == null) Debug.LogError("ROW WAS NULL");
+                if (row == null)
+                {
+                    Debug.LogError("ROW WAS NULL");
+                }
+
                 return (b + student.STAT_LEARNING + row.ROW_MODIFIER);
             }
             else
             {
                 return 0;
             }
-            
+
         }
     }
     bool moving;
@@ -229,45 +244,39 @@ public class Seat : MonoBehaviour
     {
         Debug.Log("TEST!");
         ui_studentImage = InitializeChild();
+        //ui_studentImage = GetComponent<Image>();
         Button b = GetComponent<Button>();
-        if (ui_studentImage == null)
-        {
-            Debug.LogError("ui_studentImage is null at gameobject " + gameObject.name);
-        }
-        if (ui_learningFactor == null)
-        {
-            Debug.LogError("ui_learningFactor is null at gameobject " + gameObject.name);
-        }
+
         b.targetGraphic = ui_studentImage;
+        Debug.Log("Added button listener to button " + gameObject.name);
         b.onClick.AddListener(delegate () { OnClick(); });
     }
 
-    //void Move()
-    //{
-    //    if (posStart == Vector3.zero)
-    //    {
-    //        posStart = transform.position;
-    //    }
-    //    transform.position = Vector3.Lerp(posStart, Target, lerp);
-    //    lerp += 0.05f;
 
-    //    if (transform.position == Target)
-    //    {
-    //        lerp = 0;
-    //        moving = false;
-    //        posStart = Vector3.zero;
-    //    }
-    //}
 
-    
     public void AssignModifiers(Student source, float mod, StudentEffectType type)
     {
+        modifiers.Add((source, mod, type));
+    }
 
-
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        if (student != null)
+        {
+            ClassroomManager.Instance.OnHoverSeatEnter(student);
+        }
 
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (student != null)
+        {
+            ClassroomManager.Instance.OnHoverSeatExit();
+        }
 
+
+    }
     ///// <summary>
     ///// removes all modifiers sourced from the source. or any at all.
     ///// </summary>
@@ -292,7 +301,7 @@ public class Seat : MonoBehaviour
     //        {
     //            toRemove.Add(item);
     //        }
-            
+
     //    }
 
     //    foreach (var item in toRemove)
@@ -302,7 +311,7 @@ public class Seat : MonoBehaviour
     //}
 
 
-   
+
     Image InitializeChild()
     {
         foreach (Transform child in transform)
@@ -312,8 +321,9 @@ public class Seat : MonoBehaviour
 
             // If the component is found, break the loop
             if (b != null)
+            {
                 return b;
-           
+            }
         }
         Debug.Log("could not find any Images in the children of object " + gameObject);
         return null;
@@ -321,12 +331,12 @@ public class Seat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    public void Refresh()
+    public void RefreshGraphics()
     {
-       
+
         if (student != null)
         {
             ui_studentImage.enabled = true;
@@ -337,38 +347,24 @@ public class Seat : MonoBehaviour
         {
             ui_studentImage.enabled = false;
             ui_learningFactor.text = "";
-            ui_studentImage.sprite = null ;
+            ui_studentImage.sprite = null;
             return;
         }
 
-        switch (student.prereq)
-        {
-            case StudentEffectPrerequisite.NEEDS_NOTHING:
 
-                ChangeEffect();
+      
 
-                break;
-            case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                ChangeEffect();
-                break;
-            case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
-                ChangeEffect();
-                break;
-            case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                ChangeEffect();
-                break;
-            default:
-                break;
-        }
+      
+        
     }
 
 
-  
+
 
     public void OnClick()
     {
 
-        Debug.Log("Clicked student.");
+
         ClassroomManager.Instance.OnClickSeat(this);
     }
 

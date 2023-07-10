@@ -1,13 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class SeatRow : MonoBehaviour
-{[Header("All IDs must be identical and are used to build the grid for calculations. so count up or down normally")]
+{
+    [Header("All IDs must be identical and are used to build the grid for calculations. so count up or down normally")]
     public int rowID;
-   public List<Seat> seats = new();
-    [SerializeReference] TextMeshProUGUI UI_rowmod;
+    public List<Seat> seats = new();
+
 
     public float ROW_MODIFIER
     {
@@ -18,7 +17,7 @@ public class SeatRow : MonoBehaviour
             {
                 if (item.student != null)
                 {
-                        b += item.student.ROW_MODIFIER;
+                    b += item.student.ROW_MODIFIER;
                 }
                 else return 0;
             }
@@ -37,7 +36,7 @@ public class SeatRow : MonoBehaviour
             {
                 if (item.student != null)
                 {
-                    b += item.student.EFFECTIVE_HAPPINESS;
+                    b += item.EFFECTIVE_HAPPINESS;
                 }
             }
             return b;
@@ -59,17 +58,14 @@ public class SeatRow : MonoBehaviour
                 throw new System.Exception("seat at row " + gameObject.name + " already has a row... this must mean we have overlapping stuff. not good.");
             }
             ClassroomManager.Instance.LIST_SEATS.Add(item);
-            item.row = this; 
+            item.row = this;
         }
 
-        
+
     }
 
 
-    public void Refresh()
-    {
-        UI_rowmod.text = TotalHappinessInRow.ToString();
-    }
+
 
 
 
