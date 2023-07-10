@@ -13,10 +13,11 @@ MonoBehaviour:
   m_Name: ShowOff
   m_EditorClassIdentifier: 
   chosenName: Jim
-  seatedImage: {fileID: 0}
-  portrait: {fileID: 0}
+  seatedImage: {fileID: 21300000, guid: bc8106b13db046242861ea07ff46dbbd, type: 3}
+  portrait: {fileID: 21300000, guid: 6d237dc6f9f2e604fab4b5aa63bb61c0, type: 3}
   STAT_LEARNING: 1
-  DESC: When this student has a learning effect of 3+ then all other rows get -1
+  DESC: When Jim has a learning effect of 3+ then all other rows get -1. Classic
+    Jim.
   ROW_MODIFIER: 0
   prereq: 1
   PREREQ_ARGUMENT: 3

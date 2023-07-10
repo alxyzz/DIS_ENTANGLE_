@@ -16,7 +16,7 @@ MonoBehaviour:
   seatedImage: {fileID: 21300000, guid: 2a5cbb5a477ff7b46a73b308e3117851, type: 3}
   portrait: {fileID: 21300000, guid: 036487d021e54dc489a1c2ef801a9e8f, type: 3}
   STAT_LEARNING: 0
-  DESC: 
+  DESC: Johnny is a very unremarkable guy, but pretty friendly nonetheless.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

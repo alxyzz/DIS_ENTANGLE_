@@ -12,11 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Copier
   m_EditorClassIdentifier: 
-  chosenName: Copycat
-  seatedImage: {fileID: 0}
-  portrait: {fileID: 0}
+  chosenName: Bungus
+  seatedImage: {fileID: 21300000, guid: 208cb226e2ef07141b9e84d789fc681c, type: 3}
+  portrait: {fileID: 21300000, guid: 2e89de885c6f70940b966ba7300ecf0e, type: 3}
   STAT_LEARNING: 0
-  DESC: This student gains the combined learning effect of adjacent students.
+  DESC: Bungus gains the combined learning effect of adjacent students. He's impressionable
+    like that.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

@@ -18,13 +18,16 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         
     }
     
-
+    /// <summary>
+    /// unpacks the SerializableObject and prepares the name, refreshes interface
+    /// </summary>
+    /// <param name="SO"></param>
     public void Initialize(StudentSerializableObject SO)
     {
         studentObject = SO;
         UnpackSO();
         student.chosenName = SO.chosenName;
-        Refresh();
+        RefreshPortrait();
     }
 
     void UnpackSO()
@@ -50,7 +53,7 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     }
 
-    public void Refresh()
+    public void RefreshPortrait()
     {
         if (student.portrait != null)
         {
@@ -77,12 +80,12 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        ClassroomManager.Instance.OnHoverCard(this);
+        ClassroomManager.Instance.OnHoverCardEnter(this);
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        ClassroomManager.Instance.OnLeaveHover();
+        ClassroomManager.Instance.OnHoverCardExit();
 
     }
 }

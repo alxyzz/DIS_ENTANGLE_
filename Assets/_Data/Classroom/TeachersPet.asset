@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: TeachersPet
   m_EditorClassIdentifier: 
-  chosenName: 
-  seatedImage: {fileID: 0}
-  portrait: {fileID: 0}
+  chosenName: Sarah
+  seatedImage: {fileID: 21300000, guid: f56199092366aaf40ba4c35f6fbf568f, type: 3}
+  portrait: {fileID: 21300000, guid: f9768662f098eb34d9656879721f6c2a, type: 3}
   STAT_LEARNING: 0
-  DESC: If they are not in the last row, the row they are on gains +1
+  DESC: 'If Sarah is not in the last row, the row they are on gains +1. '
   ROW_MODIFIER: 0
   prereq: 2
-  PREREQ_ARGUMENT: 1
+  PREREQ_ARGUMENT: 0
   effect: 2
   EFFECT_ARG_ONE: 1
   EFFECT_ARG_two: 0
