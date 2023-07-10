@@ -7,8 +7,7 @@ public class MenuUI : MonoBehaviour
 {
     public void OnClickPlay()
     {
-        GameManager.Instance.AdvanceLevel();
-        GameManager.Instance.Transition();
+        GameManager.Instance.ChangeLevel(false);
     }
 
 

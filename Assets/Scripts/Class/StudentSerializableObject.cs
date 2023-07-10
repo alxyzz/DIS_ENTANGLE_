@@ -15,8 +15,6 @@ public class StudentSerializableObject : ScriptableObject
     [Header("Portrait image")]
     public Sprite portrait;
 
-    [Header("Names to be picked at random")]
-    public List<string> Names = new();
 
     [Header("Base learning state")]
     public float STAT_LEARNING = 0;
