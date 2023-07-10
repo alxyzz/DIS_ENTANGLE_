@@ -371,56 +371,9 @@ public class ClassroomManager : MonoBehaviour
     /// removes the modifiers caused by a certain student from all students
     /// </summary>
     /// <param name="source"></param>
-    public void RemoveEffects(Student source)
-    {
-        //if (source.modifiedByThis.Count < 1)
-        //{
-        //    return;
-        //}
+    
 
-        List<(Seat, (Student, float, StudentEffectType))> SeatsToClean = new();
-        foreach (var seaty in LIST_SEATS)
-        {
-            foreach (var item in seaty.modifiers)
-            {
-
-                if (item.Item1 == source)
-                {
-                    try
-                    {
-                        seaty.modifiers.Remove(item);
-                    }
-                    catch (System.Exception)
-                    {
-                        Debug.LogError("ClassroomManager@RemoveStudentEffects - could not remove the effects because list was modified during removal.");
-                        throw;
-                    }
-
-                    //(Seat, (Student, float, StudentEffectType)) b = new(seaty, (item.Item1, item.Item2, item.Item3));
-                    //SeatsToClean.Add(b);
-                }
-
-
-            }
-        }
-
-
-        //for (int i = SeatsToClean.Count; i < 0; i--)
-        //{
-
-        //}
-        //foreach (var item in SeatsToClean)
-        //{
-        //    item.Item1.modifiers.Remove(item.Item2);
-
-        //}
-    }
-    public void AddEffects(Student source, float mod, StudentEffectType type)
-    {
-
-
-
-    }
+    
 
     public void OnClickRestart()
     {
@@ -462,10 +415,10 @@ public class ClassroomManager : MonoBehaviour
 
 
 
-
+        RefreshEffects();
         foreach (var item in LIST_SEATS)
         {
-            item.Refresh();
+            item.RefreshGraphics();
         }
         CheckWinCondition();
     }
@@ -479,11 +432,30 @@ public class ClassroomManager : MonoBehaviour
         RefreshHappinessFeedback();
     }
 
+
+
+    void RefreshEffects()
+    {
+        RemoveAllEffects();
+        ApplyAllEffects();
+    }
+
     public void RemoveAllEffects()
     {
         foreach (var item in LIST_SEATS)
         {
             item.modifiers.Clear();
+        }
+    }
+
+    public void ApplyAllEffects()
+    {
+        foreach (var item in LIST_SEATS)
+        {
+            if (item.student != null)
+            {
+                item.CheckPrerequisiteAndDoEffect();
+            }
         }
     }
     public void OnHoverSeatEnter(Student s)

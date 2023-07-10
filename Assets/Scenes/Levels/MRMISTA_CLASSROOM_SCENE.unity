@@ -1284,6 +1284,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 1390486750}
   ui_studentImage: {fileID: 1138531435}
   ui_learningFactor: {fileID: 1332166070}
 --- !u!114 &214023975
@@ -2577,6 +2579,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 1824025611}
+  right: {fileID: 0}
   ui_studentImage: {fileID: 393410824}
   ui_learningFactor: {fileID: 1410131603}
 --- !u!1 &542868845
@@ -2635,6 +2639,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 1096711709}
+  right: {fileID: 0}
   ui_studentImage: {fileID: 2046734677}
   ui_learningFactor: {fileID: 22344947}
 --- !u!114 &542868848
@@ -3407,6 +3413,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 2434455987532053406}
+  right: {fileID: 1824025611}
   ui_studentImage: {fileID: 788900300}
   ui_learningFactor: {fileID: 1209446644}
 --- !u!1 &788900298
@@ -4092,6 +4100,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 1379868061}
+  right: {fileID: 1096711709}
   ui_studentImage: {fileID: 1272366832}
   ui_learningFactor: {fileID: 1037237170}
 --- !u!114 &932855052
@@ -4603,6 +4613,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 932855051}
+  right: {fileID: 542868847}
   ui_studentImage: {fileID: 1294349007}
   ui_learningFactor: {fileID: 1802743857}
 --- !u!114 &1096711710
@@ -5324,6 +5336,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 1390486750}
+  right: {fileID: 2099055389}
   ui_studentImage: {fileID: 1739018348}
   ui_learningFactor: {fileID: 742367145}
 --- !u!114 &1247471679
@@ -5887,6 +5901,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 932855051}
   ui_studentImage: {fileID: 799229743}
   ui_learningFactor: {fileID: 84292425}
 --- !u!114 &1379868062
@@ -6039,6 +6055,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 214023974}
+  right: {fileID: 1247471678}
   ui_studentImage: {fileID: 253233489}
   ui_learningFactor: {fileID: 1602910145}
 --- !u!114 &1390486751
@@ -7227,6 +7245,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: eb96eed73d3bfb843b34d0d855a8792d, type: 2}
   - {fileID: 11400000, guid: 91e8b83905e9d254b8762924f6b20b4e, type: 2}
   - {fileID: 11400000, guid: b21714f02698ad444b022d297cb8be60, type: 2}
+  Act2Sequence: []
   rows:
   - {fileID: 555851880}
   - {fileID: 233851}
@@ -7915,6 +7934,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 778526146}
+  right: {fileID: 511066937}
   ui_studentImage: {fileID: 1726169482}
   ui_learningFactor: {fileID: 1015838574}
 --- !u!1 &1852521233
@@ -8422,6 +8443,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 1247471678}
+  right: {fileID: 0}
   ui_studentImage: {fileID: 1068653656}
   ui_learningFactor: {fileID: 60361026}
 --- !u!114 &2099055390
@@ -8949,6 +8972,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   row: {fileID: 0}
   column: {fileID: 0}
+  left: {fileID: 0}
+  right: {fileID: 778526146}
   ui_studentImage: {fileID: 2434455988149137124}
   ui_learningFactor: {fileID: 427782022}
 --- !u!1 &2434455988149137122

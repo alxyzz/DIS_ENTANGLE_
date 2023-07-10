@@ -15,8 +15,8 @@ MonoBehaviour:
   chosenName: Dean
   seatedImage: {fileID: 21300000, guid: 6957a74c1ccc0b740838eda62edb6cb2, type: 3}
   portrait: {fileID: 21300000, guid: 05adbc3df61420b409e4bd771251e5c7, type: 3}
-  STAT_LEARNING: 2
-  DESC: Dean is a very pleasant person. Adjacent cards gain +1.
+  STAT_LEARNING: 0
+  DESC: Dean is a very pleasant person. Having two adjacent cards gain +1.
   ROW_MODIFIER: 0
   prereq: 3
   PREREQ_ARGUMENT: 0

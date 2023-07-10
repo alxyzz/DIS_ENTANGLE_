@@ -15,7 +15,7 @@ MonoBehaviour:
   chosenName: Kid Win
   seatedImage: {fileID: 21300000, guid: a6ebbfb8bdebebd479a1289b4aee13b6, type: 3}
   portrait: {fileID: 21300000, guid: 6504d7731b4622a4289f34cb27132f97, type: 3}
-  STAT_LEARNING: 1
+  STAT_LEARNING: 0
   DESC: Kid Win is noisy and easily distracted, but funny. The left adjacent student
     gains -2 and the right neighbor gains +2
   ROW_MODIFIER: 0

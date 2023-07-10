@@ -47,24 +47,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiedByThis = new();
 
 
-    void CheckForNullEffects()
-    {
-        foreach (var item in modifiers)
-        {
-            if (item.Item1 == null)
-            {
-                modifiers.Remove(item);
-            }
-        }
-
-        foreach (var item in modifiedByThis)
-        {
-            if (item.Item1 == null)
-            {
-                modifiers.Remove(item);
-            }
-        }
-    }
+   
 
     //     Possible prerequisits:
     //None = always active
@@ -73,22 +56,22 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     //if self has neighbours
 
 
-    void RefreshEffect()
+    public void CheckPrerequisiteAndDoEffect()
     {
         if (student == null)
         {
             return;
         }
-        ClassroomManager.Instance.RemoveEffects(student);
+       
         switch (student.prereq)
         {
             case StudentEffectPrerequisite.NEEDS_NOTHING:
-                ApplyEffect();
+                DoEffect();
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
                 if (EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
                 {
-                    ApplyEffect();
+                    DoEffect();
                 }
                 else
                 {
@@ -100,7 +83,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 {
                     if (row.rowID == student.PREREQ_ARGUMENT)
                     {
-                        ApplyEffect();
+                        DoEffect();
                     }
                     else
                     {
@@ -111,7 +94,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
                 if (left != null && right != null)
                 {
-                    ApplyEffect();
+                    DoEffect();
                 }
                 else
                 {
@@ -122,7 +105,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 break;
         }
     }
-    void ApplyEffect()
+    void DoEffect()
     {
 
 
@@ -351,7 +334,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     }
 
-    public void Refresh()
+    public void RefreshGraphics()
     {
 
         if (student != null)
@@ -371,48 +354,8 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
       
 
-        switch (student.prereq)
-        {
-            case StudentEffectPrerequisite.NEEDS_NOTHING:
-
-                ApplyEffect();
-
-                break;
-            case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                if (EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
-                {
-                    ApplyEffect();
-                }
-
-                break;
-            case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
-                if (row.rowID == student.PREREQ_ARGUMENT)
-                {
-                    ApplyEffect();
-
-                }
-                else
-                {
-                    Debug.Log("Student: Tried to apply modifiers, could not because we don't have row " + student.PREREQ_ARGUMENT.ToString() + ", we are on row " + row.rowID.ToString());
-                }
-                break;
-            case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-
-
-
-                if (left != null && right != null)
-                {
-                    ApplyEffect();
-
-                }
-                else
-                {
-                    Debug.Log("Student: Tried to apply modifiers, could not because we don't have neighbors.");
-                }
-                break;
-            default:
-                break;
-        }
+      
+        
     }
 
 
