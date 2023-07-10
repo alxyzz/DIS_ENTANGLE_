@@ -44,7 +44,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
 
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiers = new();
-    [HideInInspector] public List<(Student, float, StudentEffectType)> modifiedByThis = new();
 
 
    
