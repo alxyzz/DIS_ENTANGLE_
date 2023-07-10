@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
 
     #region settings
-
+    
 
     #endregion
 
