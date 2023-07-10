@@ -879,11 +879,11 @@ PlayerSettings:
     m_VersionName: 
   apiCompatibilityLevel: 6
   activeInputHandler: 0
-  cloudProjectId: 
+  cloudProjectId: caadf26c-9d8f-4c71-8ca1-8037beb5666a
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 
-  organizationId: 
+  projectName: DIS_ENTANGLE_
+  organizationId: jrsimplex
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   playerDataPath: 
