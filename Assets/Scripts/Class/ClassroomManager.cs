@@ -467,6 +467,7 @@ public class ClassroomManager : MonoBehaviour
                   lastSelectedSeat.student.EFFECT_ARG_ONE,
                   lastSelectedSeat.student.EFFECT_ARG_two)
                 { };
+
                 Student secondSeatStudent = new Student(s.student.chosenName,
                    s.student.seatedImage,
                     s.student.portrait,
