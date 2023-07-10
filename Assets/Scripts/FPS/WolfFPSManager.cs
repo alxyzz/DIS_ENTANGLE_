@@ -59,7 +59,7 @@ public class WolfFPSManager : MonoBehaviour
   
 
 
-   make sure this whole shebang works too and move the map there
+  
 
     // Update is called once per frame
     void Update()

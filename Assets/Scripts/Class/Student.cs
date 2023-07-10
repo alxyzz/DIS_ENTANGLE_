@@ -6,14 +6,7 @@ public class Student
 {
     public string chosenName = "";
     public SeatRow row;
-    public float EFFECTIVE_HAPPINESS //happiness post all modifiers
-    {
-        get
-        {
-            float b = STAT_LEARNING + row.ROW_MODIFIER;
-            return b;
-        }
-    }
+   
 
 
     #region neighbor modifiers

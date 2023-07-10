@@ -20,20 +20,23 @@ public class Seat : MonoBehaviour
     [HideInInspector] public SeatRow column;
     [HideInInspector] public Student student;
 
-
-    public Seat GetLeftNeighbor(Seat b)
+    public float EFFECTIVE_HAPPINESS //happiness post all modifiers
     {
-
-
-
-        return null;
+        get
+        {
+            if (student == null)
+            {
+                return 0;
+            }
+            float b = student.STAT_LEARNING + row.ROW_MODIFIER;
+            foreach (var item in modifiers)
+            {
+                b += item.Item2;
+            }
+            return b;
+        }
     }
-    public Seat GetRightNeighbor(Seat b)
-    {
-
-
-        return null;
-    }
+   
 
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiers = new();
     [HideInInspector] public List<(Student, float, StudentEffectType)> modifiedByThis = new();
@@ -78,7 +81,7 @@ public class Seat : MonoBehaviour
                 ApplyEffect();
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                if (student.EFFECTIVE_HAPPINESS >  student.PREREQ_ARGUMENT)
+                if (EFFECTIVE_HAPPINESS >  student.PREREQ_ARGUMENT)
                 {
                     ApplyEffect();
                 }
@@ -101,7 +104,7 @@ public class Seat : MonoBehaviour
                 }
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                if (GetLeftNeighbor(this) != null && GetRightNeighbor(this) != null)
+                if (ClassroomManager.Instance.GetLeftNeighbor(this) != null && ClassroomManager.Instance.GetRightNeighbor(this) != null)
                 {
                     ApplyEffect();
                 }
@@ -130,35 +133,42 @@ public class Seat : MonoBehaviour
                     if (item.rowID != rownumber)
                     {
                         foreach (var sea in item.seats)
-                        {
+                        {//we add our modifiers to every seat which is not our own
                             sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_ALL_OTHER_ROWS);
                         }
                     }
                 }
                 break;
             case StudentEffectType.GAIN_OWN_ROW:
-                int sameNumber = row.rowID;
-                foreach (var item in ClassroomManager.Instance.LIST_ROWS)
-                {
-                    if (item.rowID == sameNumber)
-                    {
-                        foreach (var sea in item.seats)
-                        {
-                            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
-                        }
-                    }
-                }
+                //gain for the entire row
+                //int sameNumber = row.rowID;
+
+                student.ROW_MODIFIER = student.EFFECT_ARG_ONE;
+                //foreach (var item in ClassroomManager.Instance.LIST_ROWS)
+                //{
+                //    if (item.rowID == sameNumber)
+                //    {
+                //        foreach (var sea in item.seats)
+                //        {
+                //            sea.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
+                //        }
+                //    }
+                //}
                 break;
             case StudentEffectType.GAIN_SELF:
+
+                //just gain to self
                AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
                 break;
             case StudentEffectType.SET_AVERAGE_OF_NEIGHBORS:
+                //sum up neighbors then gain it for yourself
                 AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.SET_AVERAGE_OF_NEIGHBORS);
                 break;
             case StudentEffectType.GAIN_SELF_AND_NEIGHBORS:
+                //gain the bonus both to self and people nearby
                 AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
-                Seat left = GetLeftNeighbor(this);
-                Seat right = GetRightNeighbor(this);
+                Seat left = ClassroomManager.Instance.GetLeftNeighbor(this);
+                Seat right = ClassroomManager.Instance.GetRightNeighbor(this);
 
                 if (left != null)
                 {
@@ -171,8 +181,10 @@ public class Seat : MonoBehaviour
 
                 break;
             case StudentEffectType.GAIN_NEIGHBORS_LEFT_RIGHT_DIFFERENCE:
-                Seat lefty = GetLeftNeighbor(this);
-                Seat righty = GetRightNeighbor(this);
+                //give a different bonus to neighbors
+
+                Seat lefty = ClassroomManager.Instance.GetLeftNeighbor(this);
+                Seat righty = ClassroomManager.Instance.GetRightNeighbor(this);
 
                 if (lefty != null)
                 {
@@ -349,17 +361,37 @@ public class Seat : MonoBehaviour
 
                 break;
             case StudentEffectPrerequisite.NEEDS_HAPPINESS_LEVEL:
-                if (student.EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
+                if (EFFECTIVE_HAPPINESS > student.PREREQ_ARGUMENT)
                 {
                     ApplyEffect();
                 }
                 
                 break;
             case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
-                ApplyEffect();
+                if (row.rowID == student.PREREQ_ARGUMENT)
+                {
+                    ApplyEffect();
+
+                }
+                else
+                {
+                    Debug.Log("Student: Tried to apply modifiers, could not because we don't have row " + student.PREREQ_ARGUMENT.ToString() + ", we are on row " + row.rowID.ToString());
+                }
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                ApplyEffect();
+                Seat lefty = ClassroomManager.Instance.GetLeftNeighbor(this);
+                Seat righty = ClassroomManager.Instance.GetRightNeighbor(this);
+
+               
+                if (lefty != null && righty != null)
+                {
+                    ApplyEffect();
+
+                }
+                else
+                {
+                    Debug.Log("Student: Tried to apply modifiers, could not because we don't have neighbors.");
+                }
                 break;
             default:
                 break;

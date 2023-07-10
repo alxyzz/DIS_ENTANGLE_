@@ -37,7 +37,7 @@ public class SeatRow : MonoBehaviour
             {
                 if (item.student != null)
                 {
-                    b += item.student.EFFECTIVE_HAPPINESS;
+                    b += item.EFFECTIVE_HAPPINESS;
                 }
             }
             return b;

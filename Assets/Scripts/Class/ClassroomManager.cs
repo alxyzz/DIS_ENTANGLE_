@@ -176,14 +176,57 @@ public class ClassroomManager : MonoBehaviour
         {
             int hp = 0;
             foreach (var item in LIST_SEATS)
-            {fix this shit
-                if (item.student.EFFECTIVE_HAPPINESS > 0)
+            {
+                if (item.EFFECTIVE_HAPPINESS > 0)
                 {
                     hp += 1;
                 }
             }
             return hp;
         }
+    }
+
+
+
+    public Seat GetLeftNeighbor(Seat b)
+    {
+
+        if (b.student == null)
+        {
+            return null;
+        }
+       
+        int rowIndex = rows.IndexOf(b.row);
+        Debug.Log("ROW INDEX WAS " + rowIndex.ToString());
+        int index = rows[rowIndex].seats.IndexOf(b);
+        Debug.Log(" INDEX WAS " + index.ToString());
+
+        if (rows[rowIndex].seats[index - 1] != null)
+        {
+            return rows[rowIndex].seats[index - 1];
+        }
+        else return null;
+
+
+
+    }
+    public Seat GetRightNeighbor(Seat b)
+    {
+        if (b.student == null)
+        {
+            return null;
+        }
+
+        int rowIndex = rows.IndexOf(b.row);
+        Debug.Log("ROW INDEX WAS " + rowIndex.ToString());
+        int index = rows[rowIndex].seats.IndexOf(b);
+        Debug.Log(" INDEX WAS " + index.ToString());
+        if (rows[rowIndex].seats[index + 1] != null)
+        {
+            return rows[rowIndex].seats[index + 1];
+        }
+        else return null;
+
     }
 
     int students = 12;
@@ -277,7 +320,7 @@ public class ClassroomManager : MonoBehaviour
         //{
         //    return;
         //}
-        also make this work 
+       
         List<(Seat, (Student, float, StudentEffectType))> SeatsToClean = new();
         foreach (var seaty in LIST_SEATS)
         {
