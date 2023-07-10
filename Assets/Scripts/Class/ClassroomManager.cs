@@ -64,6 +64,7 @@ public class ClassroomManager : MonoBehaviour
     Seat lastSelectedSeat;
     StudentCard HOVERED_CARD;
     StudentCard CLICKED_CARD;
+    
     [SerializeReference] List<StudentSerializableObject> StudentSequence = new();
     [SerializeReference] List<StudentSerializableObject> Act2Sequence = new();
     [SerializeReference] List<SeatRow> rows = new();
@@ -274,6 +275,7 @@ public class ClassroomManager : MonoBehaviour
         InitializeCards();
 
     }
+
     //private GameObject lastHoveredObject;
 
     #endregion
@@ -395,9 +397,40 @@ public class ClassroomManager : MonoBehaviour
 
 
     }
-    void PlaceStudent(Seat s)
+    void PlaceStudent(Seat s, Student st, bool placedCard)
     {
 
+        if (s.student != null && placedCard)
+        {
+            Debug.Log("Clicked occupied seat, doing nothing.");
+            return;
+        }
+
+        //RemoveStudentAndEffects(s.student);
+
+        s.student = st;
+        s.student.row = s.row;
+        if (placedCard)
+        {
+            OnPlaceCard();
+            CLICKED_CARD = null;
+            stuffplaced++;
+
+        }
+
+
+
+
+        RefreshEffects();
+        foreach (var item in LIST_SEATS)
+        {
+            item.RefreshGraphics();
+        }
+        CheckWinCondition();
+    }
+
+    void RemoveStudent(Seat s)
+    {
         if (s.student != null)
         {
             Debug.Log("Clicked occupied seat, doing nothing.");
@@ -406,11 +439,10 @@ public class ClassroomManager : MonoBehaviour
 
         //RemoveStudentAndEffects(s.student);
 
-        s.student = CLICKED_CARD.student;
+        s.student = null;
         s.student.row = s.row;
-        OnPlaceCard();
 
-        CLICKED_CARD = null;
+      
         stuffplaced++;
 
 
@@ -427,12 +459,61 @@ public class ClassroomManager : MonoBehaviour
         Debug.Log("Clicked a seat.");
         if (CLICKED_CARD != null)
         {
-            PlaceStudent(s);
+            PlaceStudent(s, CLICKED_CARD.student, true);
+        }
+        else
+        {
+            //if we havent clicked a seat, select it
+            if (lastSelectedSeat == null)
+            {
+                lastSelectedSeat = s;
+            }
+            //otherwise, if we have clicked a seat, switch them
+            else
+            {
+                //lastSelectedSeat.student
+                Student FirstSeatStudent = new Student(lastSelectedSeat.student.chosenName,
+                
+                   lastSelectedSeat.student.seatedImage,
+                    lastSelectedSeat.student.portrait,
+                    lastSelectedSeat.student.STAT_LEARNING,
+                   lastSelectedSeat.student.DESC,
+                    lastSelectedSeat.student.ROW_MODIFIER,
+                   lastSelectedSeat.student.prereq,
+                    lastSelectedSeat.student.PREREQ_ARGUMENT,
+                   lastSelectedSeat.student.effect,
+                  lastSelectedSeat.student.EFFECT_ARG_ONE,
+                  lastSelectedSeat.student.EFFECT_ARG_two) {};
+                Student secondSeatStudent = new Student(s.student.chosenName,
+                   s.student.seatedImage,
+                    s.student.portrait,
+                    s.student.STAT_LEARNING,
+                   s.student.DESC,
+                    s.student.ROW_MODIFIER,
+                   s.student.prereq,
+                    s.student.PREREQ_ARGUMENT,
+                   s.student.effect,
+                  s.student.EFFECT_ARG_ONE,
+                  s.student.EFFECT_ARG_two)
+                { };
+
+
+
+
+
+                
+
+                RemoveStudent(lastSelectedSeat);
+                RemoveStudent(s);
+
+                PlaceStudent(lastSelectedSeat, secondSeatStudent, false);
+                PlaceStudent(s, FirstSeatStudent, false);
+            }
         }
         RefreshHappinessFeedback();
     }
 
-
+    
 
     void RefreshEffects()
     {

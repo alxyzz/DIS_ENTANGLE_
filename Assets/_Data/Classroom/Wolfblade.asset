@@ -12,13 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Wolfblade
   m_EditorClassIdentifier: 
-  chosenName: Loner
+  chosenName: Wolfblade
   seatedImage: {fileID: 21300000, guid: e4e97e282d025b64c9e9725eaf269771, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Wolfblade
+  portrait: {fileID: 21300000, guid: 7fd5fc772a6686646b67a261a7fe4f40, type: 3}
   STAT_LEARNING: -1
-  DESC: If this student is adjacent to another, she gains -2
+  DESC: If Wolfblade is adjacent to another, she gains -2
   ROW_MODIFIER: 0
   prereq: 3
   PREREQ_ARGUMENT: 0

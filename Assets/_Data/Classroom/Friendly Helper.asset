@@ -14,17 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chosenName: Friendly Helper
   seatedImage: {fileID: 21300000, guid: c908e480a24aed845ab7502ec4d824f0, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Naturo Sakuse
-  - Timmy Trombone
-  - "Uludag Ganzgro\xDF"
-  - Jasmine Potter
-  STAT_LEARNING: 2
+  portrait: {fileID: 21300000, guid: fa6847c98c02ffd4b81137d92e98c311, type: 3}
+  STAT_LEARNING: -1
   DESC: Adjacent cards gain +1, but for each neighbor the buddy gain -1
   ROW_MODIFIER: 0
   prereq: 3
   PREREQ_ARGUMENT: 0
   effect: 5
-  EFFECT_ARG_ONE: 0
+  EFFECT_ARG_ONE: 1
   EFFECT_ARG_two: 0

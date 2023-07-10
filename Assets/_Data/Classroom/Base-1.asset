@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Base-1
   m_EditorClassIdentifier: 
-  chosenName: -1
+  chosenName: Goku
   seatedImage: {fileID: 21300000, guid: 4f812d9e60d36454cb59ba6651197618, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Jerard
-  - Wuce Brayne
-  - Bleece Helbmi
-  - Andy Tall
+  portrait: {fileID: 21300000, guid: e80ee2f76c580cd4389c193508b4db0b, type: 3}
   STAT_LEARNING: -1
-  DESC: No Effect
+  DESC: Goku enjoys brooding in class. Pays few, if any, attention to the teacher.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

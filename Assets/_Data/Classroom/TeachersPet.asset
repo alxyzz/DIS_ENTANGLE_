@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: TeachersPet
   m_EditorClassIdentifier: 
-  chosenName: Teachers Pet
+  chosenName: Mariana
   seatedImage: {fileID: 21300000, guid: 4decdd572abd60b4da0cf3f724728cd2, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Clara Netto
-  - Anna Kantenherr
-  - Dan Jameson
-  - Chad Hubris
+  portrait: {fileID: 21300000, guid: a65bd3ea76a522848b37e804eac5b209, type: 3}
   STAT_LEARNING: 0
-  DESC: If they are not in the last row, the row they are on gains +1
+  DESC: If Mariana is in the first row, the entire row gains +1.
   ROW_MODIFIER: 0
   prereq: 2
   PREREQ_ARGUMENT: 0

@@ -14,11 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chosenName: Paige
   seatedImage: {fileID: 21300000, guid: f56199092366aaf40ba4c35f6fbf568f, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Paige
+  portrait: {fileID: 21300000, guid: f9768662f098eb34d9656879721f6c2a, type: 3}
   STAT_LEARNING: 3
-  DESC: No Effect.
+  DESC: Paige is the class nerd... Never gets a grade lower than A.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0

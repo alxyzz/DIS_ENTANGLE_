@@ -12,16 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eec17b73401cfd847b8480c683f6c45a, type: 3}
   m_Name: Base0
   m_EditorClassIdentifier: 
-  chosenName: 0
+  chosenName: Lana
   seatedImage: {fileID: 21300000, guid: 4decdd572abd60b4da0cf3f724728cd2, type: 3}
-  portrait: {fileID: 0}
-  Names:
-  - Thomas Gleich
-  - Friedrich Grattenthaler
-  - Jebaffrey
-  - Hannah Pennsylvania
+  portrait: {fileID: 21300000, guid: a65bd3ea76a522848b37e804eac5b209, type: 3}
   STAT_LEARNING: 0
-  DESC: No Effect
+  DESC: Lana thinks a lot, and says little.
   ROW_MODIFIER: 0
   prereq: 0
   PREREQ_ARGUMENT: 0
