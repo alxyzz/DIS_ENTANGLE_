@@ -181,7 +181,7 @@ public class ClassroomManager : MonoBehaviour
         void Win()
         {
             //WinPanel.SetActive(true);
-            WinScreenScript.Instance.PopUp();
+            GameManager.Instance.ChangeLevel();
         }
     }
     void OnPlaceCard()
