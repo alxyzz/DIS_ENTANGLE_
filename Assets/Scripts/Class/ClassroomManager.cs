@@ -37,20 +37,34 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
 
+
+
+    #region settings
+    float happinessThreshold = 8; //this is used wether the variable 'happy' returns it or higher
+
+
+
+    #endregion
+
     #region Variables
-    float averageHappiness
+    int happy
     {
         get
         {
-            float b = 0;
+            int hp = 0;
             foreach (var item in LIST_SEATS)
             {
-                b += item.LEARNING_FACTOR;
+
+                if (item.EFFECTIVE_HAPPINESS > 0)
+                {
+                    hp += 1;
+                }
             }
-            return b;
+            Debug.Log(hp.ToString() + " happy students exist. Out of 8.");
+            return hp;
         }
     }
-    float goalhappiness = 15;
+
     ///goal is to get a percentage of students happy
 
     Seat lastSelectedSeat;
@@ -65,8 +79,6 @@ public class ClassroomManager : MonoBehaviour
     List<StudentCard> CARDS = new(); //this is populated on start
 
 
-    bool hoveringOverCard = false;
-    float happinessThreshold = 8;
     #endregion
     #region references
     public GameObject UI_CardInfo;
@@ -182,22 +194,6 @@ public class ClassroomManager : MonoBehaviour
         CheckWinCondition();
     }
     [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
-    int happy
-    {
-        get
-        {
-            int hp = 0;
-            foreach (var item in LIST_SEATS)
-            {
-
-                if (item.EFFECTIVE_HAPPINESS > 0)
-                {
-                    hp += 1;
-                }
-            }
-            return hp;
-        }
-    }
 
 
 
