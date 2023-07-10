@@ -32,8 +32,6 @@ public class GameManager : MonoBehaviour
 
 
     #region settings
-    [Header("Time spent in the Transition scene, not including loading in and out.")]
-    public float sceneTransitionDelay = 6;
 
 
     #endregion
