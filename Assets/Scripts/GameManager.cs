@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         if (advancePlot) level++;
         SkipIntro = skipintro; //skip intro so we can restart scenes without 
 
-        //loads each specific level
+        //loads the required level
         switch (level)
         {
             case 1: //classroom

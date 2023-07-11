@@ -31,7 +31,7 @@ public class StudentSerializableObject : ScriptableObject
     [Header("Prerequisite to meet.")]
     public StudentEffectPrerequisite prereq;
 
-    [Header("Number related to prereq. Be it happiness level, or row, or howm any neighbors,.")]
+    [Header("Number related to prereq. Be it happiness level, or row, or how many neighbors,.")]
     public float PREREQ_ARGUMENT = 0;
 
     [Header("Effect of prerequisite being met.")]
