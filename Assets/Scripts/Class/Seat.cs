@@ -142,6 +142,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case StudentEffectType.GAIN_SELF:
 
                 //just gain to self
+                Debug.Log("Assigned modifier to self, to student " + student.chosenName + " effect")
                 AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
                 break;
             case StudentEffectType.SET_AVERAGE_OF_NEIGHBORS:
