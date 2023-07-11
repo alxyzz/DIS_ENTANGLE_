@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WolfFPSManager : MonoBehaviour
 {
@@ -31,18 +32,19 @@ public class WolfFPSManager : MonoBehaviour
     #endregion
 
     public TMPro.TextMeshProUGUI countdownText;
-   // [SerializeReference] GameObject YouDied;
-    [SerializeReference] GameObject PlayerPos_Act1;
-    [SerializeReference] GameObject PlayerPos_Act2;
-    [SerializeReference] GameObject PlayerPos_Act3;
-    [SerializeReference] GameObject PlayerObject;
+    // [SerializeReference] GameObject YouDied;
+    [SerializeReference] GameObject position_act1_player;
+    [SerializeReference] GameObject position_act2_player;
+    [SerializeReference] GameObject position_act3_player;
+    [SerializeReference] GameObject pTransform;
 
     [SerializeReference] GameObject DoorBlocker;
 
 
+    public AudioSource playerAudio;
+    public AudioClip bgmusicc;
 
-
-    private float timeRemaining = 90.0f; // 1 minute 30 seconds
+    private float timeRemaining = 30.0f; // 1 minute 30 seconds
 
 
 
@@ -57,45 +59,65 @@ public class WolfFPSManager : MonoBehaviour
         if (GameManager.Instance == null)
         {
 
-            PlayerObject.transform.position = PlayerPos_Act1.transform.position;
-            DoorBlocker.SetActive(true);
+            // PlayerObject.transform.position = PlayerPos_Act1.transform.position;
+            if (DoorBlocker != null)
+            {
+                DoorBlocker.SetActive(true);
+
+            }
+            foreach (var item in ai_act1)
+            {
+                item.enabled = true;
+            }
+            playerAudio.clip = bgmusicc;
+            playerAudio.loop = true;
+            playerAudio.Play();
+
+        }
+        else
+        {
+
             foreach (var item in ai_act1)
             {
                 item.enabled = true;
             }
 
+            DoorBlocker.SetActive(true);
+
         }
-        else
-            switch (GameManager.Instance.WolfbladeInstance)
-            {
 
-                case 1:
 
-                    PlayerObject.transform.position = PlayerPos_Act1.transform.position;
-                    foreach (var item in ai_act1)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
-                case 2:
-                    PlayerObject.transform.position = PlayerPos_Act2.transform.position;
-                    foreach (var item in ai_act2)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
-                case 3:
-                    PlayerObject.transform.position = PlayerPos_Act3.transform.position;
-                    DoorBlocker.SetActive(false);
-                    foreach (var item in ai_act3)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
+        //switch (GameManager.Instance.WolfbladeInstance)
+        //{
 
-                default:
-                    break;
-            }
+        //    case 1:
+
+        //        pTransform.transform.position = position_act1_player.transform.position;
+        //        foreach (var item in ai_act1)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 2:
+        //        pTransform.transform.position = position_act2_player.transform.position;
+        //        foreach (var item in ai_act2)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 3:
+        //        pTransform.transform.position = position_act3_player.transform.position;
+        //        DoorBlocker.SetActive(false);
+        //        foreach (var item in ai_act3)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+
+        //    default:
+
+        //        break;
+        //}
         timerIsRunning = true;
 
     }
@@ -104,7 +126,9 @@ public class WolfFPSManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("If you start this directly from the scene, it will not have the act 2 or 3 features, only the act 1. ");
-        CustomStart();
+        
+            CustomStart();
+            
     }
 
 
@@ -144,7 +168,16 @@ public class WolfFPSManager : MonoBehaviour
 
     void WinWolfblade()
     {
-        WinScreenScript.Instance.PopUp();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeLevel();
+
+        }
+        else
+        {
+            SceneManager.LoadScene("JANITOR_PICKUP_PAPER_CINEMATIC");
+
+        }
     }
 
 

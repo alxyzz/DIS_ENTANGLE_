@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -6,12 +7,21 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     //private AIController _ai;
-    public Transform player;             // Reference to the player's transform
-    PlayerScript _pscript;
-    public float detectionRange = 5f;    // Range at which the enemy detects the player
-    public float attackRange = 2f;        // Range at which the enemy initiates a hit
-    public float attackDelay = 1.5f;        // Range at which the enemy initiates a hit
-    private NavMeshAgent navMeshAgent;    // Reference to the NavMeshAgent component
+    [SerializeReference] private Transform player;
+    [SerializeReference] private PlayerScript _pscript;
+    [SerializeReference] private SpriteRenderer spriteRenderer;
+
+    private NavMeshAgent navMeshAgent;
+
+    public float detectionRange = 5f;   
+    public float attackRange = 2f;      
+    public float attackDelay = 1.5f;       
+
+
+    float spriteChangeInterval = 0.8f;     
+    public List<Sprite> spriteList;       
+    private int currentSpriteIndex = 0;
+    private float timer = 0f;
 
     public float knockbackForce = 5f;
 
@@ -30,8 +40,22 @@ public class Enemy : MonoBehaviour
         initialRotation = transform.rotation;
         navMeshAgent = GetComponent<NavMeshAgent>();
         _pscript = player.GetComponent<PlayerScript>();
-    }
 
+    }
+    private void ChangeSprite()
+    {
+        // Increment the sprite index
+        currentSpriteIndex++;
+
+        // Wrap the index around if it exceeds the list size
+        if (currentSpriteIndex >= spriteList.Count)
+        {
+            currentSpriteIndex = 0;
+        }
+
+        // Change the sprite to the current index
+        spriteRenderer.sprite = spriteList[currentSpriteIndex];
+    }
     public void ReceiveHit(Vector3 playerPos)
     {
         if (rbody == null)
@@ -54,17 +78,29 @@ public class Enemy : MonoBehaviour
         Destroy(rbody);
         navMeshAgent.isStopped = false;
         transform.rotation = initialRotation;
-       
+
 
 
     }
 
-   
+
 
     private void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
+        // Update the timer
+        if (spriteList.Count > 0)
+        {
+            timer += Time.deltaTime;
+            // Check if it's time to change the sprite
+            if (timer >= spriteChangeInterval)
+            {
+                timer = 0f;
+                ChangeSprite();
+            }
 
+
+        }
         if (!navMeshAgent.enabled)
         {
             return;
@@ -81,14 +117,14 @@ public class Enemy : MonoBehaviour
         {
             navMeshAgent.speed = 5;
             navMeshAgent.angularSpeed = 300;
-            navMeshAgent.isStopped= true;
-            navMeshAgent.isStopped= false;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.isStopped = false;
         }
 
         navMeshAgent.SetDestination(player.position);
         if (distanceToPlayer <= attackRange && timeSinceLastAttack > attackDelay)
         {
-           
+
             timeSinceLastAttack = 0;
             // Initiate a hit or attack
             AttackPlayer();
@@ -104,7 +140,7 @@ public class Enemy : MonoBehaviour
         else
         {
             navMeshAgent.isStopped = false;
-            
+
         }
     }
 
@@ -112,7 +148,11 @@ public class Enemy : MonoBehaviour
     {
         // Perform the attack logic here
         Debug.Log("Enemy hits the player!");
-        _pscript.GetHit();
+        if (_pscript != null)
+        {
+            _pscript.GetHit();
+
+        }
     }
 }
 
@@ -173,49 +213,4 @@ class Hitting : EnemyState
 
 
 
-
-// Implement another concrete state class
-
-
-// Implement the AI controller
-//public class AIController
-//{
-//    private EnemyState currentState;
-
-//    public Transform target; // Reference to the target the AI is interacting with
-
-//    private int TimeElapsed;
-
-//    private void Start()
-//    {
-//        // Initialize the AI with the starting state
-//        //currentState = new PatrolState(target);
-//        //currentState.EnterState();
-//    }
-
-//    private void Update(float timedeltatime) //call this on update
-//    {
-//        //TimeElapsed += timedeltatime;
-//        //// Update the current state
-//        //currentState.UpdateState();
-
-//        //// Transition to a new state if necessary
-//        //if (/* Some condition to transition to chase state */)
-//        //{
-//        //    TransitionToState(new ChaseState(target));
-//        //}
-//        //else if (/* Some condition to transition to patrol state */)
-//        //{
-//        //    TransitionToState(new PatrolState(target));
-//        //}
-//    }
-
-//    //private void TransitionToState(IAIState newState)
-//    //{
-//    //    TimeElapsed = 0;
-//    //    currentState.ExitState();
-//    //    currentState = newState;
-//    //    currentState.EnterState();
-//    //}
-//}
 

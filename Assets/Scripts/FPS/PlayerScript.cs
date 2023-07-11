@@ -13,9 +13,12 @@ public class PlayerScript : MonoBehaviour
     [SerializeReference]GameObject weapon;
     [SerializeReference]Light Flashlight;
     [SerializeReference] Slider healthSlider;
-    Animator wepAnim;
+    [SerializeReference] Animation wepAnim;
 
-    int _health;
+    public AudioSource loserSource;
+    public List<AudioClip> NegativeSelfImageInducingVocalizations = new();
+
+    int _health = 100;
     public int Health { get { return _health; } }
 
 
@@ -56,15 +59,16 @@ public class PlayerScript : MonoBehaviour
 
     void MeleeAttack()
     {
+        if (wepAnim.isPlaying || !hasWeapon)
+        {
+            return;
+        }
         RaycastHit hit;
-
-        // Create a raycast from the camera forward direction
+        wepAnim.Play();
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-        // Perform the raycast and check for a hit within the attack range
         if (Physics.Raycast(ray, out hit, 5f))
         {
-            // Check if the hit object has a health component
             Enemy enemyHit = hit.collider.GetComponent<Enemy>();
             if (enemyHit != null)
             {
@@ -152,6 +156,15 @@ public class PlayerScript : MonoBehaviour
     public void GetHit()
     {
         _health -= 15;
+
+        if (NegativeSelfImageInducingVocalizations.Count > 0)
+        {
+            int randomIndex = Random.Range(0, NegativeSelfImageInducingVocalizations.Count);
+            AudioClip randomSound = NegativeSelfImageInducingVocalizations[randomIndex];
+            loserSource.PlayOneShot(randomSound);
+        }
+
+
         if (_health < 0)
         {
             WolfFPSManager.Instance.Lose();

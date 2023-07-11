@@ -1,22 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-[CreateAssetMenu(fileName = "New JournalSequenceObject", menuName = "JournalSequenceObject")]
-public class JournalPageObject : ScriptableObject
+[CreateAssetMenu(fileName = "New JournalTextSentence", menuName = "JournalTextSentence")]
+public class JournalTextSentence : ScriptableObject
 {
    [Header("Sentence when completed.")]
     public string good;
 
-   [Header("Correct Word which is meant to be filled out.")]
+   [Header("Correct word which is meant to be filled out.")]
     public string word;
-
-
-
-
-
-
-
-
 }
 
 

@@ -88,14 +88,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool? badEnding = null;
     public void ChangeLevel(bool advancePlot = true, bool skipintro = false)
     {
-        if (advancePlot)
-        {
-            level++;
+        if (advancePlot) level++;
+        SkipIntro = skipintro; //skip intro so we can restart scenes without 
 
-        }
-        SkipIntro = skipintro; //skip intro so we can restart stuff
-
-
+        //loads the required level
         switch (level)
         {
             case 1: //classroom
@@ -111,7 +107,7 @@ public class GameManager : MonoBehaviour
 
                 break;
 
-            case 4://paige journal game
+            case 4://paige 
                 SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
 
                 break;
@@ -137,7 +133,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case 9: //janitor vid leaving dooro pen and looking at paper
-                SceneManager.LoadScene(JANITOR_LOOKS_AT_PAPER_CINEMATIC);
+                SceneManager.LoadScene(JANITOR_PICKUP_PAPER_CINEMATIC);
 
                 break;
             case 10: //paige
@@ -174,14 +170,6 @@ public class GameManager : MonoBehaviour
                 throw new System.Exception("@gameManager @ ChangeLevel - level was something that it shouldnt be .");
           
         }
-
-
-
-
-
-
-
-
     }
 
 

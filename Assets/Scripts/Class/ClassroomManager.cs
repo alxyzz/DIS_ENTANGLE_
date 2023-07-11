@@ -61,7 +61,6 @@ public class ClassroomManager : MonoBehaviour
                     hp += 1;
                 }
             }
-            Debug.Log(hp.ToString() + " happy students exist. Out of 8.");
             return hp;
         }
     }
@@ -257,9 +256,10 @@ public class ClassroomManager : MonoBehaviour
         {
             SceneManager.LoadScene("MAIN_MENU");
         }
+        RefreshHappinessFeedback();
     }
 
-   
+
 
     //private GameObject lastHoveredObject;
 
@@ -423,17 +423,17 @@ public class ClassroomManager : MonoBehaviour
 
     void RemoveStudent(Seat s)
     {
-        if (s.student != null)
-        {
-            Debug.Log("Clicked occupied seat, doing nothing.");
-            return;
-        }
+
 
         //RemoveStudentAndEffects(s.student);
-
-        s.student = null;
-        s.student.row = s.row;
-
+        if (s.student != null)
+        {
+            s.student = null;
+        }
+        else
+        {
+            Debug.Log("Student already gone from this spot. Seat - " + s.name);
+        }
 
         RefreshEffects();
         foreach (var item in LIST_SEATS)
@@ -444,62 +444,131 @@ public class ClassroomManager : MonoBehaviour
     }
     public void OnClickSeat(Seat s)
     {
-        Debug.Log("Clicked a seat.");
-        if (CLICKED_CARD != null)
+        if (lastSelectedSeat != null)
         {
-            PlaceStudent(s, CLICKED_CARD.student, true);
+            if (lastSelectedSeat.student != null)
+            {
+                Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and the student is " + s.student.chosenName);
+            }
+            else
+            {
+                Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and there was no student");
+            }
+            
+
         }
         else
         {
-            //if we havent clicked a seat, select it
-            if (lastSelectedSeat == null)
+            if (s.student != null)
             {
-                lastSelectedSeat = s;
+                Debug.LogWarning("Last clicked seat was empty. Current clicked seat is " + s.name + " and the student is " + s.student.chosenName);
+
             }
-            //otherwise, if we have clicked a seat, switch them
             else
             {
-                //lastSelectedSeat.student
-                Student FirstSeatStudent = new Student(lastSelectedSeat.student.chosenName,
+                Debug.LogWarning("Last clicked seat was empty. Current clicked seat is " + s.name);
 
-                   lastSelectedSeat.student.seatedImage,
-                    lastSelectedSeat.student.portrait,
-                    lastSelectedSeat.student.STAT_LEARNING,
-                   lastSelectedSeat.student.DESC,
-                    lastSelectedSeat.student.ROW_MODIFIER,
-                   lastSelectedSeat.student.prereq,
-                    lastSelectedSeat.student.PREREQ_ARGUMENT,
-                   lastSelectedSeat.student.effect,
-                  lastSelectedSeat.student.EFFECT_ARG_ONE,
-                  lastSelectedSeat.student.EFFECT_ARG_two)
-                { };
+            }
 
-                Student secondSeatStudent = new Student(s.student.chosenName,
-                   s.student.seatedImage,
-                    s.student.portrait,
-                    s.student.STAT_LEARNING,
-                   s.student.DESC,
-                    s.student.ROW_MODIFIER,
-                   s.student.prereq,
-                    s.student.PREREQ_ARGUMENT,
-                   s.student.effect,
-                  s.student.EFFECT_ARG_ONE,
-                  s.student.EFFECT_ARG_two)
-                { };
-
-
-
-
-
-
-
-                RemoveStudent(lastSelectedSeat);
-                RemoveStudent(s);
-
-                PlaceStudent(lastSelectedSeat, secondSeatStudent, false);
-                PlaceStudent(s, FirstSeatStudent, false);
+        }
+        if (CLICKED_CARD != null)
+        { //if this is from clicking a card, we just place it down.
+            PlaceStudent(s, CLICKED_CARD.student, true);
+            lastSelectedSeat = s;
+            return;
+        }
+        if (lastSelectedSeat != null)
+        {
+            if (lastSelectedSeat.student != null)
+            {
+                if (s.student != null)
+                {
+                    SwitchStudents(s, lastSelectedSeat);
+                }
+                else
+                {
+                    MoveStudent(lastSelectedSeat, s);
+                }
             }
         }
+        else
+        {
+            Debug.LogWarning("Just assigned lastSelectedSeat");
+            lastSelectedSeat = s;
+        }
+       
+           
+
+                    
+      
+
+
+        void SwitchStudents(Seat firstStud, Seat secondS)
+        {
+            Debug.Log("Switching seats.");
+            Student FirstSeatStudent = new Student(firstStud.student.chosenName,
+
+               firstStud.student.seatedImage,
+                firstStud.student.portrait,
+                firstStud.student.STAT_LEARNING,
+               firstStud.student.DESC,
+                firstStud.student.ROW_MODIFIER,
+               firstStud.student.prereq,
+                firstStud.student.PREREQ_ARGUMENT,
+               firstStud.student.effect,
+              firstStud.student.EFFECT_ARG_ONE,
+              firstStud.student.EFFECT_ARG_two)
+            { };
+
+            Student secondSeatStudent = new Student(secondS.student.chosenName,
+               secondS.student.seatedImage,
+                secondS.student.portrait,
+                secondS.student.STAT_LEARNING,
+               secondS.student.DESC,
+                secondS.student.ROW_MODIFIER,
+               secondS.student.prereq,
+                secondS.student.PREREQ_ARGUMENT,
+               secondS.student.effect,
+              secondS.student.EFFECT_ARG_ONE,
+              secondS.student.EFFECT_ARG_two)
+            { };
+
+
+            RemoveStudent(firstStud);
+            RemoveStudent(secondS);
+
+            PlaceStudent(firstStud, secondSeatStudent, false);
+            PlaceStudent(secondS, FirstSeatStudent, false);
+            lastSelectedSeat = null;
+        }
+
+        void MoveStudent(Seat oldplace, Seat newplace)
+        {
+            Debug.Log("Moving student.");
+            if (lastSelectedSeat.student != null)
+            {
+                //we get the student
+                Student stud = new Student(oldplace.student.chosenName,
+
+                   oldplace.student.seatedImage,
+                    oldplace.student.portrait,
+                    oldplace.student.STAT_LEARNING,
+                   oldplace.student.DESC,
+                    oldplace.student.ROW_MODIFIER,
+                   oldplace.student.prereq,
+                    oldplace.student.PREREQ_ARGUMENT,
+                   oldplace.student.effect,
+                  oldplace.student.EFFECT_ARG_ONE,
+                  oldplace.student.EFFECT_ARG_two)
+                { };
+                //we remove it from the last seat
+                RemoveStudent(lastSelectedSeat);
+                //we add it to the new one
+                PlaceStudent(newplace, stud, false);
+                lastSelectedSeat = null;
+            }
+        }
+
         RefreshHappinessFeedback();
     }
 

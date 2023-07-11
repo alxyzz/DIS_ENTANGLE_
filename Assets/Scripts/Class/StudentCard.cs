@@ -69,7 +69,7 @@ public class StudentCard : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void OnClick()
     {
-        Debug.Log("CLICKED CARD.");
+       // Debug.Log("CLICKED CARD.");
         ClassroomManager.Instance.OnSelectCard(this);
     }
 
