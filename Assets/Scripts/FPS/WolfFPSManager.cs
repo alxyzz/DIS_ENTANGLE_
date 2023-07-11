@@ -58,7 +58,11 @@ public class WolfFPSManager : MonoBehaviour
         {
 
             // PlayerObject.transform.position = PlayerPos_Act1.transform.position;
-            DoorBlocker.SetActive(true);
+            if (DoorBlocker != null)
+            {
+                DoorBlocker.SetActive(true);
+
+            }
             foreach (var item in ai_act1)
             {
                 item.enabled = true;
@@ -116,7 +120,11 @@ public class WolfFPSManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("If you start this directly from the scene, it will not have the act 2 or 3 features, only the act 1. ");
-        CustomStart();
+        if (GameManager.Instance == null)
+        {
+            CustomStart();
+
+        }
     }
 
 

@@ -38,10 +38,7 @@ public class Enemy : MonoBehaviour
         initialRotation = transform.rotation;
         navMeshAgent = GetComponent<NavMeshAgent>();
         _pscript = player.GetComponent<PlayerScript>();
-        if (spriteList.Count == 0)
-        {
-            Debug.LogError("Sprite list is empty!");
-        }
+      
     }
     private void ChangeSprite()
     {
@@ -90,13 +87,17 @@ public class Enemy : MonoBehaviour
     {
         timeSinceLastAttack += Time.deltaTime;
         // Update the timer
-        timer += Time.deltaTime;
-
-        // Check if it's time to change the sprite
-        if (timer >= spriteChangeInterval)
+        if (spriteList.Count > 0)
         {
-            timer = 0f;
-            ChangeSprite();
+            timer += Time.deltaTime;
+            // Check if it's time to change the sprite
+            if (timer >= spriteChangeInterval)
+            {
+                timer = 0f;
+                ChangeSprite();
+            }
+
+       
         }
         if (!navMeshAgent.enabled)
         {

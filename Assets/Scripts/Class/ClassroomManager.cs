@@ -257,6 +257,7 @@ public class ClassroomManager : MonoBehaviour
         {
             SceneManager.LoadScene("MAIN_MENU");
         }
+        RefreshHappinessFeedback();
     }
 
    
@@ -423,16 +424,15 @@ public class ClassroomManager : MonoBehaviour
 
     void RemoveStudent(Seat s)
     {
-        if (s.student != null)
-        {
-            Debug.Log("Clicked occupied seat, doing nothing.");
-            return;
-        }
+
 
         //RemoveStudentAndEffects(s.student);
-
-        s.student = null;
-        s.student.row = s.row;
+        if (s.student != null)
+        {
+            s.student = null;
+        }
+        else Debug.Log("Student already gone from this spot. Seat - " + s.name);
+       
 
 
         RefreshEffects();
@@ -452,16 +452,12 @@ public class ClassroomManager : MonoBehaviour
 
 
         }
-        else
+        else 
+        if (lastSelectedSeat != null)
         {
-            //if we click a seat:
-            //if we havent clicked a seat, select the clicked one
-            if (lastSelectedSeat == null)
-            {
-                lastSelectedSeat = s;
-            }
-            //otherwise, if we have clicked a seat
-            else
+           
+          
+            
             {
                 if (s.student != null && lastSelectedSeat.student != null)
                 {//if the seat is occupied, switch them
@@ -536,6 +532,10 @@ public class ClassroomManager : MonoBehaviour
                 }
                 
             }
+        }
+        else  
+        {
+            lastSelectedSeat = s;
         }
         RefreshHappinessFeedback();
     }

@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
 
                 break;
 
-            case 4://paige journal game
+            case 4://paige 
                 SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
 
                 break;
