@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,6 +13,13 @@ public class Enemy : MonoBehaviour
     public float attackRange = 2f;        // Range at which the enemy initiates a hit
     public float attackDelay = 1.5f;        // Range at which the enemy initiates a hit
     private NavMeshAgent navMeshAgent;    // Reference to the NavMeshAgent component
+
+
+   float spriteChangeInterval = 0.8f;        // Range at which the enemy initiates a hit
+    public List<Sprite> spriteList;        // Range at which the enemy initiates a hit
+    [SerializeReference]private SpriteRenderer spriteRenderer;
+    private int currentSpriteIndex = 0;
+    private float timer = 0f;
 
     public float knockbackForce = 5f;
 
@@ -30,8 +38,25 @@ public class Enemy : MonoBehaviour
         initialRotation = transform.rotation;
         navMeshAgent = GetComponent<NavMeshAgent>();
         _pscript = player.GetComponent<PlayerScript>();
+        if (spriteList.Count == 0)
+        {
+            Debug.LogError("Sprite list is empty!");
+        }
     }
+    private void ChangeSprite()
+    {
+        // Increment the sprite index
+        currentSpriteIndex++;
 
+        // Wrap the index around if it exceeds the list size
+        if (currentSpriteIndex >= spriteList.Count)
+        {
+            currentSpriteIndex = 0;
+        }
+
+        // Change the sprite to the current index
+        spriteRenderer.sprite = spriteList[currentSpriteIndex];
+    }
     public void ReceiveHit(Vector3 playerPos)
     {
         if (rbody == null)
@@ -64,7 +89,15 @@ public class Enemy : MonoBehaviour
     private void Update()
     {
         timeSinceLastAttack += Time.deltaTime;
+        // Update the timer
+        timer += Time.deltaTime;
 
+        // Check if it's time to change the sprite
+        if (timer >= spriteChangeInterval)
+        {
+            timer = 0f;
+            ChangeSprite();
+        }
         if (!navMeshAgent.enabled)
         {
             return;

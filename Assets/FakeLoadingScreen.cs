@@ -7,7 +7,7 @@ public class FakeLoadingScreen : MonoBehaviour
 {
     public UnityEngine.Events.UnityEvent StartMethod; //method that starts stuff AFTER loading is done
     public VideoPlayer vid;
-
+    public bool skip;
     void Start()
     {
         
@@ -52,10 +52,17 @@ public class FakeLoadingScreen : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        
 
 
-        yield return new WaitForSecondsRealtime(6f);
+        if (skip)
+        {
+            yield return new WaitForSecondsRealtime(0f);
+        }
+        else
+        {
+            yield return new WaitForSecondsRealtime(6f);
+
+        }
 
         if (StartMethod != null)
         {

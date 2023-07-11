@@ -31,7 +31,7 @@ public class WolfFPSManager : MonoBehaviour
     #endregion
 
     public TMPro.TextMeshProUGUI countdownText;
-   // [SerializeReference] GameObject YouDied;
+    // [SerializeReference] GameObject YouDied;
     [SerializeReference] GameObject PlayerPos_Act1;
     [SerializeReference] GameObject PlayerPos_Act2;
     [SerializeReference] GameObject PlayerPos_Act3;
@@ -57,7 +57,7 @@ public class WolfFPSManager : MonoBehaviour
         if (GameManager.Instance == null)
         {
 
-            PlayerObject.transform.position = PlayerPos_Act1.transform.position;
+            // PlayerObject.transform.position = PlayerPos_Act1.transform.position;
             DoorBlocker.SetActive(true);
             foreach (var item in ai_act1)
             {
@@ -66,36 +66,48 @@ public class WolfFPSManager : MonoBehaviour
 
         }
         else
-            switch (GameManager.Instance.WolfbladeInstance)
+        {
+
+            foreach (var item in ai_act1)
             {
-
-                case 1:
-
-                    PlayerObject.transform.position = PlayerPos_Act1.transform.position;
-                    foreach (var item in ai_act1)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
-                case 2:
-                    PlayerObject.transform.position = PlayerPos_Act2.transform.position;
-                    foreach (var item in ai_act2)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
-                case 3:
-                    PlayerObject.transform.position = PlayerPos_Act3.transform.position;
-                    DoorBlocker.SetActive(false);
-                    foreach (var item in ai_act3)
-                    {
-                        item.enabled = true;
-                    }
-                    break;
-
-                default:
-                    break;
+                item.enabled = true;
             }
+
+            DoorBlocker.SetActive(true);
+
+        }
+
+
+        //switch (GameManager.Instance.WolfbladeInstance)
+        //{
+
+        //    case 1:
+
+        //        PlayerObject.transform.position = PlayerPos_Act1.transform.position;
+        //        foreach (var item in ai_act1)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 2:
+        //        PlayerObject.transform.position = PlayerPos_Act2.transform.position;
+        //        foreach (var item in ai_act2)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 3:
+        //        PlayerObject.transform.position = PlayerPos_Act3.transform.position;
+        //        DoorBlocker.SetActive(false);
+        //        foreach (var item in ai_act3)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+
+        //    default:
+        //
+        //        break;}
         timerIsRunning = true;
 
     }
