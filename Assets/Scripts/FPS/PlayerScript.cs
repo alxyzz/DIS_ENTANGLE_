@@ -16,7 +16,7 @@ public class PlayerScript : MonoBehaviour
     [SerializeReference] Animation wepAnim;
 
     public AudioSource loserSource;
-    public List<AudioClip> NegativeSelfImageInducingVocalizations;
+    public List<AudioClip> NegativeSelfImageInducingVocalizations = new();
 
     int _health = 100;
     public int Health { get { return _health; } }
@@ -59,19 +59,16 @@ public class PlayerScript : MonoBehaviour
 
     void MeleeAttack()
     {
-        if (wepAnim.isPlaying)
+        if (wepAnim.isPlaying || !hasWeapon)
         {
             return;
         }
         RaycastHit hit;
         wepAnim.Play();
-        // Create a raycast from the camera forward direction
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
 
-        // Perform the raycast and check for a hit within the attack range
         if (Physics.Raycast(ray, out hit, 5f))
         {
-            // Check if the hit object has a health component
             Enemy enemyHit = hit.collider.GetComponent<Enemy>();
             if (enemyHit != null)
             {

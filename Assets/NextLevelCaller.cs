@@ -10,20 +10,14 @@ public class NextLevelCaller : MonoBehaviour
     private void Start()
     {
         videoPlayer = GetComponent<VideoPlayer>();
-        // Subscribe to the "loopPointReached" event of the VideoPlayer
         videoPlayer.loopPointReached += OnVideoEnd;
     }
 
     private void OnVideoEnd(VideoPlayer source)
     {
-        // This method will be called when the video ends
-        Debug.Log("Video ended");
-
-        // Call your desired method here
-        YourMethod();
+        EndCinematic();
     }
-
-    private void YourMethod()
+    private void EndCinematic()
     {
         GameManager.Instance.ChangeLevel();
     }

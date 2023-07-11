@@ -133,7 +133,7 @@ public class GameManager : MonoBehaviour
 
                 break;
             case 9: //janitor vid leaving dooro pen and looking at paper
-                SceneManager.LoadScene(JANITOR_LOOKS_AT_PAPER_CINEMATIC);
+                SceneManager.LoadScene(JANITOR_PICKUP_PAPER_CINEMATIC);
 
                 break;
             case 10: //paige

@@ -9412,7 +9412,12 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1823688467}
+      objectReference: {fileID: 1756617426}
+    - target: {fileID: 3206540183463729913, guid: 3d9ca02818131b0469a6a08f63f045df,
+        type: 3}
+      propertyPath: _pscript
+      value: 
+      objectReference: {fileID: 1756617427}
     - target: {fileID: 3206540183463729914, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_RootOrder
@@ -24814,10 +24819,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdownText: {fileID: 1280515922}
-  PlayerPos_Act1: {fileID: 0}
-  PlayerPos_Act2: {fileID: 0}
-  PlayerPos_Act3: {fileID: 0}
-  PlayerObject: {fileID: 1756617422}
+  position_act1_player: {fileID: 0}
+  position_act2_player: {fileID: 0}
+  position_act3_player: {fileID: 0}
+  pTransform: {fileID: 0}
   DoorBlocker: {fileID: 0}
   playerAudio: {fileID: 1294772181956665030}
   bgmusicc: {fileID: 8300000, guid: 4d36c56cd93b44c4780d732947c20642, type: 3}
@@ -26913,7 +26918,12 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1823688467}
+      objectReference: {fileID: 1756617426}
+    - target: {fileID: 3206540183463729913, guid: 3d9ca02818131b0469a6a08f63f045df,
+        type: 3}
+      propertyPath: _pscript
+      value: 
+      objectReference: {fileID: 1756617427}
     - target: {fileID: 3206540183463729914, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_RootOrder
@@ -40643,7 +40653,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756617422}
-  m_LocalRotation: {x: 0, y: 0.76068926, z: 0, w: 0.6491162}
+  m_LocalRotation: {x: 0, y: 0.56611854, z: 0, w: 0.82432383}
   m_LocalPosition: {x: 0, y: 2.29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -40653,7 +40663,7 @@ Transform:
   - {fileID: 1823688467}
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 99.05, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 68.96, z: 0}
 --- !u!114 &1756617427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40671,7 +40681,17 @@ MonoBehaviour:
   healthSlider: {fileID: 0}
   wepAnim: {fileID: 3928819351505607722}
   loserSource: {fileID: 1756617429}
-  NegativeSelfImageInducingVocalizations: []
+  NegativeSelfImageInducingVocalizations:
+  - {fileID: 8300000, guid: e4d360e403f1b6c419b21a863b03204c, type: 3}
+  - {fileID: 8300000, guid: 0e3ad88118b008e4e8dfc7f8fa12904a, type: 3}
+  - {fileID: 8300000, guid: c4413fb86235cd44091dbf9e3d733dd9, type: 3}
+  - {fileID: 8300000, guid: 96cbc813dc1712b46bd929ba420f4be2, type: 3}
+  - {fileID: 8300000, guid: eae8a2adcf64890458b5229f53bc457f, type: 3}
+  - {fileID: 8300000, guid: 44b2e423f58d01a44b8c6b2073ad8a90, type: 3}
+  - {fileID: 8300000, guid: 05d2f545834c2944987dd72f888470d5, type: 3}
+  - {fileID: 8300000, guid: a794314c2fd40fe40b18769d90bfce30, type: 3}
+  - {fileID: 8300000, guid: 4b1883ee9c226f748a733a9fb33ee356, type: 3}
+  - {fileID: 8300000, guid: ec1814cdbddf31d449a92a43d336f748, type: 3}
   walkingSpeed: 11.5
   runningSpeed: 21.5
   jumpSpeed: 8
@@ -42126,7 +42146,12 @@ PrefabInstance:
         type: 3}
       propertyPath: player
       value: 
-      objectReference: {fileID: 1823688467}
+      objectReference: {fileID: 1756617426}
+    - target: {fileID: 3206540183463729913, guid: 3d9ca02818131b0469a6a08f63f045df,
+        type: 3}
+      propertyPath: _pscript
+      value: 
+      objectReference: {fileID: 1756617427}
     - target: {fileID: 3206540183463729914, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_RootOrder

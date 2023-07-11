@@ -7,17 +7,19 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviour
 {
     //private AIController _ai;
-    public Transform player;             // Reference to the player's transform
-    PlayerScript _pscript;
-    public float detectionRange = 5f;    // Range at which the enemy detects the player
-    public float attackRange = 2f;        // Range at which the enemy initiates a hit
-    public float attackDelay = 1.5f;        // Range at which the enemy initiates a hit
-    private NavMeshAgent navMeshAgent;    // Reference to the NavMeshAgent component
+    [SerializeReference] private Transform player;
+    [SerializeReference] private PlayerScript _pscript;
+    [SerializeReference] private SpriteRenderer spriteRenderer;
+
+    private NavMeshAgent navMeshAgent;
+
+    public float detectionRange = 5f;   
+    public float attackRange = 2f;      
+    public float attackDelay = 1.5f;       
 
 
-   float spriteChangeInterval = 0.8f;        // Range at which the enemy initiates a hit
-    public List<Sprite> spriteList;        // Range at which the enemy initiates a hit
-    [SerializeReference]private SpriteRenderer spriteRenderer;
+    float spriteChangeInterval = 0.8f;     
+    public List<Sprite> spriteList;       
     private int currentSpriteIndex = 0;
     private float timer = 0f;
 
@@ -38,7 +40,7 @@ public class Enemy : MonoBehaviour
         initialRotation = transform.rotation;
         navMeshAgent = GetComponent<NavMeshAgent>();
         _pscript = player.GetComponent<PlayerScript>();
-      
+
     }
     private void ChangeSprite()
     {
@@ -76,12 +78,12 @@ public class Enemy : MonoBehaviour
         Destroy(rbody);
         navMeshAgent.isStopped = false;
         transform.rotation = initialRotation;
-       
+
 
 
     }
 
-   
+
 
     private void Update()
     {
@@ -97,7 +99,7 @@ public class Enemy : MonoBehaviour
                 ChangeSprite();
             }
 
-       
+
         }
         if (!navMeshAgent.enabled)
         {
@@ -115,14 +117,14 @@ public class Enemy : MonoBehaviour
         {
             navMeshAgent.speed = 5;
             navMeshAgent.angularSpeed = 300;
-            navMeshAgent.isStopped= true;
-            navMeshAgent.isStopped= false;
+            navMeshAgent.isStopped = true;
+            navMeshAgent.isStopped = false;
         }
 
         navMeshAgent.SetDestination(player.position);
         if (distanceToPlayer <= attackRange && timeSinceLastAttack > attackDelay)
         {
-           
+
             timeSinceLastAttack = 0;
             // Initiate a hit or attack
             AttackPlayer();
@@ -138,7 +140,7 @@ public class Enemy : MonoBehaviour
         else
         {
             navMeshAgent.isStopped = false;
-            
+
         }
     }
 
@@ -211,49 +213,4 @@ class Hitting : EnemyState
 
 
 
-
-// Implement another concrete state class
-
-
-// Implement the AI controller
-//public class AIController
-//{
-//    private EnemyState currentState;
-
-//    public Transform target; // Reference to the target the AI is interacting with
-
-//    private int TimeElapsed;
-
-//    private void Start()
-//    {
-//        // Initialize the AI with the starting state
-//        //currentState = new PatrolState(target);
-//        //currentState.EnterState();
-//    }
-
-//    private void Update(float timedeltatime) //call this on update
-//    {
-//        //TimeElapsed += timedeltatime;
-//        //// Update the current state
-//        //currentState.UpdateState();
-
-//        //// Transition to a new state if necessary
-//        //if (/* Some condition to transition to chase state */)
-//        //{
-//        //    TransitionToState(new ChaseState(target));
-//        //}
-//        //else if (/* Some condition to transition to patrol state */)
-//        //{
-//        //    TransitionToState(new PatrolState(target));
-//        //}
-//    }
-
-//    //private void TransitionToState(IAIState newState)
-//    //{
-//    //    TimeElapsed = 0;
-//    //    currentState.ExitState();
-//    //    currentState = newState;
-//    //    currentState.EnterState();
-//    //}
-//}
 

@@ -46,9 +46,9 @@ public class JournalManager : MonoBehaviour
     }
 
     #endregion
-    public List<JournalPageObject> firstPage = new();
-    public List<JournalPageObject> secondPage = new();
-     List<List<JournalPageObject>> sequenceObjects = new();
+    public List<JournalTextSentence> firstPage = new();
+    public List<JournalTextSentence> secondPage = new();
+     List<List<JournalTextSentence>> sequenceObjects = new();
 
     List<List<JournalPage>> allPages = new();
 
@@ -124,7 +124,7 @@ public class JournalManager : MonoBehaviour
         //initializes buttons
         for (int i = 0; i < currentPage.Count; i++)
         {
-            buttons[i].text.text = currentPage[i].Word;
+            buttons[i].text = currentPage[i].Word;
         }
 
     }

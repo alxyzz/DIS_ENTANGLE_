@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WolfFPSManager : MonoBehaviour
 {
@@ -32,10 +33,10 @@ public class WolfFPSManager : MonoBehaviour
 
     public TMPro.TextMeshProUGUI countdownText;
     // [SerializeReference] GameObject YouDied;
-    [SerializeReference] GameObject PlayerPos_Act1;
-    [SerializeReference] GameObject PlayerPos_Act2;
-    [SerializeReference] GameObject PlayerPos_Act3;
-    [SerializeReference] GameObject PlayerObject;
+    [SerializeReference] GameObject position_act1_player;
+    [SerializeReference] GameObject position_act2_player;
+    [SerializeReference] GameObject position_act3_player;
+    [SerializeReference] GameObject pTransform;
 
     [SerializeReference] GameObject DoorBlocker;
 
@@ -86,36 +87,37 @@ public class WolfFPSManager : MonoBehaviour
         }
 
 
-        //switch (GameManager.Instance.WolfbladeInstance)
-        //{
+        switch (GameManager.Instance.WolfbladeInstance)
+        {
 
-        //    case 1:
+            case 1:
 
-        //        PlayerObject.transform.position = PlayerPos_Act1.transform.position;
-        //        foreach (var item in ai_act1)
-        //        {
-        //            item.enabled = true;
-        //        }
-        //        break;
-        //    case 2:
-        //        PlayerObject.transform.position = PlayerPos_Act2.transform.position;
-        //        foreach (var item in ai_act2)
-        //        {
-        //            item.enabled = true;
-        //        }
-        //        break;
-        //    case 3:
-        //        PlayerObject.transform.position = PlayerPos_Act3.transform.position;
-        //        DoorBlocker.SetActive(false);
-        //        foreach (var item in ai_act3)
-        //        {
-        //            item.enabled = true;
-        //        }
-        //        break;
+                pTransform.transform.position = position_act1_player.transform.position;
+                foreach (var item in ai_act1)
+                {
+                    item.enabled = true;
+                }
+                break;
+            case 2:
+                pTransform.transform.position = position_act2_player.transform.position;
+                foreach (var item in ai_act2)
+                {
+                    item.enabled = true;
+                }
+                break;
+            case 3:
+                pTransform.transform.position = position_act3_player.transform.position;
+                DoorBlocker.SetActive(false);
+                foreach (var item in ai_act3)
+                {
+                    item.enabled = true;
+                }
+                break;
 
-        //    default:
-        //
-        //        break;}
+            default:
+
+                break;
+        }
         timerIsRunning = true;
 
     }
@@ -166,7 +168,16 @@ public class WolfFPSManager : MonoBehaviour
 
     void WinWolfblade()
     {
-        GameManager.Instance.ChangeLevel();
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.ChangeLevel();
+
+        }
+        else
+        {
+            SceneManager.LoadScene("JANITOR_PICKUP_PAPER_CINEMATIC");
+
+        }
     }
 
 
