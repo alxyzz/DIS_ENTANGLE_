@@ -87,37 +87,37 @@ public class WolfFPSManager : MonoBehaviour
         }
 
 
-        switch (GameManager.Instance.WolfbladeInstance)
-        {
+        //switch (GameManager.Instance.WolfbladeInstance)
+        //{
 
-            case 1:
+        //    case 1:
 
-                pTransform.transform.position = position_act1_player.transform.position;
-                foreach (var item in ai_act1)
-                {
-                    item.enabled = true;
-                }
-                break;
-            case 2:
-                pTransform.transform.position = position_act2_player.transform.position;
-                foreach (var item in ai_act2)
-                {
-                    item.enabled = true;
-                }
-                break;
-            case 3:
-                pTransform.transform.position = position_act3_player.transform.position;
-                DoorBlocker.SetActive(false);
-                foreach (var item in ai_act3)
-                {
-                    item.enabled = true;
-                }
-                break;
+        //        pTransform.transform.position = position_act1_player.transform.position;
+        //        foreach (var item in ai_act1)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 2:
+        //        pTransform.transform.position = position_act2_player.transform.position;
+        //        foreach (var item in ai_act2)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
+        //    case 3:
+        //        pTransform.transform.position = position_act3_player.transform.position;
+        //        DoorBlocker.SetActive(false);
+        //        foreach (var item in ai_act3)
+        //        {
+        //            item.enabled = true;
+        //        }
+        //        break;
 
-            default:
+        //    default:
 
-                break;
-        }
+        //        break;
+        //}
         timerIsRunning = true;
 
     }
