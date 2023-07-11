@@ -2159,7 +2159,7 @@ GameObject:
   - component: {fileID: 943762599}
   - component: {fileID: 943762600}
   m_Layer: 5
-  m_Name: _firstAct_firstPage_
+  m_Name: _ACT1_P1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3067,7 +3067,7 @@ GameObject:
   - component: {fileID: 1279266782}
   - component: {fileID: 1279266783}
   m_Layer: 5
-  m_Name: _firstAct_secondPage
+  m_Name: _ACT1_P2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
