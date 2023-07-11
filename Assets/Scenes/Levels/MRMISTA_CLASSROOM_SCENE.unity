@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 261.80054, g: 324.32776, b: 429.24692, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -894,6 +894,7 @@ GameObject:
   - component: {fileID: 92073284}
   - component: {fileID: 92073283}
   - component: {fileID: 92073286}
+  - component: {fileID: 92073287}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1092,6 +1093,102 @@ MonoBehaviour:
       enableFptlForForwardOpaque: 0
       enableBigTilePrepass: 0
       isFptlEnabled: 0
+--- !u!82 &92073287
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92073282}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &100004979
 GameObject:
   m_ObjectHideFlags: 0
@@ -1867,6 +1964,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 596641846210092440, guid: cc5ded32236fe2246bf4d35a97633def,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 2100000, guid: 0ce71f9d4d6b7b54397315d9b44e4f1a, type: 2}
     - target: {fileID: 596641846210092443, guid: cc5ded32236fe2246bf4d35a97633def,
         type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2038,6 +2140,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 3ace9ed67bb442242a525f241f4f4ba9,
         type: 3}
+    - target: {fileID: 5019862092009524161, guid: cc5ded32236fe2246bf4d35a97633def,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 6655138556310371432, guid: cc5ded32236fe2246bf4d35a97633def,
         type: 3}
       propertyPath: skip
@@ -3368,7 +3475,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &772229367
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7250,12 +7357,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Students_ACT1:
-  - {fileID: 11400000, guid: 1b12b6e98c3574b44848042e8a5f6548, type: 2}
-  - {fileID: 11400000, guid: 94d797a3dbfd8a846aab04d50806c125, type: 2}
+  - {fileID: 11400000, guid: 0aba135531868fc47a6e65a32833c2f1, type: 2}
+  - {fileID: 11400000, guid: eb96eed73d3bfb843b34d0d855a8792d, type: 2}
   - {fileID: 11400000, guid: 39c0c03ebc9647948a0bc7862514695c, type: 2}
   - {fileID: 11400000, guid: 94d797a3dbfd8a846aab04d50806c125, type: 2}
-  - {fileID: 11400000, guid: 1b12b6e98c3574b44848042e8a5f6548, type: 2}
-  - {fileID: 11400000, guid: 94d797a3dbfd8a846aab04d50806c125, type: 2}
+  - {fileID: 11400000, guid: b21714f02698ad444b022d297cb8be60, type: 2}
+  - {fileID: 11400000, guid: 91e8b83905e9d254b8762924f6b20b4e, type: 2}
   - {fileID: 11400000, guid: 56f3e8bbb5e7afa479c1c5d9589fecf8, type: 2}
   - {fileID: 11400000, guid: 1b12b6e98c3574b44848042e8a5f6548, type: 2}
   Students_ACT2:
@@ -8208,7 +8315,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 41.2}
+  m_AnchoredPosition: {x: 0, y: 192.8}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2043421387
@@ -8243,7 +8350,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Classroom\nStarring Mr. Mista
+  m_text: Mr Mista's Classroom shuffle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 44d1bb9fbd943a548b926d4f18df78ef, type: 2}
   m_sharedMaterial: {fileID: 5323569407690284001, guid: 44d1bb9fbd943a548b926d4f18df78ef,
@@ -8271,8 +8378,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 80
-  m_fontSizeBase: 80
+  m_fontSize: 54.1
+  m_fontSizeBase: 54.1
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

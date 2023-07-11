@@ -65,8 +65,8 @@ public class Student
 
 
     [Header("Effect argument 1/left")]
-    public float EFFECT_ARG_ONE = 0;
+    public float EFFECT_ARG_ONE;
 
     [Header("Effect argument 2/right")]
-    public float EFFECT_ARG_two = 0;
+    public float EFFECT_ARG_two;
 }

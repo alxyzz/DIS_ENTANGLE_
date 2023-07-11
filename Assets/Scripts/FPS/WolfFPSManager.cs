@@ -40,9 +40,10 @@ public class WolfFPSManager : MonoBehaviour
     [SerializeReference] GameObject DoorBlocker;
 
 
+    public AudioSource playerAudio;
+    public AudioClip bgmusicc;
 
-
-    private float timeRemaining = 90.0f; // 1 minute 30 seconds
+    private float timeRemaining = 30.0f; // 1 minute 30 seconds
 
 
 
@@ -67,6 +68,9 @@ public class WolfFPSManager : MonoBehaviour
             {
                 item.enabled = true;
             }
+            playerAudio.clip = bgmusicc;
+            playerAudio.loop = true;
+            playerAudio.Play();
 
         }
         else
@@ -120,11 +124,9 @@ public class WolfFPSManager : MonoBehaviour
     void Start()
     {
         Debug.LogWarning("If you start this directly from the scene, it will not have the act 2 or 3 features, only the act 1. ");
-        if (GameManager.Instance == null)
-        {
+        
             CustomStart();
-
-        }
+            
     }
 
 
@@ -164,7 +166,7 @@ public class WolfFPSManager : MonoBehaviour
 
     void WinWolfblade()
     {
-        WinScreenScript.Instance.PopUp();
+        GameManager.Instance.ChangeLevel();
     }
 
 

@@ -799,7 +799,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 41.2}
+  m_AnchoredPosition: {x: 0, y: 208.9}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &214895746
@@ -834,7 +834,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: The Journal...\nStarring Paige & Wolfblade
+  m_text: The Journal, by Paige
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 44d1bb9fbd943a548b926d4f18df78ef, type: 2}
   m_sharedMaterial: {fileID: 5323569407690284001, guid: 44d1bb9fbd943a548b926d4f18df78ef,

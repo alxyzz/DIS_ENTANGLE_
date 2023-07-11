@@ -146,7 +146,11 @@ public class Enemy : MonoBehaviour
     {
         // Perform the attack logic here
         Debug.Log("Enemy hits the player!");
-        _pscript.GetHit();
+        if (_pscript != null)
+        {
+            _pscript.GetHit();
+
+        }
     }
 }
 

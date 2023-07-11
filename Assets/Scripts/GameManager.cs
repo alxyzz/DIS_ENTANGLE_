@@ -88,14 +88,10 @@ public class GameManager : MonoBehaviour
     [HideInInspector] public bool? badEnding = null;
     public void ChangeLevel(bool advancePlot = true, bool skipintro = false)
     {
-        if (advancePlot)
-        {
-            level++;
+        if (advancePlot) level++;
+        SkipIntro = skipintro; //skip intro so we can restart scenes without 
 
-        }
-        SkipIntro = skipintro; //skip intro so we can restart stuff
-
-
+        //loads each specific level
         switch (level)
         {
             case 1: //classroom
@@ -174,14 +170,6 @@ public class GameManager : MonoBehaviour
                 throw new System.Exception("@gameManager @ ChangeLevel - level was something that it shouldnt be .");
           
         }
-
-
-
-
-
-
-
-
     }
 
 
