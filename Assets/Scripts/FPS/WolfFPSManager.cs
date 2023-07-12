@@ -44,7 +44,7 @@ public class WolfFPSManager : MonoBehaviour
     public AudioClip bgmusicc;
     public AudioClip bell;
 
-    private float timeRemaining = 30.0f; // 1 minute 30 seconds
+    private float timeRemaining = 20.0f; // 1 minute 30 seconds
 
 
 
