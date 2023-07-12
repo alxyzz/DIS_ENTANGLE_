@@ -2860,7 +2860,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 143557269}
   m_LocalRotation: {x: 0, y: -0.67790306, z: 0, w: 0.7351513}
-  m_LocalPosition: {x: 0, y: -0.79999995, z: 0}
+  m_LocalPosition: {x: 0, y: 0.04, z: 0}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -9401,7 +9401,7 @@ PrefabInstance:
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
@@ -24822,10 +24822,11 @@ MonoBehaviour:
   position_act1_player: {fileID: 0}
   position_act2_player: {fileID: 0}
   position_act3_player: {fileID: 0}
-  pTransform: {fileID: 0}
-  DoorBlocker: {fileID: 0}
+  pTransform: {fileID: 1756617422}
+  DoorBlocker: {fileID: 1492377092}
   playerAudio: {fileID: 1294772181956665030}
   bgmusicc: {fileID: 8300000, guid: 4d36c56cd93b44c4780d732947c20642, type: 3}
+  bell: {fileID: 8300000, guid: 6330549613bee1e4aa96a67e189fcbf3, type: 3}
   ai_act1:
   - {fileID: 372551096}
   - {fileID: 1194685018}
@@ -26907,7 +26908,7 @@ PrefabInstance:
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
@@ -30438,8 +30439,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1:30
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 44d1bb9fbd943a548b926d4f18df78ef, type: 2}
-  m_sharedMaterial: {fileID: 5323569407690284001, guid: 44d1bb9fbd943a548b926d4f18df78ef,
+  m_fontAsset: {fileID: 11400000, guid: ae6a36bd7c3670c49b6a1ee41c129f85, type: 2}
+  m_sharedMaterial: {fileID: 8044450324249653110, guid: ae6a36bd7c3670c49b6a1ee41c129f85,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -34163,6 +34164,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84f6ee6e17240a243a54f01c78d90b2e, type: 3}
+--- !u!1 &1492377092
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492377093}
+  m_Layer: 0
+  m_Name: DUMMY BLOCKER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492377093
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492377092}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1790420889}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1496885168
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42135,7 +42167,7 @@ PrefabInstance:
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_Speed
-      value: 0.5
+      value: 0.13
       objectReference: {fileID: 0}
     - target: {fileID: 3206540183463729912, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
@@ -42165,7 +42197,7 @@ PrefabInstance:
     - target: {fileID: 3206540183463729914, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.95
+      value: 2.02
       objectReference: {fileID: 0}
     - target: {fileID: 3206540183463729914, guid: 3d9ca02818131b0469a6a08f63f045df,
         type: 3}
@@ -42470,6 +42502,7 @@ Transform:
   - {fileID: 194606780}
   - {fileID: 329431021}
   - {fileID: 610946388}
+  - {fileID: 1492377093}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

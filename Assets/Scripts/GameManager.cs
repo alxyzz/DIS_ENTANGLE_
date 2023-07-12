@@ -78,6 +78,8 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.H))
         {
+            StopAllCoroutines();
+            Debug.Log("LEVEL THAT JUST ENDED IS " + level.ToString());
             ChangeLevel();
         }
     }
@@ -167,8 +169,11 @@ public class GameManager : MonoBehaviour
                 break;
 
             default:
-                throw new System.Exception("@gameManager @ ChangeLevel - level was something that it shouldnt be .");
-          
+                level = 0;
+                SceneManager.LoadScene(MAIN_MENU);
+
+                break;
+
         }
     }
 

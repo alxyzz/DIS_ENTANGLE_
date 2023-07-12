@@ -9,6 +9,7 @@ public class ThePaiger : MonoBehaviour
 
     public int order = 1;
     public int pageIndex = 0;
+    bool pressed = false;
     [SerializeReference] List<Page> pages = new();
    TextMeshProUGUI texty
     {
@@ -31,14 +32,20 @@ public class ThePaiger : MonoBehaviour
 
     public void NextPage()
     {
+        if (pressed)
+        {
+            return;
+
+        }
+        pressed = true;
         StopAllCoroutines();
+        pageIndex++;
         StartCoroutine(SlideNExtPage());
 
     }
     IEnumerator SlideNExtPage()
     {
-        yield return new WaitForSecondsRealtime(3f);
-        pageIndex++;
+        yield return new WaitForSecondsRealtime(1f);
         if (pages != null)
         {
             if (pages[pageIndex] == null)
@@ -60,6 +67,7 @@ public class ThePaiger : MonoBehaviour
                 }
                 pages[pageIndex].gameObject.SetActive(true);
                 order = 1;
+                pressed = false;
             }
         }
         else
