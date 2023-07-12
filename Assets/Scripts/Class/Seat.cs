@@ -33,13 +33,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 return 0;
             }
             float b = student.STAT_LEARNING + row.ROW_MODIFIER;
-            //foreach (var item in modifiers)
-            //{
-            //    Debug.Log(student.chosenName + "=> MODIFIER FOUND - FROM " + item.Item1.chosenName + " effect value -> " + item.Item2 + " effect type " + item.Item3.ToString()); ;
-
-            //    b += item.Item2;
-            //}
-
+           
             return b;
         }
     }
@@ -93,7 +87,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                if (left != null && right != null)
+                if (left.student != null && right.student != null)
                 {
                     Debug.Log("Wolfblade just activated.");
                     DoEffect();
@@ -346,7 +340,26 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (student != null)
         {
             ui_studentImage.enabled = true;
-            ui_learningFactor.text = (EFFECTIVE_HAPPINESS).ToString();
+            float totalModifier = 0;
+            string mod = "";
+            foreach (var item in modifiers)
+            {
+                totalModifier += item.Item2;
+            }
+            if (totalModifier != 0)
+            {
+                if (totalModifier < 0)
+                {
+                    mod =  totalModifier.ToString();
+
+                }
+                else
+                {
+                    mod = "+" + totalModifier.ToString();
+
+                }
+            }
+            ui_learningFactor.text = (student.STAT_LEARNING + row.ROW_MODIFIER).ToString() + mod;
             ui_studentImage.sprite = student.seatedImage;
         }
         else

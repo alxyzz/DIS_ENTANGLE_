@@ -49,7 +49,7 @@ public class ClassroomManager : MonoBehaviour
     #endregion
 
     #region Variables
-    int happy
+    string happy
     {
         get
         {
@@ -62,7 +62,7 @@ public class ClassroomManager : MonoBehaviour
                     hp += 1;
                 }
             }
-            return hp;
+            return hp.ToString() + "/8";
         }
     }
 
@@ -182,9 +182,17 @@ public class ClassroomManager : MonoBehaviour
 
     void CheckWinCondition()
     {
+        int hp = 0;
+        foreach (var item in LIST_SEATS)
+        {
 
+            if (item.EFFECTIVE_HAPPINESS > 0)
+            {
+                hp += 1;
+            }
+        }
 
-        if (happy >= happinessThreshold)
+        if (hp >= happinessThreshold)
         {
             Win();
         }
@@ -236,7 +244,7 @@ public class ClassroomManager : MonoBehaviour
 
     void RefreshHappinessFeedback()
     {
-        txt_HappinessFeedback.text = happy.ToString() + "/8";
+        txt_HappinessFeedback.text = happy;
     }
     public void OnSelectCard(StudentCard b)
     {
@@ -435,6 +443,7 @@ public class ClassroomManager : MonoBehaviour
 
 
         RefreshEffects();
+
         foreach (var item in LIST_SEATS)
         {
             item.RefreshGraphics();
@@ -456,15 +465,31 @@ public class ClassroomManager : MonoBehaviour
             Debug.Log("Student already gone from this spot. Seat - " + s.name);
         }
 
-        RefreshEffects();
         foreach (var item in LIST_SEATS)
         {
             item.RefreshGraphics();
         }
         CheckWinCondition();
     }
+
+
+    IEnumerator unselectSeat()
+    {
+
+
+        yield return new WaitForSecondsRealtime(1.5f);
+        lastSelectedSeat = null;
+    }
     public void OnClickSeat(Seat s)
     {
+        //StopAllCoroutines();
+        //StartCoroutine(unselectSeat());
+        if (s == lastSelectedSeat)
+        {
+            lastSelectedSeat = null;
+            return;
+        }
+
         if (lastSelectedSeat != null)
         {
             if (lastSelectedSeat.student != null)
@@ -566,6 +591,8 @@ public class ClassroomManager : MonoBehaviour
 
             PlaceStudent(firstStud, secondSeatStudent, false);
             PlaceStudent(secondS, FirstSeatStudent, false);
+            RefreshEffects();
+
         }
 
         void MoveStudent(Seat oldplace, Seat newplace)
@@ -591,6 +618,8 @@ public class ClassroomManager : MonoBehaviour
                 RemoveStudent(lastSelectedSeat);
                 //we add it to the new one
                 PlaceStudent(newplace, stud, false);
+                RefreshEffects();
+
             }
         }
 
