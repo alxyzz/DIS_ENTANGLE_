@@ -61,7 +61,7 @@ public class ClassroomManager : MonoBehaviour
                 {
                     hp += 1;
                 }
-                if (hp > happinessThreshold)
+                if (hp >= happinessThreshold)
                 {
                     StartCoroutine(delayedWin());
                 }
@@ -91,9 +91,10 @@ public class ClassroomManager : MonoBehaviour
     public int introIndex = 0;
     public GameObject introProf;
     public GameObject bg;
-
+    public GameObject breaktime;
     //
 
+    bool playing = true;
 
     public GameObject UI_CardInfo;
     public AudioSource asource;
@@ -190,6 +191,8 @@ public class ClassroomManager : MonoBehaviour
     IEnumerator delayedWin()
     {
         asource.PlayOneShot(bell);
+        breaktime.SetActive(true);
+        playing = false;
         yield return new WaitForSecondsRealtime(bell.length + 1f);
         GameManager.Instance.ChangeLevel();
 
@@ -245,6 +248,10 @@ public class ClassroomManager : MonoBehaviour
     }
     public void OnSelectCard(StudentCard b)
     {
+        if (!playing)
+        {
+            return;
+        }
         if (CLICKED_CARD == b)
         { //when deselecting
             CLICKED_CARD.ToggleHighLight(false);
