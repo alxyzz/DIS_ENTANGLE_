@@ -32,8 +32,13 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             {
                 return 0;
             }
-            float b = student.STAT_LEARNING + row.ROW_MODIFIER;
-           
+            float modi = 0;
+            foreach (var item in modifiers)
+            {
+                modi += item.Item2;
+            }
+            float b = student.STAT_LEARNING + row.ROW_MODIFIER + modi;
+            
             return b;
         }
     }
@@ -87,15 +92,27 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 break;
             case StudentEffectPrerequisite.NEEDS_NEIGHBORS:
-                if (left.student != null && right.student != null)
+                bool doit = false;
+                if (left != null)
                 {
-                    Debug.Log("Wolfblade just activated.");
+                    if (left.student != null)
+                    {
+                        doit = true;
+                    }
+                }
+                if (right != null)
+                {
+                    if (right.student != null)
+                    {
+                        doit = true;
+                    }
+                }
+                if (doit)
+                {
                     DoEffect();
                 }
-                else
-                {
-                    Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have enough neighbors.");
-                }
+
+                
                 break;
             default:
                 break;
@@ -108,7 +125,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         switch (student.effect)
         {
             case StudentEffectType.None:
-                Debug.Log("Initialized effect with no effect. :)");
                 break;
             case StudentEffectType.GAIN_ALL_OTHER_ROWS:
                 // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
@@ -126,7 +142,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
                 foreach (var item in ClassroomManager.Instance.LIST_SEATS)
                 {
-                    if (item.row.rowID == row.rowID)
+                    if (item.row.rowID == row.rowID || item.row.rowID == row.rowID+1)
                     {
                         item.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_OWN_ROW);
                     }
@@ -138,7 +154,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             case StudentEffectType.GAIN_SELF:
 
                 //just gain to self
-                Debug.Log("Assigned modifier to self, to student " + student.chosenName + " effect");
                 AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF);
                 break;
             case StudentEffectType.SET_AVERAGE_OF_NEIGHBORS:
@@ -166,12 +181,20 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 // ALEX MARK OF APPROVAL ON THIS FINE PIECE OF WORK
                 if (left != null)
                 {
-                    left.AssignModifiers(left.student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                    if (left.student != null)
+                    {
+                        left.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+
+                    }
 
                 }
                 if (right != null)
                 {
-                    right.AssignModifiers(right.student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+                    if (right.student != null)
+                    {
+                        right.AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
+
+                    }
 
                 }
                 AssignModifiers(student, student.EFFECT_ARG_ONE, StudentEffectType.GAIN_SELF_AND_NEIGHBORS);
@@ -192,7 +215,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 break;
             default:
-                Debug.LogError("Got undefined student effect type, for some reason.");
                 break;
         }
 
@@ -244,7 +266,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         Button b = GetComponent<Button>();
 
         b.targetGraphic = ui_studentImage;
-        Debug.Log("Added button listener to button " + gameObject.name);
         b.onClick.AddListener(delegate () { OnClick(); });
     }
 
@@ -252,8 +273,13 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void AssignModifiers(Student source, float mod, StudentEffectType type)
     {
-        Debug.LogWarning("Added modifier " + type.ToString() + " from " + source.chosenName + " with value" + mod.ToString());
-        modifiers.Add((source, mod, type));
+        if (student != null)
+        {
+            //Debug.LogWarning("Added modifier " + type.ToString() + " from " + source.chosenName + " with value" + mod.ToString());
+
+            modifiers.Add((source, mod, type));
+
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

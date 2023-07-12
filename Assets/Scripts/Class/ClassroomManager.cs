@@ -61,6 +61,10 @@ public class ClassroomManager : MonoBehaviour
                 {
                     hp += 1;
                 }
+                if (hp > happinessThreshold)
+                {
+                    StartCoroutine(delayedWin());
+                }
             }
             return hp.ToString() + "/8";
         }
@@ -180,29 +184,7 @@ public class ClassroomManager : MonoBehaviour
     }
 
 
-    void CheckWinCondition()
-    {
-        int hp = 0;
-        foreach (var item in LIST_SEATS)
-        {
-
-            if (item.EFFECTIVE_HAPPINESS > 0)
-            {
-                hp += 1;
-            }
-        }
-
-        if (hp >= happinessThreshold)
-        {
-            Win();
-        }
-
-        void Win()
-        {
-            //WinPanel.SetActive(true);
-            StartCoroutine(delayedWin());
-        }
-    }
+   
 
 
     IEnumerator delayedWin()
@@ -220,7 +202,6 @@ public class ClassroomManager : MonoBehaviour
         HOVERED_CARD = null;
 
 
-        CheckWinCondition();
     }
     [SerializeReference] TextMeshProUGUI txt_HappinessFeedback;
 
@@ -241,9 +222,25 @@ public class ClassroomManager : MonoBehaviour
         return b.right;
 
     }
-
+    public TextMeshProUGUI seatdisplay;
     void RefreshHappinessFeedback()
     {
+        if (lastSelectedSeat == null)
+        {
+            seatdisplay.text = "NOTHING";
+        }
+        else
+        {
+            if (lastSelectedSeat.student != null)
+            {
+                seatdisplay.text = lastSelectedSeat.student.chosenName;
+
+            }
+            else
+            {
+                seatdisplay.text = lastSelectedSeat.gameObject.name;
+            }
+        }
         txt_HappinessFeedback.text = happy;
     }
     public void OnSelectCard(StudentCard b)
@@ -448,7 +445,6 @@ public class ClassroomManager : MonoBehaviour
         {
             item.RefreshGraphics();
         }
-        CheckWinCondition();
     }
 
     void RemoveStudent(Seat s)
@@ -469,7 +465,6 @@ public class ClassroomManager : MonoBehaviour
         {
             item.RefreshGraphics();
         }
-        CheckWinCondition();
     }
 
 
@@ -490,42 +485,9 @@ public class ClassroomManager : MonoBehaviour
             return;
         }
 
-        if (lastSelectedSeat != null)
-        {
-            if (lastSelectedSeat.student != null)
-            {
-                if (s.student != null)
-                {
-                    Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and the student is " + s.student.chosenName);
-
-                }
-                else
-                {
-                    Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and there was no student");
-                }
-            }
-           
-            
-
-        }
-        else
-        {
-            if (s.student != null)
-            {
-                Debug.LogWarning("Last clicked seat was empty. Current clicked seat is " + s.name + " and the student is " + s.student.chosenName);
-
-            }
-            else
-            {
-                Debug.LogWarning("Last clicked seat was empty. Current clicked seat is " + s.name);
-
-            }
-
-        }
-        if (CLICKED_CARD != null)
+        if (CLICKED_CARD != null && s.student == null)
         { //if this is from clicking a card, we just place it down.
             PlaceStudent(s, CLICKED_CARD.student, true);
-            lastSelectedSeat = s;
             return;
         }
         if (lastSelectedSeat != null)
@@ -542,11 +504,16 @@ public class ClassroomManager : MonoBehaviour
                 }
                 lastSelectedSeat = null;
             }
+            return;
         }
-        else
+        if (lastSelectedSeat == null)
         {
-            Debug.LogWarning("Just assigned lastSelectedSeat");
-            lastSelectedSeat = s;
+            if (s.student != null)
+            {
+                lastSelectedSeat = s;
+            }
+
+
         }
        
            
@@ -555,21 +522,20 @@ public class ClassroomManager : MonoBehaviour
       
 
 
-        void SwitchStudents(Seat firstStud, Seat secondS)
+        void SwitchStudents(Seat firstSeat, Seat secondS)
         {
-            Debug.Log("Switching seats.");
-            Student FirstSeatStudent = new Student(firstStud.student.chosenName,
+            Student FirstSeatStudent = new Student(firstSeat.student.chosenName,
 
-               firstStud.student.seatedImage,
-                firstStud.student.portrait,
-                firstStud.student.STAT_LEARNING,
-               firstStud.student.DESC,
-                firstStud.student.ROW_MODIFIER,
-               firstStud.student.prereq,
-                firstStud.student.PREREQ_ARGUMENT,
-               firstStud.student.effect,
-              firstStud.student.EFFECT_ARG_ONE,
-              firstStud.student.EFFECT_ARG_two)
+               firstSeat.student.seatedImage,
+                firstSeat.student.portrait,
+                firstSeat.student.STAT_LEARNING,
+               firstSeat.student.DESC,
+                firstSeat.student.ROW_MODIFIER,
+               firstSeat.student.prereq,
+                firstSeat.student.PREREQ_ARGUMENT,
+               firstSeat.student.effect,
+              firstSeat.student.EFFECT_ARG_ONE,
+              firstSeat.student.EFFECT_ARG_two)
             { };
 
             Student secondSeatStudent = new Student(secondS.student.chosenName,
@@ -586,10 +552,10 @@ public class ClassroomManager : MonoBehaviour
             { };
 
 
-            RemoveStudent(firstStud);
+            RemoveStudent(firstSeat);
             RemoveStudent(secondS);
 
-            PlaceStudent(firstStud, secondSeatStudent, false);
+            PlaceStudent(firstSeat, secondSeatStudent, false);
             PlaceStudent(secondS, FirstSeatStudent, false);
             RefreshEffects();
 
@@ -597,7 +563,6 @@ public class ClassroomManager : MonoBehaviour
 
         void MoveStudent(Seat oldplace, Seat newplace)
         {
-            Debug.Log("Moving student.");
             if (lastSelectedSeat.student != null)
             {
                 //we get the student
@@ -632,6 +597,7 @@ public class ClassroomManager : MonoBehaviour
     {
         RemoveAllEffects();
         ApplyAllEffects();
+        RefreshHappinessFeedback();
     }
 
     public void RemoveAllEffects()
