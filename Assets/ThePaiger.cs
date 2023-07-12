@@ -11,7 +11,7 @@ public class ThePaiger : MonoBehaviour
     public int pageIndex = 0;
     bool pressed = false;
     [SerializeReference] List<Page> pages = new();
-   TextMeshProUGUI texty
+    TextMeshProUGUI texty
     {
         get
         {
@@ -39,16 +39,19 @@ public class ThePaiger : MonoBehaviour
         }
         pressed = true;
         StopAllCoroutines();
+        dirtysecondpagebooleanyeah = true;
         pageIndex++;
         StartCoroutine(SlideNExtPage());
 
     }
+
+    bool dirtysecondpagebooleanyeah = false;
     IEnumerator SlideNExtPage()
     {
         yield return new WaitForSecondsRealtime(1f);
         if (pages != null)
         {
-            if (pages[pageIndex] == null)
+            if (dirtysecondpagebooleanyeah)
             {
                 if (GameManager.Instance == null)
                 {
@@ -75,7 +78,7 @@ public class ThePaiger : MonoBehaviour
 
             Debug.LogError("no pages? do something about it.");
         }
-       
+
     }
 }
 
