@@ -40,9 +40,9 @@ public class WolfFPSManager : MonoBehaviour
 
     [SerializeReference] GameObject DoorBlocker;
 
-
     public AudioSource playerAudio;
     public AudioClip bgmusicc;
+    public AudioClip bell;
 
     private float timeRemaining = 30.0f; // 1 minute 30 seconds
 
@@ -53,7 +53,22 @@ public class WolfFPSManager : MonoBehaviour
     [SerializeReference] List<UnityEngine.AI.NavMeshAgent> ai_act3 = new();
 
     private bool timerIsRunning = false;
+    System.Collections.IEnumerator delayedMusicAfterBell()
+    {
+        playerAudio.loop = false;
+        playerAudio.PlayOneShot(bell);
+        yield return new WaitForSecondsRealtime(bell.length + 1);
+        playerAudio.clip = bgmusicc;
+        playerAudio.loop = true;
+        playerAudio.Play();
 
+
+    }
+    void GoNext()
+    {
+        StopAllCoroutines();
+
+    }
     public void CustomStart()
     {
         if (GameManager.Instance == null)

@@ -23,6 +23,10 @@ public class Student
                    float effecarg1,
                    float effecarg2)
     {
+        if (string.IsNullOrEmpty(cn))
+        {
+            chosenName = "No name given.";
+        }
         chosenName = cn;
         seatedImage = imagedown;
         portrait = protra;

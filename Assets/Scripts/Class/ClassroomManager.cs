@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -81,8 +82,18 @@ public class ClassroomManager : MonoBehaviour
 
     #endregion
     #region references
-    public GameObject UI_CardInfo;
+    //intro cinematic - wip until game actually works
+    public List<TextMeshProUGUI> introLines = new();
+    public int introIndex = 0;
+    public GameObject introProf;
+    public GameObject bg;
 
+    //
+
+
+    public GameObject UI_CardInfo;
+    public AudioSource asource;
+    public AudioClip bell;
     public TextMeshProUGUI currentlySelectedCardName;
     public TextMeshProUGUI currentlySelectedCardDesc;
     public TextMeshProUGUI currentlySelectedCardLearning;
@@ -181,9 +192,19 @@ public class ClassroomManager : MonoBehaviour
         void Win()
         {
             //WinPanel.SetActive(true);
-            GameManager.Instance.ChangeLevel();
+            StartCoroutine(delayedWin());
         }
     }
+
+
+    IEnumerator delayedWin()
+    {
+        asource.PlayOneShot(bell);
+        yield return new WaitForSecondsRealtime(bell.length + 1f);
+        GameManager.Instance.ChangeLevel();
+
+    }
+
     void OnPlaceCard()
     {
         HideCardInfo();
@@ -448,12 +469,17 @@ public class ClassroomManager : MonoBehaviour
         {
             if (lastSelectedSeat.student != null)
             {
-                Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and the student is " + s.student.chosenName);
+                if (s.student != null)
+                {
+                    Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and the student is " + s.student.chosenName);
+
+                }
+                else
+                {
+                    Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and there was no student");
+                }
             }
-            else
-            {
-                Debug.LogWarning("Clicked a seat. lastSeatClicked is " + lastSelectedSeat.name + " and there was no student");
-            }
+           
             
 
         }
@@ -489,6 +515,7 @@ public class ClassroomManager : MonoBehaviour
                 {
                     MoveStudent(lastSelectedSeat, s);
                 }
+                lastSelectedSeat = null;
             }
         }
         else
@@ -539,7 +566,6 @@ public class ClassroomManager : MonoBehaviour
 
             PlaceStudent(firstStud, secondSeatStudent, false);
             PlaceStudent(secondS, FirstSeatStudent, false);
-            lastSelectedSeat = null;
         }
 
         void MoveStudent(Seat oldplace, Seat newplace)
@@ -565,7 +591,6 @@ public class ClassroomManager : MonoBehaviour
                 RemoveStudent(lastSelectedSeat);
                 //we add it to the new one
                 PlaceStudent(newplace, stud, false);
-                lastSelectedSeat = null;
             }
         }
 

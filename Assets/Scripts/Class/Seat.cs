@@ -264,6 +264,12 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         if (student != null)
         {
+            
+            foreach (var item in modifiers)
+            {
+                Debug.Log("MODIFIER FOUND - "+item.Item1.chosenName + " effect value -> " + item.Item2 + " effect type " + item.Item3.ToString()); ;
+            }
+           
             ClassroomManager.Instance.OnHoverSeatEnter(student);
         }
 
