@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 261.80054, g: 324.32776, b: 429.24692, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3901,7 +3901,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 27.28}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.7678, y: -24.5766}
+  m_AnchoredPosition: {x: -68.4, y: -15.6}
   m_SizeDelta: {x: 64.1204, y: 64.7684}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &819239333
@@ -3924,7 +3924,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 
+  m_text: '>1 Happiness = GOOD!'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3951,15 +3951,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 15
-  m_fontSizeBase: 15
+  m_fontSize: 11.9
+  m_fontSizeBase: 11.9
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -7374,7 +7374,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 94d797a3dbfd8a846aab04d50806c125, type: 2}
   - {fileID: 11400000, guid: 56f3e8bbb5e7afa479c1c5d9589fecf8, type: 2}
   - {fileID: 11400000, guid: 1b12b6e98c3574b44848042e8a5f6548, type: 2}
+  introLines: []
+  introIndex: 0
+  introProf: {fileID: 0}
+  bg: {fileID: 0}
   UI_CardInfo: {fileID: 545079140}
+  asource: {fileID: 0}
+  bell: {fileID: 0}
   currentlySelectedCardName: {fileID: 572377586}
   currentlySelectedCardDesc: {fileID: 299897793}
   currentlySelectedCardLearning: {fileID: 1313508661}

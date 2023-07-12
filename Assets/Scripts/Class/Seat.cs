@@ -33,11 +33,13 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 return 0;
             }
             float b = student.STAT_LEARNING + row.ROW_MODIFIER;
-            foreach (var item in modifiers)
-            {
+            //foreach (var item in modifiers)
+            //{
+            //    Debug.Log(student.chosenName + "=> MODIFIER FOUND - FROM " + item.Item1.chosenName + " effect value -> " + item.Item2 + " effect type " + item.Item3.ToString()); ;
 
-                b += item.Item2;
-            }
+            //    b += item.Item2;
+            //}
+
             return b;
         }
     }
@@ -74,7 +76,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                 }
                 else
                 {
-                    Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have the required happiness level.");
+                    Debug.Log(" " + student.chosenName + " tried to apply effect, but did not have the required happiness level.");
                 }
                 break;
             case StudentEffectPrerequisite.NEEDS_SPECIFIC_ROW:
@@ -86,7 +88,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
                     }
                     else
                     {
-                        Debug.Log("Student " + student.chosenName + " tried to apply effect, but did not have the required row.");
+                        Debug.Log(" " + student.chosenName + " tried to apply effect, but did not have the required row.");
                     }
                 }
                 break;
@@ -243,7 +245,6 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("TEST!");
         ui_studentImage = InitializeChild();
         //ui_studentImage = GetComponent<Image>();
         Button b = GetComponent<Button>();
@@ -257,6 +258,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 
     public void AssignModifiers(Student source, float mod, StudentEffectType type)
     {
+        Debug.LogWarning("Added modifier " + type.ToString() + " from " + source.chosenName + " with value" + mod.ToString());
         modifiers.Add((source, mod, type));
     }
 
@@ -265,10 +267,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (student != null)
         {
             
-            foreach (var item in modifiers)
-            {
-                Debug.Log("MODIFIER FOUND - "+item.Item1.chosenName + " effect value -> " + item.Item2 + " effect type " + item.Item3.ToString()); ;
-            }
+           
            
             ClassroomManager.Instance.OnHoverSeatEnter(student);
         }
@@ -347,7 +346,7 @@ public class Seat : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         if (student != null)
         {
             ui_studentImage.enabled = true;
-            ui_learningFactor.text = (student.STAT_LEARNING + row.ROW_MODIFIER).ToString();
+            ui_learningFactor.text = (EFFECTIVE_HAPPINESS).ToString();
             ui_studentImage.sprite = student.seatedImage;
         }
         else
