@@ -19,6 +19,11 @@ public class ThePaiger : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
 
     public void ChangeText(string texter)
     {

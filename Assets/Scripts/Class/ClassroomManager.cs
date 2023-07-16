@@ -34,6 +34,11 @@ public class ClassroomManager : MonoBehaviour
             _instance = this;
 
         }
+
+
+
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 
     #endregion
