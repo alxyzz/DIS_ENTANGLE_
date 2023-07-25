@@ -97,6 +97,8 @@ public class GameManager : MonoBehaviour
         switch (level)
         {
             case 1: //classroom
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(MRMISTA_CLASSROOM_SCENE);
                 break;
 
@@ -110,17 +112,24 @@ public class GameManager : MonoBehaviour
                 break;
 
             case 4://paige 
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
 
                 break;
 
             case 5: //classroom
                 MrMistaInstance = 2;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(MRMISTA_CLASSROOM_SCENE);
 
                 break;
             case 6: //paige
+
                 MrMistaInstance = 2;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
 
                 break;
@@ -140,6 +149,8 @@ public class GameManager : MonoBehaviour
                 break;
             case 10: //paige
                 PaigeLevelInstance = 3;
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(PAIGE_JOURNAL_SCENE);
 
                 break;
@@ -161,15 +172,23 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    throw new System.Exception("@gameManager @ ChangeLevel - bad-ending variable undefined. this should not happen .");
+                    SceneManager.LoadScene(JANITOR_LOOKS_AT_PAPER_CINEMATIC);
+                    return;
                 }
                 MrMistaInstance = 2;
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(MRMISTA_CLASSROOM_SCENE);
 
                 break;
 
             default:
                 level = 0;
+
+
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
                 SceneManager.LoadScene(MAIN_MENU);
 
                 break;
