@@ -16,7 +16,7 @@ MonoBehaviour:
   seatedImage: {fileID: 21300000, guid: c908e480a24aed845ab7502ec4d824f0, type: 3}
   portrait: {fileID: 21300000, guid: fa6847c98c02ffd4b81137d92e98c311, type: 3}
   STAT_LEARNING: -1
-  DESC: Adjacent cards gain +1, but for each neighbor the buddy gain -1
+  DESC: Adjacent cards gain +1, but for each neighbor the buddy gains -1
   ROW_MODIFIER: 0
   prereq: 3
   PREREQ_ARGUMENT: 0

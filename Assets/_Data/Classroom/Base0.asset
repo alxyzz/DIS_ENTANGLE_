@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Base0
   m_EditorClassIdentifier: 
   chosenName: Lana
-  seatedImage: {fileID: 21300000, guid: 4decdd572abd60b4da0cf3f724728cd2, type: 3}
-  portrait: {fileID: 21300000, guid: a65bd3ea76a522848b37e804eac5b209, type: 3}
+  seatedImage: {fileID: 21300000, guid: c908e480a24aed845ab7502ec4d824f0, type: 3}
+  portrait: {fileID: 21300000, guid: fa6847c98c02ffd4b81137d92e98c311, type: 3}
   STAT_LEARNING: 0
   DESC: Lana thinks a lot, and says little.
   ROW_MODIFIER: 0
