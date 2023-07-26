@@ -11830,7 +11830,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 84f6ee6e17240a243a54f01c78d90b2e,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.751216
+      value: 7.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f6ee6e17240a243a54f01c78d90b2e,
         type: 3}
@@ -11840,7 +11840,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 84f6ee6e17240a243a54f01c78d90b2e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.009892
+      value: 7.87
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 84f6ee6e17240a243a54f01c78d90b2e,
         type: 3}
@@ -29437,6 +29437,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: StickMan Attack
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 2427950329819be43aefd5824cd38852,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1330755669629619180, guid: 2427950329819be43aefd5824cd38852,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -30529,18 +30534,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
         type: 3}
+      propertyPath: m_LocalScale.x
+      value: 100.52675
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 90.347435
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 84.19958
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
+        type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.594
+      value: 9.528
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.4
+      value: 1.37
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.43
+      value: 3.161
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 71821aa0c0018c042a7fae57dbc51ab2,
         type: 3}
@@ -37393,7 +37413,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 22eb8876932b49c48816c9d0140e247a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.558
+      value: 9.481999
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22eb8876932b49c48816c9d0140e247a,
         type: 3}
@@ -37403,7 +37423,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 22eb8876932b49c48816c9d0140e247a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.591
+      value: 3.321
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 22eb8876932b49c48816c9d0140e247a,
         type: 3}
@@ -40686,8 +40706,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1756617422}
   m_LocalRotation: {x: 0, y: 0.56611854, z: 0, w: 0.82432383}
-  m_LocalPosition: {x: 0, y: 2.29, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.751, z: 0}
+  m_LocalScale: {x: 0.6438363, y: 0.6438363, z: 0.6438363}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8187530352550817339}
@@ -40724,9 +40744,9 @@ MonoBehaviour:
   - {fileID: 8300000, guid: a794314c2fd40fe40b18769d90bfce30, type: 3}
   - {fileID: 8300000, guid: 4b1883ee9c226f748a733a9fb33ee356, type: 3}
   - {fileID: 8300000, guid: ec1814cdbddf31d449a92a43d336f748, type: 3}
-  walkingSpeed: 11.5
-  runningSpeed: 21.5
-  jumpSpeed: 8
+  walkingSpeed: 5
+  runningSpeed: 7
+  jumpSpeed: 3
   gravity: 20
   playerCamera: {fileID: 1823688466}
   lookSpeed: 2
